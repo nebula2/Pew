@@ -1,0 +1,10 @@
+this is temp:
+
+menu:
+arrow keys to select
+enter to apply
+
+ingame:
+q and e to switch the current weapon
+arrow keys for movement
+space for shoot

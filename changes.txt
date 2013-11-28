@@ -1,0 +1,40 @@
+- Pew -
+
+Pre-alpha
+
+cl1:
+
+- Enemy and Bullets have their own damagegetter
+- intro now ends correctly by itself
+- intro is shown only once 
+- added music to settings
+
+cl2:
+
+- Hud added (weapons ->except the third one)
+  -> but there are ideas and graphics existing for it
+- you can now only have 100 health
+- healthdrop gives now only 20 health (50 before)
+
+cl3:
+
+- added weaponselection (q and e)
+- reworked enemy movement
+- enemy now needs two shots
+- damage system reworked
+- player can now shoot faster
+
+cl4:
+
+- added movable background
+
+cl5:
+
+- added some non-working stuff 
+
+cl6:
+
+- third weapon added
+- added another enemy, if you kill it, you can unlock the third weapon
+- cooldown added (which does not show correct at the moment)
+- reworked code 
