@@ -8,7 +8,6 @@ ShitBullets::ShitBullets()
 {
 	speed = 0.2;
 	active = true;
-	health = 1;
 
 	if (!shitTex.loadFromFile("graphics//shit.png"))
 	{
@@ -52,6 +51,7 @@ void ShitBullets::SetPosition(float x, float y)
 {
 	sprite.setPosition(x, y);
 }
+
 int ShitBullets::getDamage()
 {
 	return 10;

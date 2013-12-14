@@ -24,9 +24,7 @@ public:
 	void PewShotDraw(std::vector<Pew> &vector, std::vector<Pew>::iterator &iterator, int &points, IngameSound &sound, HighscoreManager &highscore, std::vector<Enemy> &enemyv, std::vector<SpaceMonkey> &monkeyv, std::vector<ShitBullets> &shitv, std::vector<Boss1> &boss1v, sf::RenderWindow &window, float &elapsedTime);
 	void ShitDraw(std::vector<ShitBullets> &vector, std::vector<ShitBullets>::iterator &iterator, sf::RenderWindow &window, float &elapsedTime);
 	void Boss1WeaponDraw(std::vector<Boss1Weapon> &vector, std::vector<Boss1Weapon>::iterator &iterator, sf::RenderWindow &window, float &elapsedTime);
-
-private:
-
+	void CowDraw(std::vector<Cow> &vector, float elapsedTime, sf::RenderWindow &window);
 };
 
 #endif

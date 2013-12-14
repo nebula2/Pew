@@ -6,14 +6,15 @@ int Settings::Run(sf::RenderWindow &window)
 {
 	bool running = true;
 
-
 	//sound
+	IOsound iosound;
+	iosound.ReadSoundSettings(volume);
 	MenuSound sound;
 	sound.LoadSoundBuffer();
-	sound.setBuffer();
+	sound.setBuffer(volume);
 
 	MenuMusic music;
-	music.LoadMusic();
+	music.LoadMusic(volume);
 	music.PlayMusic("menusong");
 
 	//background and "buttons"
@@ -54,7 +55,7 @@ int Settings::Run(sf::RenderWindow &window)
 					}
 					break;
 				case sf::Keyboard::Down:
-					if (selection <3)
+					if (selection < 3)
 					{
 						selection += 1;
 						sound.PlaySound("select");
@@ -67,15 +68,15 @@ int Settings::Run(sf::RenderWindow &window)
 				case sf::Keyboard::Return:
 					if (selection == 0)
 					{
-						return (3);
+						return (4);
 					}
 					else if (selection == 1)
 					{
-						return (3);
+						return (6);
 					}
 					else if (selection == 2)
 					{
-						return (3);
+						return (4);
 					}
 					else
 					{

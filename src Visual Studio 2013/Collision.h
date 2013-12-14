@@ -85,6 +85,7 @@ namespace coll
 					{
 						obj->active = false;
 					}
+					objList[i].active = false;
 					points += 5;
 					sound.PlaySound("enemyCollision");
 					highscore.setEnemyKilled(1);

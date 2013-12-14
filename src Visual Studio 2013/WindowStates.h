@@ -11,6 +11,7 @@
 #include "Settings.h"
 #include "Settings_tmp.h"
 #include "Highscore.h"
+#include "SoundSet.h"
 
 
 #endif

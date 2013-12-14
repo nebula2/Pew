@@ -5,6 +5,7 @@
 
 #include "StateManager.h"
 #include "MenuSfx.h"
+#include "IOsound.h"
 
 class Menu : public StateManager
 {
@@ -14,5 +15,6 @@ private:
 	bool playing;
 	sf::Event event;
 	int selection;
+	int volume;
 };
 #endif

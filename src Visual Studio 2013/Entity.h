@@ -12,6 +12,7 @@
 #include "DoubleShot.h"
 #include "Boss1.h"
 #include "Boss1Weapon.h"
+#include "Cow.h"
 #include "UnlockPew.h"
 #include "Pew.h"
 

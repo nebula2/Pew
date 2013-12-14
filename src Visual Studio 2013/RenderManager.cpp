@@ -168,3 +168,17 @@ void RenderManager::Boss1WeaponDraw(std::vector<Boss1Weapon> &vector, std::vecto
 		}
 	}
 }
+
+void RenderManager::CowDraw(std::vector<Cow> &vector, float elapsedTime, sf::RenderWindow &window)
+{
+	for (int i = 0; i < vector.size(); i++)
+	{
+		if (vector[i].active)
+		{
+			vector[i].Update(window, elapsedTime);
+			vector[i].Render(window);
+		}
+		else
+			vector.erase(vector.begin() + i);
+	}
+}

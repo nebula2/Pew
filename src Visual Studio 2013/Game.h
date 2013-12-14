@@ -5,6 +5,7 @@
 
 #include "StateManager.h"
 #include "IngameSfx.h"
+#include "IOsound.h"
 #include "BasicStuff.h"
 #include "UpdateManager.h"
 #include "RenderManager.h"
@@ -36,6 +37,7 @@ private:
 	std::vector<Enemy>				   enemyv;
 	std::vector<SpaceMonkey>		   monkeyv;
 	std::vector<Boss1>				   boss1v;
+	std::vector<Cow>				   cowv;
 	std::vector<ShitBullets>		   shitv;
 	std::vector<Boss1Weapon>		   b1Weaponv;
 	std::vector<ShitBullets>::iterator shititerator;
@@ -47,11 +49,13 @@ private:
 	HighscoreManager highscore;
 
 	//integer
+	int volume;
 	int points;
 	int bulletTimeCount;
 	int enemyTimeCount;
 	int shitCount;
 	int boss1WeaponCount;
+	int cowTimeCount;
 	int healthDropCount;
 	int randomX;
 	int showLvUp;

@@ -5,6 +5,7 @@
 
 #include "StateManager.h"
 #include "MenuSfx.h"
+#include "IOsound.h"
 
 class Settings_tmp : public StateManager
 {
@@ -13,6 +14,7 @@ public:
 
 private:
 	sf::Event event;
+	int volume;
 };
 
 #endif

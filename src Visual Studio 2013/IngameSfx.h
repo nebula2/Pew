@@ -9,7 +9,7 @@
 class IngameMusic
 {
 public:
-	void LoadMusic();
+	void LoadMusic(int &volume);
 	void PlayMusic(std::string music);
 	void getCurrentPosition();
 	void Stop();
@@ -22,7 +22,7 @@ class IngameSound
 public:
 
 	void LoadSoundBuffer();
-	void SetBuffer();
+	void setBuffer(int &volume);
 	void PlaySound(std::string sound);
 
 private:
@@ -36,6 +36,7 @@ private:
 	sf::SoundBuffer monkeyFartBuffer;
 	sf::SoundBuffer pewBuffer;
 	sf::SoundBuffer boss1HitBuffer;
+	sf::SoundBuffer cowBuffer;
 
 	sf::Sound bossDeathSound;
 	sf::Sound bulletShotSound;
@@ -46,6 +47,7 @@ private:
 	sf::Sound monkeyFartSound;
 	sf::Sound pewSound;
 	sf::Sound boss1HitSound;
+	sf::Sound cowSound;
 };
 
 #endif

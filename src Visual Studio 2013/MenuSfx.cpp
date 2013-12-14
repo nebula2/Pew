@@ -3,10 +3,12 @@
 #include "MenuSfx.h"
 
 //Music
-void MenuMusic::LoadMusic()
+void MenuMusic::LoadMusic(int &volume)
 {
 	menuTheme.openFromFile("audio//menusong.ogg");
 	introTheme.openFromFile("audio//introsong.ogg");
+	menuTheme.setVolume(volume);
+	introTheme.setVolume(volume);
 
 }
 
@@ -30,9 +32,10 @@ void MenuSound::LoadSoundBuffer()
 {
 	selectBuffer.loadFromFile("audio//select.ogg");
 }
-void MenuSound::setBuffer()
+void MenuSound::setBuffer(int &volume)
 {
 	selectSound.setBuffer(selectBuffer);
+	selectSound.setVolume(volume);
 }
 
 void MenuSound::PlaySound(std::string sound)

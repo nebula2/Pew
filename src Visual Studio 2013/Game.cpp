@@ -2,7 +2,6 @@
 
 #include "Game.h"
 
-
 HighscoreManager Game::getHighScore()
 {
 	return highscore;
@@ -16,11 +15,13 @@ int Game::Run(sf::RenderWindow &window)
 	bool Running = true;
 
 	//sound & music
+	IOsound iosound;
+	iosound.ReadSoundSettings(volume);
 	IngameSound sound;
 	sound.LoadSoundBuffer();
-	sound.SetBuffer();
+	sound.setBuffer(volume);
 	IngameMusic music;
-	music.LoadMusic();
+	music.LoadMusic(volume);
 	music.PlayMusic("ingamesong");
 
 	//background and HUD
@@ -45,13 +46,14 @@ int Game::Run(sf::RenderWindow &window)
 	GUIcircleShape pewCD;
 
 	//counter + random-x-spawn
-	bulletTimeCount = 0;
-	enemyTimeCount = 0;
-	shitCount = 0;
-	healthDropCount = 0;
-	randomX = 0;
-	showLvUp = 0;
-	damageChill = 0;
+	bulletTimeCount  = 0;
+	enemyTimeCount	 = 0;
+	shitCount	     = 0;
+	healthDropCount  = 0;
+	cowTimeCount	 = 0;
+	randomX			 = 0;
+	showLvUp		 = 0;
+	damageChill		 = 0;
 	boss1WeaponCount = 0;
 
 	//health, points & alive
@@ -89,6 +91,7 @@ int Game::Run(sf::RenderWindow &window)
 		shitCount += elapsedTime;
 		boss1WeaponCount += elapsedTime;
 		healthDropCount += elapsedTime;
+		cowTimeCount += elapsedTime;
 		damageChill += elapsedTime;
 		bg.Update(window, elapsedTime, bgSpeed, bgDirection);
 
@@ -125,6 +128,7 @@ int Game::Run(sf::RenderWindow &window)
 		updateMng.Boss1Spawn(points, boss1v);
 		updateMng.UnlockPewSpawn(boss1Dead, unlockPewv);
 		updateMng.Boss1WeaponSpawn(boss1WeaponCount, b1Weaponv, boss1v, sound);
+		updateMng.CowSpawn(cowTimeCount, cowv, randomX, sound);
 		pewCD.Update(pewOnCooldown, elapsedTime);
 
 		//bullet spawn
@@ -154,6 +158,7 @@ int Game::Run(sf::RenderWindow &window)
 		renderMng.SpaceMonkeyDraw(monkeyv, elapsedTime, window);
 		renderMng.Boss1Draw(boss1v, elapsedTime, window);
 		renderMng.UnlockPewDraw(unlockPewv, elapsedTime, window);
+		renderMng.CowDraw(cowv, elapsedTime, window);
 
 		//player collision
 		if (player1.active)
@@ -163,8 +168,10 @@ int Game::Run(sf::RenderWindow &window)
 			coll::PlayerHealthGet(healthv, player1, sound);
 			coll::PlayerEnemyInactive(b1Weaponv, player1, sound);
 			coll::PlayerUnlockPew(unlockPewv, player1, sound, gotPew, pewOnCooldown);
+			//for enemies that are not set inactive there is a damagechill.. otherwise player would instantly die
 			if (damageChill > 500)
 			{
+				coll::PlayerEnemyActive(cowv, player1, sound);
 				coll::PlayerEnemyActive(monkeyv, player1, sound);
 				coll::PlayerEnemyActive(boss1v, player1, sound);
 				damageChill = 0;

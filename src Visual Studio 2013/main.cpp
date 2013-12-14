@@ -26,6 +26,8 @@ int main()
 	states.push_back(&state4);
 	Highscore state5;
 	states.push_back(&state5);
+	SoundSet state6;
+	states.push_back(&state6);
 
 	
 
@@ -36,7 +38,6 @@ int main()
 		{
 			state5.setHighscoreManager(state3.getHighScore());
 		}
-
 		screenState = states[screenState]->Run(window);
 	}
 	return 0;

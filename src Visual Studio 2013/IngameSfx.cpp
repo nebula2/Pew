@@ -2,10 +2,11 @@
 
 #include "IngameSfx.h"
 
-void IngameMusic::LoadMusic()
+//Music
+void IngameMusic::LoadMusic(int &volume)
 {
 	gameTheme.openFromFile("audio//ingamesong.ogg");
-
+	gameTheme.setVolume(volume);
 }
 
 void IngameMusic::PlayMusic(std::string music)
@@ -13,7 +14,6 @@ void IngameMusic::PlayMusic(std::string music)
 	if (music == "ingamesong")
 	{
 		gameTheme.play();
-		gameTheme.setVolume(40);
 		gameTheme.setLoop(true);
 	}
 }
@@ -27,6 +27,7 @@ void IngameMusic::Stop()
 	gameTheme.stop();
 }
 
+//Sound
 void IngameSound::LoadSoundBuffer()
 {
 
@@ -39,18 +40,31 @@ void IngameSound::LoadSoundBuffer()
 	monkeyFartBuffer.loadFromFile("audio//fart.ogg");
 	pewBuffer.loadFromFile("audio//pew.ogg");
 	boss1HitBuffer.loadFromFile("audio//boss1Hit.ogg");
+	cowBuffer.loadFromFile("audio//cow.ogg");
 }
-void IngameSound::SetBuffer()
+
+void IngameSound::setBuffer(int &volume)
 {
 	bossDeathSound.setBuffer(bossDeathBuffer);
+		bossDeathSound.setVolume(volume);
 	bulletShotSound.setBuffer(bulletShotBuffer);
+		bulletShotSound.setVolume(volume);
 	enemyCollisionSound.setBuffer(enemyCollisionBuffer);
+		enemyCollisionSound.setVolume(volume);
 	healthDropSound.setBuffer(healthDropBuffer);
+		healthDropSound.setVolume(volume);
 	playerCollisionSound.setBuffer(playerCollisionBuffer);
+		playerCollisionSound.setVolume(volume);
 	playerDeathSound.setBuffer(playerDeathBuffer);
+		playerDeathSound.setVolume(volume);
 	monkeyFartSound.setBuffer(monkeyFartBuffer);
+		monkeyFartSound.setVolume(volume);
 	pewSound.setBuffer(pewBuffer);
+		pewSound.setVolume(volume);
 	boss1HitSound.setBuffer(boss1HitBuffer);
+		boss1HitSound.setVolume(volume);
+	cowSound.setBuffer(cowBuffer);
+		cowSound.setVolume(volume);
 }
 
 void IngameSound::PlaySound(std::string sound)
@@ -90,5 +104,9 @@ void IngameSound::PlaySound(std::string sound)
 	if (sound == "boss1Hit")
 	{
 		boss1HitSound.play();
+	}
+	if (sound == "cow")
+	{
+		cowSound.play();
 	}
 }

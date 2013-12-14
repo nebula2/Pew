@@ -8,9 +8,12 @@ int Intro::Run(sf::RenderWindow &window)
 	elapsedTime = 0;
 	
 	//music
+	IOsound iosound;
+	iosound.ReadSoundSettings(volume);
 	MenuMusic music;
-	music.LoadMusic();
+	music.LoadMusic(volume);
 	music.PlayMusic("introsong");
+
 
 	//background
 	sf::Texture intro;

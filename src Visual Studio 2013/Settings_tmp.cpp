@@ -6,14 +6,15 @@ int Settings_tmp::Run(sf::RenderWindow &window)
 {
 	bool running = true;
 
-
 	//sound
+	IOsound iosound;
+	iosound.ReadSoundSettings(volume);
 	MenuSound sound;
 	sound.LoadSoundBuffer();
-	sound.setBuffer();
+	sound.setBuffer(volume);
 
 	MenuMusic music;
-	music.LoadMusic();
+	music.LoadMusic(volume);
 	music.PlayMusic("menusong");
 
 	//background and "buttons"

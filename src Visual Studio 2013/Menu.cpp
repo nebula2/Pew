@@ -4,8 +4,12 @@
 
 int Menu::Run(sf::RenderWindow &window)
 {
+	//basic stuff
 	bool running = true;
 	playing = false;
+	IOsound iosound;
+	iosound.ReadSoundSettings(volume);
+	selection = 0;
 
 	//background and buttons
 	Background bg("graphics//core//menu.png");
@@ -13,10 +17,10 @@ int Menu::Run(sf::RenderWindow &window)
 	//sound & music
 	MenuSound sound;
 	sound.LoadSoundBuffer();
-	sound.setBuffer();
+	sound.setBuffer(volume);
 
 	MenuMusic music;
-	music.LoadMusic();
+	music.LoadMusic(volume);
 	music.PlayMusic("menusong");
 
 	//buttons

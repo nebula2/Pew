@@ -5,6 +5,7 @@
 
 #include "StateManager.h"
 #include "MenuSfx.h"
+#include "IOsound.h"
 
 class Intro : public StateManager
 {
@@ -16,6 +17,7 @@ private:
 	float elapsedTime;
 	float bgSpeed;
 	bool running;
+	int volume;
 };
 
 #endif

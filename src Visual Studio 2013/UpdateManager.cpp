@@ -89,6 +89,19 @@ void UpdateManager::Boss1WeaponSpawn(int &counter, std::vector<Boss1Weapon> &bwV
 	}
 }
 
+void UpdateManager::CowSpawn(int &counter, std::vector<Cow> &vector, int &randomX, IngameSound &sound)
+{
+	if (counter >= 10000)
+	{
+		randomX = (rand() % 300) + 1;
+		Cow cowx;
+		cowx.setPosition(randomX, -400);
+		sound.PlaySound("cow");
+		vector.push_back(cowx);
+		counter = 0;
+	}
+}
+
 //WEAPONS
 
 void UpdateManager::BulletSpawn(int &counter, std::vector<Bullet> &vector, HighscoreManager &highscore, WeaponManager &weapon, Player &player, IngameSound &sound)

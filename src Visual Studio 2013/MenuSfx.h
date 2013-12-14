@@ -9,7 +9,7 @@
 class MenuMusic
 {
 public:
-	void LoadMusic();
+	void LoadMusic(int &volume);
 	void PlayMusic(std::string music);
 
 private:
@@ -22,7 +22,7 @@ class MenuSound
 public:
 
 	void LoadSoundBuffer();
-	void setBuffer();
+	void setBuffer(int &volume);
 	void PlaySound(std::string sound);
 
 private:

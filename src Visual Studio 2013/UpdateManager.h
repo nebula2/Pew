@@ -23,8 +23,8 @@ public:
 	void UnlockPewSpawn(bool &boss1Dead, std::vector<UnlockPew> &vector);
 	void Boss1WeaponSpawn(int &counter, std::vector<Boss1Weapon> &bwVector, std::vector<Boss1> &bVector, IngameSound &sound);
 	void BulletSpawn(int &counter, std::vector<Bullet> &vector, HighscoreManager &highscore, WeaponManager &weapon, Player &player, IngameSound &sound);
+	void CowSpawn(int &counter, std::vector<Cow> &vector, int &randomX, IngameSound &sound);
 	void DoubleShotSpawn(int &counter, std::vector<DoubleShot> &vector, HighscoreManager &highscore, WeaponManager &weapon, Player &player, IngameSound &sound);
 	void PewSpawn(std::vector<Pew> &vector, HighscoreManager &highscore, WeaponManager &weapon, Player &player, IngameSound &sound, bool &pewOnCooldown);
-
 };
 #endif

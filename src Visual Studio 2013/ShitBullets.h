@@ -26,6 +26,5 @@ private:
 	sf::Vector2f pPosition;
 	float speed;
 	static sf::Texture shitTex;
-	int health;
 };
 #endif
