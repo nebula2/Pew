@@ -11,7 +11,7 @@ DoubleShot::DoubleShot()
 	active = true;
 	isPew = false;
 
-	doubleTex.loadFromFile("graphics//double.png");
+	doubleTex.loadFromFile("graphics//weapons//double.png");
 
 	doubleTex.setSmooth(false);
 	sprite.setTexture(doubleTex);

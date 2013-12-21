@@ -2,11 +2,25 @@
 
 #include "Menu.h"
 
+Menu::Menu()
+{
+	playing = false;
+}
+
+void Menu::setPlaying(bool &mPlaying)
+{
+	playing = mPlaying;
+}
+
+bool Menu::getPlaying()
+{
+	return playing;
+}
+
 int Menu::Run(sf::RenderWindow &window)
 {
 	//basic stuff
 	bool running = true;
-	playing = false;
 	IOsound iosound;
 	iosound.ReadSoundSettings(volume);
 	selection = 0;

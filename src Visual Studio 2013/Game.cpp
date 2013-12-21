@@ -55,6 +55,7 @@ int Game::Run(sf::RenderWindow &window)
 	showLvUp		 = 0;
 	damageChill		 = 0;
 	boss1WeaponCount = 0;
+	boss2WeaponCount = 0;
 
 	//health, points & alive
 	Health health("graphics//health.png");
@@ -90,6 +91,7 @@ int Game::Run(sf::RenderWindow &window)
 		bulletTimeCount += elapsedTime;
 		shitCount += elapsedTime;
 		boss1WeaponCount += elapsedTime;
+		boss2WeaponCount += elapsedTime;
 		healthDropCount += elapsedTime;
 		cowTimeCount += elapsedTime;
 		damageChill += elapsedTime;
@@ -108,30 +110,32 @@ int Game::Run(sf::RenderWindow &window)
 			{
 				if (event.key.code == sf::Keyboard::Escape)
 				{
+					//reset stuff (bugfix)
+					points = 0;
+					enemyv.clear();
+					monkeyv.clear();
+					shitv.clear();
+					cowv.clear();
+
 					return (0);
 				}
 			}
 		}
 
-		//screenshot
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::F1))
-		{
-			screenie = window.capture();
-			screenie.saveToFile(filename);
-		}
-
 		//spawns
 		updateMng.EnemySpawn(enemyTimeCount, enemyv, randomX);
 		updateMng.HealthDropSpawn(healthDropCount, healthv, randomX);
-		updateMng.SpaceMonkeySpawn(points, monkeyv);
+		updateMng.SpaceMonkeySpawn(points, monkeyv, boss2v);
 		updateMng.ShitSpawn(shitCount, monkeyv, shitv, sound);
 		updateMng.Boss1Spawn(points, boss1v);
 		updateMng.UnlockPewSpawn(boss1Dead, unlockPewv);
 		updateMng.Boss1WeaponSpawn(boss1WeaponCount, b1Weaponv, boss1v, sound);
 		updateMng.CowSpawn(cowTimeCount, cowv, randomX, sound);
+		updateMng.Boss2Spawn(boss2v, points);
+		updateMng.Boss2WeaponSpawn(boss2WeaponCount, boss2Weaponv, boss2v);
 		pewCD.Update(pewOnCooldown, elapsedTime);
 
-		//bullet spawn
+		//player weapon spawn
 		if (player1.active)
 		{
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
@@ -153,39 +157,45 @@ int Game::Run(sf::RenderWindow &window)
 		//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 		window.clear();
 		bg.Render(window);
-		renderMng.EnemyDraw(enemyv, elapsedTime, highscore, window);
-		renderMng.HealthDraw(healthv, elapsedTime, window);
-		renderMng.SpaceMonkeyDraw(monkeyv, elapsedTime, window);
-		renderMng.Boss1Draw(boss1v, elapsedTime, window);
-		renderMng.UnlockPewDraw(unlockPewv, elapsedTime, window);
-		renderMng.CowDraw(cowv, elapsedTime, window);
+
+		if (player1.active)
+		{
+			Rm::StdDraw(healthv, elapsedTime, window);
+			Rm::StdDraw(unlockPewv, elapsedTime, window);
+			Rm::StdDraw(monkeyv, elapsedTime, window);
+			Rm::StdDraw(boss1v, elapsedTime, window);
+			Rm::StdDraw(cowv, elapsedTime, window);
+			Rm::StdDraw(boss2v, elapsedTime, window);
+			Rm::EnemyStdWeapon(shitv, shititerator, window, elapsedTime);
+			Rm::EnemyStdWeapon(b1Weaponv, bWeaponIt, window, elapsedTime);
+
+			renderMng.Boss2WeaponDraw(boss2Weaponv, boss2WeaponIt, elapsedTime, player1, window);
+			renderMng.EnemyDraw(enemyv, elapsedTime, highscore, window);
+			renderMng.BulletDraw(bulletv, bulletviterator, points, sound, highscore, enemyv, monkeyv, shitv, boss1v, boss1Dead, boss2Weaponv, window, elapsedTime);
+			renderMng.DoubleShotDraw(dShotv, dShotIt, points, sound, highscore, enemyv, monkeyv, shitv, boss1v, boss1Dead, boss2Weaponv, window, elapsedTime);
+			renderMng.PewShotDraw(pewv, pewIt, points, sound, highscore, enemyv, monkeyv, shitv, boss1v, boss2v, boss2Weaponv, window, elapsedTime);
+		}
 
 		//player collision
 		if (player1.active)
 		{
 			coll::PlayerEnemyInactive(enemyv, player1, sound);
 			coll::PlayerEnemyInactive(shitv, player1, sound);
-			coll::PlayerHealthGet(healthv, player1, sound);
 			coll::PlayerEnemyInactive(b1Weaponv, player1, sound);
+			coll::PlayerEnemyInactive(boss2Weaponv, player1, sound);
+
+			coll::PlayerHealthGet(healthv, player1, sound);
 			coll::PlayerUnlockPew(unlockPewv, player1, sound, gotPew, pewOnCooldown);
+
 			//for enemies that are not set inactive there is a damagechill.. otherwise player would instantly die
 			if (damageChill > 500)
 			{
+				coll::PlayerEnemyActive(boss2v, player1, sound);
 				coll::PlayerEnemyActive(cowv, player1, sound);
 				coll::PlayerEnemyActive(monkeyv, player1, sound);
 				coll::PlayerEnemyActive(boss1v, player1, sound);
 				damageChill = 0;
 			}
-		}
-
-		//shots draw + collisions
-		if (player1.active)
-		{
-			renderMng.BulletDraw(bulletv, bulletviterator, points, sound, highscore, enemyv, monkeyv, shitv, boss1v, boss1Dead, window, elapsedTime);
-			renderMng.DoubleShotDraw(dShotv, dShotIt, points, sound, highscore, enemyv, monkeyv, shitv, boss1v, boss1Dead, window, elapsedTime);
-			renderMng.PewShotDraw(pewv, pewIt, points, sound, highscore, enemyv, monkeyv, shitv, boss1v, window, elapsedTime);
-			renderMng.ShitDraw(shitv, shititerator, window, elapsedTime);
-			renderMng.Boss1WeaponDraw(b1Weaponv, bWeaponIt, window, elapsedTime);
 		}
 
 		//health & points into string
@@ -226,15 +236,23 @@ int Game::Run(sf::RenderWindow &window)
 		//Game over 
 		if (!player1.active)
 		{
+			//adjust highscore and show "Game Over"
 			highscore.setPoints(points);
 			gameOver.Render(window);
 			window.display();
+			
+			//reset stuff (bugfix)
+			points = 0;
+			enemyv.clear();
+			monkeyv.clear();
+			shitv.clear();
+			cowv.clear();
+			
+			//delay until the highscore screen appears
 			sf::sleep(sf::seconds(1));
-
-			//hier kommt der fehler
 			return 5;
 		}
-
+		
 		window.display();
 	}
 	return -1;

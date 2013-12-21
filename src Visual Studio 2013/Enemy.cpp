@@ -10,7 +10,7 @@ Enemy::Enemy()
 	active = true;
 	health = 2;
 
-	enemyTex.loadFromFile("graphics//enemy.png");
+	enemyTex.loadFromFile("graphics//enemies//enemy.png");
 	enemyTex.setSmooth(false);
 	sprite.setTexture(enemyTex);
 	sprite.setOrigin(36.5, 35);

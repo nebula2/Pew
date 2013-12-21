@@ -10,6 +10,7 @@ int main()
 	std::vector<StateManager*> states;
 	int screenState = 0;
 
+	//create window
 	sf::RenderWindow window(sf::VideoMode( 800, 600, 32 ), "Pew");
 	window.setFramerateLimit(60);
 

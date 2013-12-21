@@ -15,5 +15,7 @@
 #include "Cow.h"
 #include "UnlockPew.h"
 #include "Pew.h"
+#include "Boss2.h"
+#include "Boss2Weapon.h"
 
 #endif

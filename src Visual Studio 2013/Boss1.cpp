@@ -11,7 +11,7 @@ Boss1::Boss1()
 	active = true;
 	moveLeft = true;
 
-	if (!enemyTex.loadFromFile("graphics//robbe.png"))
+	if (!enemyTex.loadFromFile("graphics//enemies//robbe.png"))
 	{
 		std::cout << "Enemy konnte nicht geladen werden" << std::endl;
 	}
@@ -31,15 +31,15 @@ void Boss1::Update(sf::RenderWindow &window, float elapsedTime)
 	{
 		if (y <= 120)
 		{
-			y += (speed*elapsedTime) / 3;
+			y += (speed * elapsedTime) / 3;
 		}
 		if (y <= 200)
 		{
-			y += speed*elapsedTime;
+			y += speed * elapsedTime;
 		}
 		if (moveLeft && x > 75)
 		{
-			x -= speed*elapsedTime;
+			x -= speed * elapsedTime;
 		}
 		else
 		{
@@ -48,7 +48,7 @@ void Boss1::Update(sf::RenderWindow &window, float elapsedTime)
 
 		if (!moveLeft && x < window.getSize().x - 75)
 		{
-			x += speed*elapsedTime;
+			x += speed * elapsedTime;
 		}
 		else
 		{

@@ -27,9 +27,9 @@ void UpdateManager::HealthDropSpawn(int &counter, std::vector<HealthDrop> &vecto
 	}
 }
 
-void UpdateManager::SpaceMonkeySpawn(int &points, std::vector<SpaceMonkey> &vector)
+void UpdateManager::SpaceMonkeySpawn(int &points, std::vector<SpaceMonkey> &vector, std::vector<Boss2> &bossV)
 {
-	if (points > 1 && points % 300 == 0)
+	if (points > 1 && points % 300 == 0 && bossV.size() == 0)
 	{
 		points += 10;
 		SpaceMonkey monkey;
@@ -143,5 +143,30 @@ void UpdateManager::PewSpawn(std::vector<Pew> &vector, HighscoreManager &highsco
 		vector.push_back(pewx);
 		sound.PlaySound("pew");
 		pewOnCooldown = true;
+	}
+}
+
+void UpdateManager::Boss2Spawn(std::vector<Boss2> &vector, int &points)
+{
+	if (points >= 2800 && points < 2899)
+	{
+		points += 100;
+		Boss2 boss2x;
+		boss2x.setPosition(400, -300);
+		vector.push_back(boss2x);
+	}
+}
+
+void UpdateManager::Boss2WeaponSpawn(int &counter, std::vector<Boss2Weapon> &bwvector, std::vector<Boss2> &bvector)
+{
+	for (int i = 0; i < bvector.size(); i++)
+	{
+		if (bvector[i].active && bvector[i].getfadeIn() == true && counter >= 2000)
+		{
+			Boss2Weapon b2Wx;
+			b2Wx.setPosition(bvector[i].getPosition().x, bvector[i].getPosition().y);
+			bwvector.push_back(b2Wx);
+			counter = 0;
+		}
 	}
 }

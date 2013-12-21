@@ -10,7 +10,7 @@ Pew::Pew()
 	active = true;
 	isPew = true;
 
-	pewShotTex.loadFromFile("graphics//pew.png");
+	pewShotTex.loadFromFile("graphics//weapons//pew.png");
 
 	pewShotTex.setSmooth(false);
 	sprite.setTexture(pewShotTex);
@@ -51,5 +51,5 @@ void Pew::SetPosition(float x, float y)
 
 int Pew::getDamage()
 {
-	return 100;
+	return 20;
 }

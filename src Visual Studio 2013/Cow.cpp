@@ -10,7 +10,7 @@ Cow::Cow()
 	active = true;
 	damage = 30;
 
-	cowTex.loadFromFile("graphics//cow.png");
+	cowTex.loadFromFile("graphics//enemies//cow.png");
 	cowTex.setSmooth(false);
 	sprite.setTexture(cowTex);
 	sprite.setOrigin(0, 300);

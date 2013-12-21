@@ -7,20 +7,20 @@ WeaponManager::WeaponManager()
 	currentWeapon = 0;
 	delay = 0;
 
-	bulletTex.loadFromFile("graphics//bulletA.png");
+	bulletTex.loadFromFile("graphics//weapons//bulletA.png");
 	bulletTex.setSmooth(false);
 	bulletSprite.setTexture(bulletTex);
 	bulletSprite.setPosition(306, 0);
 	bulletA = true;
 
-	doubleTex.loadFromFile("graphics//doubleA.png");
+	doubleTex.loadFromFile("graphics//weapons//doubleA.png");
 	doubleTex.setSmooth(false);
 	doubleSprite.setTexture(doubleTex);
 	doubleSprite.setPosition(374, 0);
 	doubleA = false;
 
 
-	pewTex.loadFromFile("graphics//pewA.png");
+	pewTex.loadFromFile("graphics//weapons//pewA.png");
 	pewTex.setSmooth(false);
 	pewSprite.setTexture(pewTex);
 	pewSprite.setPosition(450, 0);

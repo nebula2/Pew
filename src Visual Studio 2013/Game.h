@@ -20,15 +20,17 @@ public:
 	virtual int Run(sf::RenderWindow &window);
 	HighscoreManager getHighScore();
 private:
+
+	//SMFL stuff
 	sf::Event event;
 	sf::Clock clock;
-	float elapsedTime;
 
 	//stringstreams & image
 	std::stringstream healthStream;
 	std::stringstream pointStream;
 	std::string		  filename;
 	sf::Image			  screenie;
+
 	//vectors
 	std::vector<Bullet>				   bulletv;
 	std::vector<Bullet>::iterator	   bulletviterator;
@@ -46,6 +48,9 @@ private:
 	std::vector<UnlockPew>			   unlockPewv;
 	std::vector<Pew>				   pewv;
 	std::vector<Pew>::iterator		   pewIt;
+	std::vector<Boss2>				   boss2v;
+	std::vector<Boss2Weapon>		   boss2Weaponv;
+	std::vector<Boss2Weapon>::iterator boss2WeaponIt;
 	HighscoreManager highscore;
 
 	//integer
@@ -55,6 +60,7 @@ private:
 	int enemyTimeCount;
 	int shitCount;
 	int boss1WeaponCount;
+	int boss2WeaponCount;
 	int cowTimeCount;
 	int healthDropCount;
 	int randomX;
@@ -63,6 +69,7 @@ private:
 
 	//float
 	float bgSpeed;
+	float elapsedTime;
 
 	//bool
 	bool boss1Dead;

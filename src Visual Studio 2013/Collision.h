@@ -45,7 +45,7 @@ namespace coll
 	template <class Object, class ObjectList>
 	void ProjectileToMonkey(Object &obj, std::vector<ObjectList> &objList, int &points, IngameSound &sound, HighscoreManager &highscore)
 	{
-		//collision detection for monkey (got a seperate to count monkey kills
+		//collision detection for monkey (got a seperate to count monkey kills)
 		for (int i = 0; i < objList.size(); i++)
 		{
 			if (objList[i].active)
@@ -116,6 +116,32 @@ namespace coll
 						points += 20;
 						highscore.setEnemyKilled(1);
 						boss1Dead = true;
+					}
+				}
+			}
+		}
+	}
+
+	template <class Object, class ObjectList>
+	void Boss2Collision(Object &obj, std::vector<ObjectList> &objList, int &points, IngameSound &sound, HighscoreManager&highscore)
+	{
+		//Boss 2 Collision detection
+		for (int i = 0; i < objList.size(); i++)
+		{
+			if (objList[i].active)
+			{
+				if (obj->sprite.getGlobalBounds().intersects(objList[i].sprite.getGlobalBounds()))
+				{
+					obj->active = false;
+					sound.PlaySound("boss1Hit");
+					highscore.setShotsGot(1);
+					objList[i].reduceHealth(obj->getDamage());
+					if (objList[i].getHealth() <= 0)
+					{
+						sound.PlaySound("audio//bossDeath.ogg");
+						objList[i].active = false;
+						points += 20;
+						highscore.setEnemyKilled(1);
 					}
 				}
 			}

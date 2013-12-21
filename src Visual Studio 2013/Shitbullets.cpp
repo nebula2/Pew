@@ -9,7 +9,7 @@ ShitBullets::ShitBullets()
 	speed = 0.2;
 	active = true;
 
-	if (!shitTex.loadFromFile("graphics//shit.png"))
+	if (!shitTex.loadFromFile("graphics//enemies//shit.png"))
 	{
 		std::cout << "shit konnte nicht geladen werden" << std::endl;
 	}

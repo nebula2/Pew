@@ -11,7 +11,7 @@ SpaceMonkey::SpaceMonkey()
 	active = true;
 	moveLeft = true;
 
-	if (!enemyTex.loadFromFile("graphics//spacemonkey.png"))
+	if (!enemyTex.loadFromFile("graphics//enemies//spacemonkey.png"))
 	{
 		std::cout << "Enemy konnte nicht geladen werden" << std::endl;
 	}

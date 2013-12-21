@@ -64,7 +64,7 @@ void Player::Update(sf::RenderWindow &Window, float elapsedTime)
 	{
 		if (y >= Window.getSize().y - 17)
 		{
-			y = Window.getSize().y;
+			y = Window.getSize().y - 17;
 		}
 		else
 		{

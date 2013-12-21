@@ -10,7 +10,10 @@
 class Menu : public StateManager
 {
 public: 
+	Menu();
 	virtual int Run(sf::RenderWindow &window);
+	void setPlaying(bool &mPlaying);
+	bool getPlaying();
 private:
 	bool playing;
 	sf::Event event;

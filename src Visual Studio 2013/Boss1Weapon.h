@@ -5,10 +5,6 @@
 
 //windows and sfml header
 #include <SFML\Graphics.hpp>
-#include <iostream>
-//own header
-#include "SpaceMonkey.h"
-#include "Player.h"
 
 class Boss1Weapon
 {
