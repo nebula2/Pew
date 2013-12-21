@@ -1,0 +1,91 @@
+    - Pew -
+German Changelog
+
+Pre-alpha
+
+cl1:
+
+- Gegner und Bullets haben ihre eigenen Damagegetter
+- intro wird nun richtig von alleine beendet
+- das intro wird nur noch einmal angezeigt, wie gewollt
+- musik in den settings hinzugefügt
+
+cl2:
+
+- Hud hinzugefügt (waffen und deren auswahl noch nicht)
+  -> es gibt schon grafiken dafür und ideen
+- man kann nur noch max 100 leben haben
+- healthdrop gibt nur noch 20 leben
+
+cl3:
+
+- waffenauswahl wurde hinzugefügt, waffen noch nicht (q und e)
+- enemy kommt nun erst langsam rein und fliegt dann schneller
+- enemy braucht nun 2 schüsse
+- dmg system überarbeitet
+- player kann schneller schießen
+
+cl4:
+
+- hintergrund bewegt sich jetzt richtig
+- ich habe es geschafft mal die scheiß schüsse zu zählen, 
+  der rest wird auch noch gezählt und ausgewertet für die auswertung,
+  aus der dann die highscore gemacht wird
+
+cl5:
+
+- highscore wird übergeben und angezeigt
+
+cl6:
+
+- dritte waffe hinzugefügt
+- neuer gegner der pew dropt
+- code überarbeitet
+
+cl7:
+- dritte waffe hat cooldown
+- grafiken anders angeordnet
+- gamelog geadded
+- soundsettings geadded
+- neuer gegner:
+  Kuh, fliegt runter, keine kollision mit waffen, soll den player zum bewegen zwingen
+Bugfix:
+- der bug, dass wenn man aus dem spiel geht und dann beim erneuten spielen so ne kacke gespawned wird,
+  wurde gefixed
+
+cl8:
+- neuer gegner geadded, bewegungen sind drin, mehr nicht
+
+cl9:
+- Brians bewegungen sind nun so wie gewollt, bis auf sound alles komplett implementiert
+- Brian schießt mit äpfeln, die den spieler verfolgen
+- Im RenderManager wurde ein namespace geadded, der die standartfälle abdeckt (codereduzierung)
+
+geplant:
+
+Gameplay->
+- finetuning neuer gegner
+- kühe während brian aktiv ist ausschalten (oder enemy, kp)
+- 2 gegner sind noch geplant bevor es zuende geht:
+  bad luck brian der mit äppeln wirft und nur mit pew besiegt werden kann
+  ein zweites schiff für das ne ki geschrieben wird
+
+Projekt an sich->
+- musik übergeben
+  wird wahrscheinlich leider auf die main fallen wenn mir net bald 
+  was einfällt :/
+- auswertung fertig machen, diese in credits auswerten und dann 
+  in txt speichern
+  -> dann neuen window state upgrade, um waffen gleich freizuschalten 
+     und aufzuwerten
+  -> je höher aufgewertet wurde, desto schwieriger das spiel
+- ende:
+  credits, save, statistik
+- diff einstellungen adden und anpassen
+  steuerung einstellen adden
+- evtl highscore. dann alles einzeln in 1000 txt files da ich zu dumm bin
+  in den dingern zu lesen
+
+Bekannte Fehler:
+- Intro pimmelt einfach so rum (bool einführen)
+- Cooldown von pew wird nicht korrekt angezeigt (pewCD angucken)
