@@ -49,10 +49,11 @@ int GraphicSet::Run(sf::RenderWindow &window)
 		{
 			switch (event.key.code)
 			{
+				//horizontal
 			case sf::Keyboard::Up:
-				if (selectionV > 0)
+				if (selectionV != 0)
 				{
-					selectionV -= 1;
+					selectionV = 0;
 					sound.PlaySound("select");
 				}
 				else
@@ -61,9 +62,9 @@ int GraphicSet::Run(sf::RenderWindow &window)
 				}
 				break;
 			case sf::Keyboard::Down:
-				if (selectionV < 1)
+				if (selectionV =! 1)
 				{
-					selectionV += 1;
+					selectionV = 1;
 					sound.PlaySound("select");
 				}
 				else
@@ -71,10 +72,11 @@ int GraphicSet::Run(sf::RenderWindow &window)
 					selectionV = 1;
 				}
 				break;
+				//vertical
 			case sf::Keyboard::Right:
-				if (selectionH < 1)
+				if (selectionH != 1)
 				{
-					selectionH += 1;
+					selectionH = 1;
 					sound.PlaySound("select");
 				}
 				else
@@ -82,15 +84,16 @@ int GraphicSet::Run(sf::RenderWindow &window)
 					selectionH = 1;
 				}
 			case sf::Keyboard::Left:
-				if (selectionH > 0)
+				if (selectionH != 0)
 				{
-					selectionH -= 1;
+					selectionH = 0;
 					sound.PlaySound("select");
 				}
 				else
 				{
 					selectionH = 0;
 				}
+				//confirm or discard
 			case sf::Keyboard::Return:
 				ioscreen.setScreenSettings(isFull);
 				iosmooth.WriteSmoothSettings(isSmooth);
@@ -104,7 +107,7 @@ int GraphicSet::Run(sf::RenderWindow &window)
 			}
 		}
 	
-		//set bools and change color depending on selection
+		//set bools depending on selection
 		if (selectionH == 0 && selectionV == 0)
 		{
 			isSmooth = false;
@@ -117,11 +120,12 @@ int GraphicSet::Run(sf::RenderWindow &window)
 		{
 			isFull = false;
 		}
-		else
+		else if (selectionH == 1 && selectionV == 1)
 		{
 			isFull = true;
 		}
 	
+		//change color depending on selection
 		if (selectionV == 0)
 		{
 			if (isFull)
@@ -168,7 +172,6 @@ int GraphicSet::Run(sf::RenderWindow &window)
 				falseF.setColor(sf::Color(255, 255, 255));
 				trueF.setColor(sf::Color(255, 128, 0));
 			}
-
 		}
 
 		//draw stuff
