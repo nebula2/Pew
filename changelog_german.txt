@@ -61,13 +61,15 @@ cl9:
 - Brian schießt mit äpfeln, die den spieler verfolgen
 - Im RenderManager wurde ein namespace geadded, der die standartfälle abdeckt (codereduzierung)
 
+cl10:
+- Einstellungen sind nun komplett drin
+- nen bissl feintuning wurde vorgenommen (verfolgungsäppel kleiner)
+- es spawnen keine affen wenn brian aktiv ist
+
 geplant:
 
 Gameplay->
-- finetuning neuer gegner
-- kühe während brian aktiv ist ausschalten (oder enemy, kp)
-- 2 gegner sind noch geplant bevor es zuende geht:
-  bad luck brian der mit äppeln wirft und nur mit pew besiegt werden kann
+- 1 gegner ist noch geplant bevor es zuende geht:
   ein zweites schiff für das ne ki geschrieben wird
 
 Projekt an sich->

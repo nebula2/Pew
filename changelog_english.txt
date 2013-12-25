@@ -88,5 +88,11 @@ cl9:
 - brian shoots apple which track player
 - added a namespace to the rendermanager to reduce some code 
 
+cl10:
+- settings are now finished
+- did some finetuning for enemies
+- no monkeys will spawn while brian is active
+
+
 
 
