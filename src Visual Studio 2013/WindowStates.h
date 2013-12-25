@@ -9,9 +9,9 @@
 #include "Intro.h"
 #include "Game.h"
 #include "Settings.h"
-#include "Settings_tmp.h"
 #include "Highscore.h"
 #include "SoundSet.h"
-
+#include "DiffSet.h"
+#include "GraphicSet.h"
 
 #endif

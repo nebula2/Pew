@@ -7,8 +7,11 @@ sf::Texture Boss2::enemyTex;
 
 Boss2::Boss2()
 {
+	IOdiff diff;
+	IOsmooth smooth;
+
 	speed = 0.5;
-	health = 200;
+	health = 200 * diff.ReadDiffSettings();
 	active = true;
 	fadeIn = false;
 	moveLeft = true;
@@ -16,7 +19,7 @@ Boss2::Boss2()
 	debauch = 30;
 
 	enemyTex.loadFromFile("graphics//enemies//boss2.png");
-	enemyTex.setSmooth(false);
+	enemyTex.setSmooth(smooth.ReadSmoothSettings());
 	sprite.setTexture(enemyTex);
 	sprite.setOrigin(75, 105.5);
 }
@@ -27,8 +30,6 @@ void Boss2::Update(sf::RenderWindow &window, float elapsedTime)
 	float y = sprite.getPosition().y;
 
 	sinValue += elapsedTime;
-
-
 
 	//handle movement
 	if (Boss2::active)

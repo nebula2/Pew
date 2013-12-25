@@ -3,8 +3,10 @@
 #ifndef BOSS1WEAPON_H
 #define BOSS1WEAPON_H
 
-//windows and sfml header
+
 #include <SFML\Graphics.hpp>
+#include "IOdiff.h"
+#include "IOsmooth.h"
 
 class Boss1Weapon
 {

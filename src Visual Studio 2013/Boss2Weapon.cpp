@@ -6,13 +6,14 @@ sf::Texture Boss2Weapon::weaponTex;
 
 Boss2Weapon::Boss2Weapon()
 {
-	speed = 0.4;
+	IOsmooth smooth;
+	speed = 0.3;
 	active = true;
 
 	weaponTex.loadFromFile("graphics//enemies//boss2weapon.png");
-	weaponTex.setSmooth(false);
+	weaponTex.setSmooth(smooth.ReadSmoothSettings());
 	sprite.setTexture(weaponTex);
-	sprite.setOrigin(44, 49.5);
+	sprite.setOrigin(22, 25);
 }
 
 void Boss2Weapon::Update(sf::RenderWindow &window, float &elapsedTime, Player &pPlayer)
@@ -61,5 +62,6 @@ void Boss2Weapon::setPosition(float x, float y)
 
 int Boss2Weapon::getDamage()
 {
-	return 15;
+	IOdiff diff;
+	return 15 * diff.ReadDiffSettings();
 }

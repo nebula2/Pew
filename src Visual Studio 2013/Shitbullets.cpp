@@ -7,14 +7,11 @@ sf::Texture ShitBullets::shitTex;
 ShitBullets::ShitBullets()
 {
 	speed = 0.2;
+	IOsmooth smooth;
 	active = true;
 
-	if (!shitTex.loadFromFile("graphics//enemies//shit.png"))
-	{
-		std::cout << "shit konnte nicht geladen werden" << std::endl;
-	}
-
-	shitTex.setSmooth(false);
+	shitTex.loadFromFile("graphics//enemies//shit.png");
+	shitTex.setSmooth(smooth.ReadSmoothSettings());
 	sprite.setTexture(shitTex);
 	sprite.setOrigin(17.5, 17.5);
 }
@@ -54,5 +51,6 @@ void ShitBullets::SetPosition(float x, float y)
 
 int ShitBullets::getDamage()
 {
-	return 10;
+	IOdiff diff;
+	return 10 * diff.ReadDiffSettings();
 }

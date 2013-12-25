@@ -6,17 +6,16 @@ sf::Texture Boss1::enemyTex;
 
 Boss1::Boss1()
 {
+	IOdiff diff;
+	IOsmooth smooth;
+
 	speed = 0.4;
-	health = 50;
+	health = 50 * diff.ReadDiffSettings();
 	active = true;
 	moveLeft = true;
 
-	if (!enemyTex.loadFromFile("graphics//enemies//robbe.png"))
-	{
-		std::cout << "Enemy konnte nicht geladen werden" << std::endl;
-	}
-
-	enemyTex.setSmooth(false);
+	enemyTex.loadFromFile("graphics//enemies//robbe.png");
+	enemyTex.setSmooth(smooth.ReadSmoothSettings());
 	sprite.setTexture(enemyTex);
 	sprite.setOrigin(75, 65);
 	sprite.setPosition(400, -300);

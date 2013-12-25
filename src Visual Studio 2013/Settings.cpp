@@ -22,10 +22,10 @@ int Settings::Run(sf::RenderWindow &window)
 	selection = 0;
 
 	//buttons
-	Text difficulty("Difficulty", 70), control("Control", 70), sounds("Sound", 70), back("Back", 70);
+	Text difficulty("Difficulty", 70), graphics("Graphics", 70), sounds("Sound", 70), back("Back", 70);
 	
 	difficulty.setPosition(270, 150);
-	control.setPosition	  (270, 350);
+	graphics.setPosition(270, 350);
 	sounds.setPosition	  (270, 250);
 	back.setPosition	  (270, 450);
 
@@ -68,7 +68,7 @@ int Settings::Run(sf::RenderWindow &window)
 				case sf::Keyboard::Return:
 					if (selection == 0)
 					{
-						return (4);
+						return (7);
 					}
 					else if (selection == 1)
 					{
@@ -92,28 +92,28 @@ int Settings::Run(sf::RenderWindow &window)
 		if (selection == 0)//Schwierigkeit
 		{
 			difficulty.setColor(sf::Color(255, 128, 0));
-			control.setColor(sf::Color(255, 255, 255));
+			graphics.setColor(sf::Color(255, 255, 255));
 			sounds.setColor(sf::Color(255, 255, 255));
 			back.setColor(sf::Color(255, 255, 255));
 		}
 		else if (selection == 1)//Sound
 		{
 			difficulty.setColor(sf::Color(255, 255, 255));
-			control.setColor(sf::Color(255, 255, 255));
+			graphics.setColor(sf::Color(255, 255, 255));
 			sounds.setColor(sf::Color(255, 128, 0));
 			back.setColor(sf::Color(255, 255, 255));
 		}
-		else if (selection == 2)//Control
+		else if (selection == 2)//Graphics
 		{
 			difficulty.setColor(sf::Color(255, 255, 255));
-			control.setColor(sf::Color(255, 128, 0));
+			graphics.setColor(sf::Color(255, 128, 0));
 			sounds.setColor(sf::Color(255, 255, 255));
 			back.setColor(sf::Color(255, 255, 255));
 		}
 		else
 		{
 			difficulty.setColor(sf::Color(255, 255, 255));
-			control.setColor(sf::Color(255, 255, 255));
+			graphics.setColor(sf::Color(255, 255, 255));
 			sounds.setColor(sf::Color(255, 255, 255));
 			back.setColor(sf::Color(255, 128, 0));
 		}
@@ -121,7 +121,7 @@ int Settings::Run(sf::RenderWindow &window)
 		//draw
 		window.clear();
 		bg.Render(window);
-		control.Render(window);
+		graphics.Render(window);
 		difficulty.Render(window);
 		sounds.Render(window);
 		back.Render(window);

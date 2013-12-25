@@ -9,7 +9,6 @@ void MenuMusic::LoadMusic(int &volume)
 	introTheme.openFromFile("audio//introsong.ogg");
 	menuTheme.setVolume(volume);
 	introTheme.setVolume(volume);
-
 }
 
 void MenuMusic::PlayMusic(std::string music)

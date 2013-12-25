@@ -4,7 +4,8 @@
 #define BOSS1_H
 
 #include <SFML\Graphics.hpp>
-#include <iostream>
+#include "IOdiff.h"
+#include "IOsmooth.h"
 
 class Boss1
 {

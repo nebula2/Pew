@@ -6,12 +6,15 @@ sf::Texture Cow::cowTex;
 
 Cow::Cow()
 {
-	speed = 0.5;
+	IOdiff diff;
+	IOsmooth smooth;
+
+	speed = 0.5 *diff.ReadDiffSettings();
 	active = true;
 	damage = 30;
 
 	cowTex.loadFromFile("graphics//enemies//cow.png");
-	cowTex.setSmooth(false);
+	cowTex.setSmooth(smooth.ReadSmoothSettings());
 	sprite.setTexture(cowTex);
 	sprite.setOrigin(0, 300);
 }

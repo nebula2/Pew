@@ -3,12 +3,10 @@
 #ifndef _ENEMY_H
 #define _ENEMY_H
 
-//SFML and windows header
 #include <SFML\Graphics.hpp>
-#include <iostream>
-
-//own header
 #include "HighscoreManager.h"
+#include "IOdiff.h"
+#include "IOsmooth.h"
 
 class Enemy
 {

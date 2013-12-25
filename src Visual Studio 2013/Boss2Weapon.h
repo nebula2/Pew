@@ -5,6 +5,8 @@
 
 #include <SFML\Graphics.hpp>
 #include "Player.h"
+#include "IOdiff.h"
+#include "IOsmooth.h"
 
 class Boss2Weapon
 {

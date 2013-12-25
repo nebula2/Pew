@@ -6,11 +6,12 @@ sf::Texture Boss1Weapon::weaponTex;
 
 Boss1Weapon::Boss1Weapon()
 {
+	IOsmooth smooth;
 	speed = 0.5;
 	active = true;
 
 	weaponTex.loadFromFile("graphics//enemies//pew.png");
-	weaponTex.setSmooth(false);
+	weaponTex.setSmooth(smooth.ReadSmoothSettings());
 	sprite.setTexture(weaponTex);
 	sprite.setRotation(180);
 	sprite.setOrigin(23.5, 12);
@@ -51,5 +52,6 @@ void Boss1Weapon::SetPosition(float x, float y)
 
 int Boss1Weapon::getDamage()
 {
-	return 25;
+	IOdiff diff;
+	return 25 * diff.ReadDiffSettings();
 }

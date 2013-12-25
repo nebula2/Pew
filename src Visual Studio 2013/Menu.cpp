@@ -25,7 +25,7 @@ int Menu::Run(sf::RenderWindow &window)
 	iosound.ReadSoundSettings(volume);
 	selection = 0;
 
-	//background and buttons
+	//background
 	Background bg("graphics//core//menu.png");
 
 	//sound & music

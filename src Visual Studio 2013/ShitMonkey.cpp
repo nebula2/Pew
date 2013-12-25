@@ -6,17 +6,16 @@ sf::Texture SpaceMonkey::enemyTex;
 
 SpaceMonkey::SpaceMonkey()
 {
+	IOdiff diff;
+	IOsmooth smooth;
+
 	speed = 0.3;
-	health = 10;
+	health = 10 * diff.ReadDiffSettings();
 	active = true;
 	moveLeft = true;
 
-	if (!enemyTex.loadFromFile("graphics//enemies//spacemonkey.png"))
-	{
-		std::cout << "Enemy konnte nicht geladen werden" << std::endl;
-	}
-
-	enemyTex.setSmooth(false);
+	enemyTex.loadFromFile("graphics//enemies//spacemonkey.png");
+	enemyTex.setSmooth(smooth.ReadSmoothSettings());
 	sprite.setTexture(enemyTex);
 	sprite.setOrigin(36, 20);
 	sprite.setPosition(364, 25);

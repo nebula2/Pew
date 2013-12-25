@@ -150,10 +150,10 @@ void UpdateManager::Boss2Spawn(std::vector<Boss2> &vector, int &points)
 {
 	if (points >= 2800 && points < 2899)
 	{
-		points += 100;
 		Boss2 boss2x;
 		boss2x.setPosition(400, -300);
 		vector.push_back(boss2x);
+		points += 100;
 	}
 }
 

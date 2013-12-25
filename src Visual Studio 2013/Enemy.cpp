@@ -6,12 +6,14 @@ sf::Texture Enemy::enemyTex;
 
 Enemy::Enemy()
 {
+	IOdiff diff;
+	IOsmooth smooth;
 	speed = 0.6;
 	active = true;
-	health = 2;
+	health = 2 * diff.ReadDiffSettings();
 
 	enemyTex.loadFromFile("graphics//enemies//enemy.png");
-	enemyTex.setSmooth(false);
+	enemyTex.setSmooth(smooth.ReadSmoothSettings());
 	sprite.setTexture(enemyTex);
 	sprite.setOrigin(36.5, 35);
 }
