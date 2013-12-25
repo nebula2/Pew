@@ -11,8 +11,8 @@ int GraphicSet::Run(sf::RenderWindow &window)
 	isFull = ioscreen.getScreenSettings();
 	IOsmooth iosmooth;
 	isSmooth = false;
-	selectionH = 0;
-	selectionV = 0;
+	selectionH = false;
+	selectionV = false;
 
 	//Sound
 	IOsound iosound;
@@ -22,8 +22,8 @@ int GraphicSet::Run(sf::RenderWindow &window)
 	sound.setBuffer(volume);
 
 	//buttons
-	Text smooth("Smooth", 70), fullscreen("Fullscreen", 70), falseS("false", 50), falseF("false", 50), trueS("true", 50), trueF("true", 50),
-		info("enter = save, esc = back", 40);
+	Text smooth("Smooth", 70), fullscreen("Fullscreen", 70), falseS("false", 50), falseF("false", 50), trueS("true", 50),
+		trueF("true", 50), info("enter = save, esc = back", 40);
 
 	smooth.setPosition(50, 75);
 	smooth.setColor(sf::Color(255, 128, 0));
@@ -51,47 +51,47 @@ int GraphicSet::Run(sf::RenderWindow &window)
 			{
 				//horizontal
 			case sf::Keyboard::Up:
-				if (selectionV != 0)
+				if (selectionV)
 				{
-					selectionV = 0;
+					selectionV = false;
 					sound.PlaySound("select");
 				}
 				else
 				{
-					selectionV = 0;
+					selectionV = false;
 				}
 				break;
 			case sf::Keyboard::Down:
-				if (selectionV =! 1)
+				if (!selectionV)
 				{
-					selectionV = 1;
+					selectionV = true;
 					sound.PlaySound("select");
 				}
 				else
 				{
-					selectionV = 1;
+					selectionV = true;
 				}
 				break;
 				//vertical
 			case sf::Keyboard::Right:
-				if (selectionH != 1)
+				if (!selectionH)
 				{
-					selectionH = 1;
+					selectionH = true;
 					sound.PlaySound("select");
 				}
 				else
 				{
-					selectionH = 1;
+					selectionH = true;
 				}
 			case sf::Keyboard::Left:
-				if (selectionH != 0)
+				if (selectionH)
 				{
-					selectionH = 0;
+					selectionH = false;
 					sound.PlaySound("select");
 				}
 				else
 				{
-					selectionH = 0;
+					selectionH = true;
 				}
 				//confirm or discard
 			case sf::Keyboard::Return:
@@ -108,25 +108,25 @@ int GraphicSet::Run(sf::RenderWindow &window)
 		}
 	
 		//set bools depending on selection
-		if (selectionH == 0 && selectionV == 0)
-		{
-			isSmooth = false;
-		}
-		else if (selectionH == 1 && selectionV == 0)
-		{
-			isSmooth = true;
-		}
-		else if (selectionH == 0 && selectionV == 1)
-		{
-			isFull = false;
-		}
-		else if (selectionH == 1 && selectionV == 1)
+		if (selectionH && selectionV)
 		{
 			isFull = true;
 		}
+		else if (!selectionH && !selectionV)
+		{
+			isSmooth = false;
+		}
+		else if (selectionH && !selectionV)
+		{
+			isSmooth = true;
+		}
+		else if (!selectionH && selectionV)
+		{
+			isFull = false;
+		}
 	
 		//change color depending on selection
-		if (selectionV == 0)
+		if (!selectionV)
 		{
 			if (isFull)
 			{
@@ -138,19 +138,19 @@ int GraphicSet::Run(sf::RenderWindow &window)
 				falseF.setColor(sf::Color(255, 128, 0));
 				trueF.setColor(sf::Color(255, 255, 255));
 			}
-			if (selectionH == 0)
+			if (!selectionH)
 			{
 				falseS.setColor(sf::Color(255, 128, 0));
 				trueS.setColor(sf::Color(255, 255, 255));
 			}
-			if (selectionH == 1)
+			if (selectionH)
 			{
 				falseS.setColor(sf::Color(255, 255, 255));
 				trueS.setColor(sf::Color(255, 128, 0));
 			}
 		}
 
-		if (selectionV == 1)
+		if (selectionV)
 		{
 			if (isSmooth)
 			{
@@ -162,12 +162,12 @@ int GraphicSet::Run(sf::RenderWindow &window)
 				falseS.setColor(sf::Color(255, 128, 0));
 				trueS.setColor(sf::Color(255, 255, 255));
 			}
-			if (selectionH == 0)
+			if (!selectionH)
 			{
 				falseF.setColor(sf::Color(255, 128, 0));
 				trueF.setColor(sf::Color(255, 255, 255));
 			}
-			if (selectionH == 1)
+			if (selectionH)
 			{
 				falseF.setColor(sf::Color(255, 255, 255));
 				trueF.setColor(sf::Color(255, 128, 0));
