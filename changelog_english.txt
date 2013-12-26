@@ -96,6 +96,7 @@ cl10:
 cl11:
 - added enemy to main menu
 - in the graphics settings you now see the active selection
+- sound can now be set in 5% steps
 
 
 

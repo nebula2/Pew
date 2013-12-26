@@ -69,6 +69,7 @@ cl10:
 cl11:
 - es fliegt ein gegner im hauptmenu rum
 - grafikeinstellungen werden korrekt angezeigt
+- sound kann nun in 5% schritten gesetzt werden
 
 geplant:
 
