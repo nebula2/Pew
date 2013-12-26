@@ -66,6 +66,10 @@ cl10:
 - nen bissl feintuning wurde vorgenommen (verfolgungsäppel kleiner)
 - es spawnen keine affen wenn brian aktiv ist
 
+cl11:
+- es fliegt ein gegner im hauptmenu rum
+- grafikeinstellungen werden korrekt angezeigt
+
 geplant:
 
 Gameplay->

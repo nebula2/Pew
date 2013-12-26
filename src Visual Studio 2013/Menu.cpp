@@ -1,5 +1,7 @@
 //Menu.cpp
 
+#define PI 3.14159
+
 #include "Menu.h"
 
 Menu::Menu()
@@ -24,6 +26,16 @@ int Menu::Run(sf::RenderWindow &window)
 	IOsound iosound;
 	iosound.ReadSoundSettings(volume);
 	selection = 0;
+	
+	//Enemy
+	elapsedTime = 0;
+	x_movement = 0;
+	y_movement = 0;
+	debauch = 200;
+	texture.loadFromFile("graphics//enemies//enemy.png");
+	texture.setSmooth(false);
+	sprite.setTexture(texture);
+	sprite.setOrigin(36.5, 35);
 
 	//background
 	Background bg("graphics//core//menu.png");
@@ -131,9 +143,30 @@ int Menu::Run(sf::RenderWindow &window)
 			close.setColor	 (sf::Color(255, 128,   0));
 		}
 
+		//moving enemy
+		elapsedTime = clock.restart().asMilliseconds();
+		x_movement += elapsedTime;
+		y_movement += elapsedTime;
+		y = sprite.getPosition().y;
+		x = sprite.getPosition().x;
+		y = 300 + std::sin(y_movement * PI / 180) * debauch;
+		x = 350 + std::cos(x_movement * PI / 180) * debauch;
+
+		if (x_movement > 360)
+		{
+			x_movement = 0;
+		}
+		if (y_movement > 360)
+		{
+			y_movement = 0;
+		}
+
+		sprite.setPosition(x, y);
+
 		//draw stuff
 		window.clear();
 		bg.Render(window);
+		window.draw(sprite);
 
 		if (playing)
 		{

@@ -1,27 +1,27 @@
+//Settings_tmp.cpp
+
 #include "Settings_tmp.h"
 
-int Settings_tmp::Run (sf::RenderWindow &window)
+int Settings_tmp::Run(sf::RenderWindow &window)
 {
-	bool Running = true;
-
-	//vector for mouse position check
-	sf::Vector2f posMouseInFloat;
-	sf::Vector2i posMouse;
+	bool running = true;
 
 	//sound
+	IOsound iosound;
+	iosound.ReadSoundSettings(volume);
 	MenuSound sound;
 	sound.LoadSoundBuffer();
-	sound.SetBuffer();
+	sound.setBuffer(volume);
 
 	MenuMusic music;
-	music.LoadMusic();
+	music.LoadMusic(volume);
 	music.PlayMusic("menusong");
 
 	//background and "buttons"
-	Backgrounds bg("graphics//settings_tmp.jpg");
+	Background bg("graphics//core//settings_tmp.jpg");
 
 
-	while (Running)
+	while (running)
 	{
 		while (window.pollEvent(event))
 		{
@@ -37,14 +37,14 @@ int Settings_tmp::Run (sf::RenderWindow &window)
 				{
 
 				case sf::Keyboard::Return:
-							return (2);
-						break;
-					default:
-						break;
+					return (2);
+					break;
+				default:
+					break;
 				}
 			}
 		}
-        
+
 		//draw
 		window.clear();
 		bg.Render(window);

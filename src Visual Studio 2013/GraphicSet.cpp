@@ -10,7 +10,14 @@ int GraphicSet::Run(sf::RenderWindow &window)
 	IOscreen ioscreen;
 	isFull = ioscreen.getScreenSettings();
 	IOsmooth iosmooth;
-	isSmooth = false;
+	if (iosmooth.ReadSmoothSettings())
+	{
+		isSmooth = false;
+	}
+	else
+	{
+		isSmooth = true;
+	}
 	selectionH = false;
 	selectionV = false;
 

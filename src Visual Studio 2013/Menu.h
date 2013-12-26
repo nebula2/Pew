@@ -6,6 +6,7 @@
 #include "StateManager.h"
 #include "MenuSfx.h"
 #include "IOsound.h"
+#include <math.h>
 
 class Menu : public StateManager
 {
@@ -19,5 +20,14 @@ private:
 	sf::Event event;
 	int selection;
 	int volume;
+	sf::Clock clock;
+	float elapsedTime;
+	float x_movement;
+	float y_movement;
+	float x, y;
+	int debauch;
+	sf::Texture texture;
+	sf::Sprite sprite;
+
 };
 #endif

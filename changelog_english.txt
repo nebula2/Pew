@@ -93,6 +93,10 @@ cl10:
 - did some finetuning for enemies
 - no monkeys will spawn while brian is active
 
+cl11:
+- added enemy to main menu
+- in the graphics settings you now see the active selection
+
 
 
 
