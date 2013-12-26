@@ -59,15 +59,15 @@ int Game::Run(sf::RenderWindow &window)
 
 	//health, points & alive
 	Health health("graphics//health.png");
-	health.setPosition(5, 12.5);
+	health.setPosition(0, 12.5);
 
-	Text pHealthS(20);
-	pHealthS.setPosition(32, 12.5);
+	Text pHealthS(18);
+	pHealthS.setPosition(23, 12.5);
 	pHealthS.setColor(sf::Color::Green);
 
 	points = 0;
-	Text pointS(20);
-	pointS.setPosition(650, 12.5);
+	Text pointS(25);
+	pointS.setPosition(650, 8);
 	pointS.setColor(sf::Color::Black);
 	std::stringstream pointStream;
 

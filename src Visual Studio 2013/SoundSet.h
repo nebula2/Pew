@@ -17,8 +17,6 @@ private:
 	int selection;
 	std::stringstream selectionStream;
 	bool running;
-	sf::Clock clock;
-	float elapsedTime;
 };
 
 #endif

@@ -34,13 +34,13 @@ int GraphicSet::Run(sf::RenderWindow &window)
 
 	smooth.setPosition(50, 75);
 	smooth.setColor(sf::Color(255, 128, 0));
-	falseS.setPosition(400, 95);
-	trueS.setPosition(550, 95);
+	falseS.setPosition(480, 95);
+	trueS.setPosition(630, 95);
 
 	fullscreen.setPosition(50, 300);
 	fullscreen.setColor(sf::Color(255, 128, 0));
-	falseF.setPosition(400, 320);
-	trueF.setPosition(550, 320);
+	falseF.setPosition(480, 320);
+	trueF.setPosition(630, 320);
 
 	info.setPosition(50, 500);
 	info.setColor(sf::Color(255, 128, 0));

@@ -10,9 +10,6 @@ int SoundSet::Run(sf::RenderWindow &window)
 	Text selectionString(50);
 		 selectionString.setPosition(350, 250);
 		 selectionString.setColor(sf::Color::White);
-	elapsedTime = 0;
-
-
 
 	//read actual settings into volume
 	IOsound iosound;
@@ -32,32 +29,37 @@ int SoundSet::Run(sf::RenderWindow &window)
 			
 			if (event.type == sf::Event::KeyPressed)
 			{
-				if (event.key.code == sf::Keyboard::Escape)
+				switch (event.key.code)
 				{
-					return(2);
-				}
-				if (event.key.code == sf::Keyboard::Return)
-				{
-
+				case sf::Keyboard::Right:
+					if (selection < 100)
+					{
+						selection += 5;
+					}
+					else
+					{
+						selection = 100;
+					}
+					break;
+				case sf::Keyboard::Left:
+					if (selection > 0)
+					{
+						selection -= 5;
+					}
+					break;
+				case sf::Keyboard::Escape:
+					return 2;
+					break;
+				case sf::Keyboard::Return:
 					iosound.WriteSoundSettings(selection);
-					return (2);
+					return 2;
+					break;
+				default:
+					break;
+
 				}
+
 			}
-		}
-
-		//let the user define the volume
-		elapsedTime = clock.restart().asMilliseconds();
-
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
-		{
-			if (selection >= 0)
-			selection -= 0.05 * elapsedTime;
-		}
-
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
-		{
-			if (selection <= 99)
-			selection += 0.1 * elapsedTime;
 		}
 		
 		//stream int

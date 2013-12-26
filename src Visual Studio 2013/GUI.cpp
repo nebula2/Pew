@@ -65,7 +65,7 @@ float MovableBackground::getY()
 //Text
 Text::Text(int size)
 {
-	font.loadFromFile("graphics/font/NASHVILL.ttf");
+	font.loadFromFile("graphics/font/Saddlebag.ttf");
 	text.setFont(font);
 	text.setStyle(sf::Text::Bold);
 	text.setCharacterSize(size);
@@ -73,7 +73,7 @@ Text::Text(int size)
 
 Text::Text(std::string output, int size)
 {
-	font.loadFromFile("graphics/font/NASHVILL.ttf");
+	font.loadFromFile("graphics/font/Saddlebag.ttf");
 	text.setFont(font);
 	text.setString(output);
 	text.setStyle(sf::Text::Bold);
