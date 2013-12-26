@@ -4,7 +4,7 @@
 #define HIGHSCORE_H
 
 //SFML and windows header
-#include <SFML\Graphics.hpp>
+#include <SFML/Graphics.hpp>
 #include <sstream>
 
 //own header

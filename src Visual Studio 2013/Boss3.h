@@ -3,7 +3,7 @@
 #ifndef BOSS3_H
 #define BOss3_H
 
-#include <SFML\Graphics.hpp>
+#include <SFML/Graphics.hpp>
 #include "IOdiff.h"
 
 class Boss3
