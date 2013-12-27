@@ -1,6 +1,7 @@
 //Boss2.cpp
 
 #include "Boss2.h"
+#include <cmath>
 #define PI 3.14159265
 
 sf::Texture Boss2::enemyTex;
