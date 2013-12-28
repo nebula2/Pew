@@ -8,7 +8,7 @@ int DiffSet::Run(sf::RenderWindow &window)
 	running = true;
 	IOdiff diff;
 	selection = diff.ReadDiffSettings();
-	Background bg("graphics//core//settings.jpg");
+	Background bg("graphics//core//settings.png");
 
 	//Sound
 	IOsound iosound;

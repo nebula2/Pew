@@ -6,7 +6,7 @@
 
 //includes that I want at all states
 #include "GUI.h"
-#include <SFML\Graphics.hpp>
+#include <SFML/Graphics.hpp>
 
 //includes the method to run the active state
 

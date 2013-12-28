@@ -4,7 +4,7 @@
 #define DOUBLESHOT_H
 
 //SFML and windows header
-#include <SFML\Graphics.hpp>
+#include <SFML/Graphics.hpp>
 #include <iostream>
 
 class DoubleShot

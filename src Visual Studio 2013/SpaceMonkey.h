@@ -3,7 +3,7 @@
 #ifndef SPACEMONKEY_H
 #define SPACEMONKEY_H
 
-#include <SFML\Graphics.hpp>
+#include <SFML/Graphics.hpp>
 #include "IOdiff.h"
 #include "IOsmooth.h"
 

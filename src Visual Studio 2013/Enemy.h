@@ -3,7 +3,7 @@
 #ifndef _ENEMY_H
 #define _ENEMY_H
 
-#include <SFML\Graphics.hpp>
+#include <SFML/Graphics.hpp>
 #include "HighscoreManager.h"
 #include "IOdiff.h"
 #include "IOsmooth.h"

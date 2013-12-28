@@ -3,7 +3,7 @@
 #ifndef _SHIT_H
 #define _SHIT_H
 
-#include <SFML\Graphics.hpp>
+#include <SFML/Graphics.hpp>
 #include "SpaceMonkey.h"
 #include "Player.h"
 #include "IOdiff.h"

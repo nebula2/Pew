@@ -6,7 +6,7 @@ int GraphicSet::Run(sf::RenderWindow &window)
 {
 	//basic stuff
 	running = true;
-	Background bg("graphics//core//settings.jpg");
+	Background bg("graphics//core//settings.png");
 	IOscreen ioscreen;
 	isFull = ioscreen.getScreenSettings();
 	IOsmooth iosmooth;
