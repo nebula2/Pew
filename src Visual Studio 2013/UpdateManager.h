@@ -15,7 +15,8 @@
 class UpdateManager
 {
 public:
-	void EnemySpawn(int &counter, std::vector<Enemy> &vector, int &randomX);
+	void EnemySpawn(int &counter, std::vector<Enemy> &vector, std::vector<EnemyFormation> &enemyFormationv, int &randomX);
+	void EnemyFormationSpawn(int &counter, std::vector<EnemyFormation> &vector);
 	void HealthDropSpawn(int &counter, std::vector<HealthDrop> &vector, int &randomX);
 	void SpaceMonkeySpawn(int &points, std::vector<SpaceMonkey> &vector, std::vector<Boss2> &bossV);
 	void ShitSpawn(int &counter, std::vector<SpaceMonkey> &smVector, std::vector<ShitBullets> &sVector, IngameSound &sound);

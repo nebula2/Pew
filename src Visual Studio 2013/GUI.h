@@ -43,6 +43,7 @@ public:
 	Text(std::string output, int size);
 	void setColor(sf::Color color);
 	void setPosition(float x, float y);
+	void setOrigin(float x, float y);
 	void Update(std::stringstream &stream, int value);
 	void Render(sf::RenderWindow &window);
 	sf::FloatRect getGlobalBounds();

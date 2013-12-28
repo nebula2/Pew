@@ -5,6 +5,7 @@
 
 #include "Player.h"
 #include "Enemy.h"
+#include "EnemyFormation.h"
 #include "SpaceMonkey.h"
 #include "Bullet.h"
 #include "ShitBullets.h"

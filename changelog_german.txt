@@ -71,6 +71,13 @@ cl11:
 - grafikeinstellungen werden korrekt angezeigt
 - sound kann nun in 5% schritten gesetzt werden
 
+cl12:
+- vector clear hat nun eine eigene funktion
+- text "New Weapon" repositioniert
+- cow DMG 30->25
+- Pew schneller 0.8->0.9
+- Enemy Formationsflug geadded
+
 geplant:
 
 Gameplay->

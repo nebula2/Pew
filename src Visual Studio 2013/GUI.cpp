@@ -90,6 +90,11 @@ void Text::setPosition(float x, float y)
 	text.setPosition(x, y);
 }
 
+void Text::setOrigin(float x, float y)
+{
+	text.setOrigin(x, y);
+}
+
 void Text::Update(std::stringstream &stream, int value)
 {
 	text.setString(stream.str());

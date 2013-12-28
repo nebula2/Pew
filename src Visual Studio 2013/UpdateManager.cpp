@@ -3,14 +3,55 @@
 #include "UpdateManager.h"
 
 
-void UpdateManager::EnemySpawn(int &counter, std::vector<Enemy> &vector, int &randomX)
+void UpdateManager::EnemySpawn(int &counter, std::vector<Enemy> &vector, std::vector<EnemyFormation> &enemyFormationv, int &randomX)
 {
-	if (counter >= 600)
+	if (counter >= 600 && enemyFormationv.size() == 0)
 	{
 		randomX = (rand() % 800) + 1;
 		Enemy enemyx;
-		enemyx.SetPosition(randomX, -35);
+		enemyx.SetPosition(randomX, -85);
 		vector.push_back(enemyx);
+		counter = 0;
+	}
+}
+
+void UpdateManager::EnemyFormationSpawn(int &counter, std::vector<EnemyFormation> &vector)
+{
+	if (counter >= 15000)
+	{
+		EnemyFormation enemy0;
+		EnemyFormation enemy1;
+		EnemyFormation enemy2;
+		EnemyFormation enemy3;
+		EnemyFormation enemy4;
+		EnemyFormation enemy5;
+		EnemyFormation enemy6;
+		EnemyFormation enemy7;
+		EnemyFormation enemy8;
+		EnemyFormation enemy9;
+
+		enemy0.setPosition(0, -280);
+		enemy9.setPosition(355.55556, -280);
+		enemy8.setPosition(711.11112, -245);
+		enemy1.setPosition(88.88889, -245);
+		enemy7.setPosition(622.22223, -245);
+		enemy2.setPosition(177.77778, -210);
+		enemy6.setPosition(533.33334, -210);
+		enemy3.setPosition(266.66667, -175);
+		enemy5.setPosition(444.44445, -175);
+		enemy4.setPosition(355.55556, -140);
+
+		vector.push_back(enemy0);
+		vector.push_back(enemy1);
+		vector.push_back(enemy2);
+		vector.push_back(enemy3);
+		vector.push_back(enemy4);
+		vector.push_back(enemy5);
+		vector.push_back(enemy6);
+		vector.push_back(enemy7);
+		vector.push_back(enemy8);
+		vector.push_back(enemy9);
+
 		counter = 0;
 	}
 }
@@ -78,7 +119,7 @@ void UpdateManager::Boss1WeaponSpawn(int &counter, std::vector<Boss1Weapon> &bwV
 {
 	for (int i = 0; i < bVector.size(); i++)
 	{
-		if (bVector[i].active && counter >= 2000)
+		if (bVector[i].active && counter >= 1000)
 		{
 			Boss1Weapon b1Weaponx;
 			b1Weaponx.SetPosition(bVector[i].getPosition().x, bVector[i].getPosition().y);
@@ -91,7 +132,7 @@ void UpdateManager::Boss1WeaponSpawn(int &counter, std::vector<Boss1Weapon> &bwV
 
 void UpdateManager::CowSpawn(int &counter, std::vector<Cow> &vector, int &randomX, IngameSound &sound)
 {
-	if (counter >= 10000)
+	if (counter >= 18000)
 	{
 		randomX = (rand() % 300) + 1;
 		Cow cowx;

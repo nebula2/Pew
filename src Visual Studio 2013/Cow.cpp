@@ -11,7 +11,7 @@ Cow::Cow()
 
 	speed = 0.5 *diff.ReadDiffSettings();
 	active = true;
-	damage = 30;
+	damage = 25;
 
 	cowTex.loadFromFile("graphics//enemies//cow.png");
 	cowTex.setSmooth(smooth.ReadSmoothSettings());

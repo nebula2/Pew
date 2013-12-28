@@ -6,7 +6,7 @@ sf::Texture Pew::pewShotTex;
 
 Pew::Pew()
 {
-	speed = 0.6;
+	speed = 0.9;
 	active = true;
 	isPew = true;
 

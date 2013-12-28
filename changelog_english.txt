@@ -98,6 +98,13 @@ cl11:
 - in the graphics settings you now see the active selection
 - sound can now be set in 5% steps
 
+cl12:
+- vector clear got its own function
+- text "New Weapon" repositioned
+- cow DMG 30->25
+- Pew faster 0.8->0.9
+- Enemy formation added
+
 
 
 

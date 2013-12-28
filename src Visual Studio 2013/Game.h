@@ -19,6 +19,7 @@ class Game : public StateManager
 public:
 	virtual int Run(sf::RenderWindow &window);
 	HighscoreManager getHighScore();
+	void ClearStuff();
 private:
 
 	//SMFL stuff
@@ -27,8 +28,8 @@ private:
 
 	//stringstreams & image
 	std::stringstream healthStream;
-	std::stringstream pointStream;
-	std::string		  filename;
+	std::stringstream  pointStream;
+	std::string		      filename;
 	sf::Image			  screenie;
 
 	//vectors
@@ -37,6 +38,7 @@ private:
 	std::vector<DoubleShot>			   dShotv;
 	std::vector<DoubleShot>::iterator  dShotIt;
 	std::vector<Enemy>				   enemyv;
+	std::vector<EnemyFormation>        enemyFormationv;
 	std::vector<SpaceMonkey>		   monkeyv;
 	std::vector<Boss1>				   boss1v;
 	std::vector<Cow>				   cowv;
@@ -58,6 +60,7 @@ private:
 	int points;
 	int bulletTimeCount;
 	int enemyTimeCount;
+	int enemyFormationCount;
 	int shitCount;
 	int boss1WeaponCount;
 	int boss2WeaponCount;

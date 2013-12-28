@@ -39,7 +39,31 @@ void RenderManager::EnemyDraw(std::vector<Enemy> &vector, float &elapsedTime, Hi
 
 //Player Weapons
 
-void RenderManager::BulletDraw(std::vector<Bullet> &vector, std::vector<Bullet>::iterator &iterator, int &points, IngameSound &sound, HighscoreManager &highscore, std::vector<Enemy> &enemyv, std::vector<SpaceMonkey> &monkeyv, std::vector<ShitBullets> &shitv, std::vector<Boss1> &boss1v, bool &boss1Dead, std::vector<Boss2Weapon> &boss2weaponv, sf::RenderWindow &window, float &elapsedTime)
+void RenderManager::BulletDraw(std::vector<Bullet> &vector, std::vector<Bullet>::iterator &iterator, int &points, IngameSound &sound, HighscoreManager &highscore, std::vector<Enemy> &enemyv, std::vector<SpaceMonkey> &monkeyv, std::vector<ShitBullets> &shitv, std::vector<Boss1> &boss1v, bool &boss1Dead, std::vector<Boss2Weapon> &boss2weaponv,std::vector<EnemyFormation> &enemyFormationv, sf::RenderWindow &window, float &elapsedTime)
+{
+	for (iterator = vector.begin(); iterator != vector.end();)
+	{
+		if (!iterator->active)
+		{
+			iterator = vector.erase(iterator);
+		}
+		else
+		{
+			coll::ProjectileToList(iterator, enemyv, points, sound, highscore);//enemy
+			coll::ProjectileToMonkey(iterator, monkeyv, points, sound, highscore);//monkey
+			coll::ProjectileToListNoHealth(iterator, shitv, points, sound, highscore);//shit
+			coll::ProjectileToListNoHealth(iterator, boss2weaponv, points, sound, highscore);//boss2Weapon
+			coll::BossCollision(iterator, boss1v, points, sound, highscore, boss1Dead);//boss1
+			coll::ProjectileToList(iterator, enemyFormationv, points, sound, highscore);//enemyFormation
+
+			iterator->Update(window, elapsedTime);
+			iterator->Render(window);
+			++iterator;
+		}
+	}
+}
+
+void RenderManager::DoubleShotDraw(std::vector<DoubleShot> &vector, std::vector<DoubleShot>::iterator &iterator, int &points, IngameSound &sound, HighscoreManager &highscore, std::vector<Enemy> &enemyv, std::vector<SpaceMonkey> &monkeyv, std::vector<ShitBullets> &shitv, std::vector<Boss1> &boss1v, bool &boss1Dead, std::vector<Boss2Weapon> &boss2weaponv, std::vector<EnemyFormation> &enemyFormationv, sf::RenderWindow &window, float &elapsedTime)
 {
 	for (iterator = vector.begin(); iterator != vector.end();)
 	{
@@ -62,30 +86,7 @@ void RenderManager::BulletDraw(std::vector<Bullet> &vector, std::vector<Bullet>:
 	}
 }
 
-void RenderManager::DoubleShotDraw(std::vector<DoubleShot> &vector, std::vector<DoubleShot>::iterator &iterator, int &points, IngameSound &sound, HighscoreManager &highscore, std::vector<Enemy> &enemyv, std::vector<SpaceMonkey> &monkeyv, std::vector<ShitBullets> &shitv, std::vector<Boss1> &boss1v, bool &boss1Dead, std::vector<Boss2Weapon> &boss2weaponv, sf::RenderWindow &window, float &elapsedTime)
-{
-	for (iterator = vector.begin(); iterator != vector.end();)
-	{
-		if (!iterator->active)
-		{
-			iterator = vector.erase(iterator);
-		}
-		else
-		{
-			coll::ProjectileToList(iterator, enemyv, points, sound, highscore);//enemy
-			coll::ProjectileToMonkey(iterator, monkeyv, points, sound, highscore);//monkey
-			coll::ProjectileToListNoHealth(iterator, shitv, points, sound, highscore);//shit
-			coll::ProjectileToListNoHealth(iterator, boss2weaponv, points, sound, highscore);//boss2Weapon
-			coll::BossCollision(iterator, boss1v, points, sound, highscore, boss1Dead);//boss1
-
-			iterator->Update(window, elapsedTime);
-			iterator->Render(window);
-			++iterator;
-		}
-	}
-}
-
-void RenderManager::PewShotDraw(std::vector<Pew> &vector, std::vector<Pew>::iterator &iterator, int &points, IngameSound &sound, HighscoreManager &highscore, std::vector<Enemy> &enemyv, std::vector<SpaceMonkey> &monkeyv, std::vector<ShitBullets> &shitv, std::vector<Boss1> &boss1v, std::vector<Boss2> &boss2v, std::vector<Boss2Weapon> &boss2weaponv, sf::RenderWindow &window, float &elapsedTime)
+void RenderManager::PewShotDraw(std::vector<Pew> &vector, std::vector<Pew>::iterator &iterator, int &points, IngameSound &sound, HighscoreManager &highscore, std::vector<Enemy> &enemyv, std::vector<SpaceMonkey> &monkeyv, std::vector<ShitBullets> &shitv, std::vector<Boss1> &boss1v, std::vector<Boss2> &boss2v, std::vector<Boss2Weapon> &boss2weaponv, std::vector<EnemyFormation> &enemyFormationv, sf::RenderWindow &window, float &elapsedTime)
 {
 	for (iterator = vector.begin(); iterator != vector.end();)
 	{
