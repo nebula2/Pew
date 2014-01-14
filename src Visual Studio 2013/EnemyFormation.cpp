@@ -9,7 +9,7 @@ EnemyFormation::EnemyFormation()
 	IOdiff diff;
 	IOsmooth smooth;
 	speed = 0.6;
-	damage = 10;
+	damage = 15;
 	active = true;
 	health = 4 * diff.ReadDiffSettings();
 

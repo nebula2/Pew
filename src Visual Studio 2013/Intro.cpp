@@ -2,11 +2,12 @@
 
 #include "Intro.h"
 
-int Intro::Run(sf::RenderWindow &window)
+Intro::Intro()
 {
-	running = true;
+	//basic
+	running = false;
 	elapsedTime = 0;
-	
+
 	//music
 	IOsound iosound;
 	iosound.ReadSoundSettings(volume);
@@ -16,13 +17,24 @@ int Intro::Run(sf::RenderWindow &window)
 
 
 	//background
-	sf::Texture intro;
 	intro.loadFromFile("graphics//core//intro.jpg");
-	sf::Sprite introSprite;
 	introSprite.setTexture(intro);
 	introSprite.setPosition(0, 600);
 	bgSpeed = 0.03;
+}
 
+int Intro::Run(sf::RenderWindow &window)
+{	
+
+	while (!running)
+	{
+		introSprite.setPosition(0, 600);
+		//draw
+		window.clear();
+		window.draw(introSprite);
+		window.display();
+	}
+	
 	float y = introSprite.getPosition().y;
 
 	while (running)
@@ -59,4 +71,14 @@ int Intro::Run(sf::RenderWindow &window)
 		window.display();
 	}
 	return -1; 
+}
+
+void Intro::setRunning(bool &m_running)
+{
+	running = m_running;
+}
+
+bool Intro::getRunning()
+{
+	return running;
 }

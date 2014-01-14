@@ -15,9 +15,9 @@ void UpdateManager::EnemySpawn(int &counter, std::vector<Enemy> &vector, std::ve
 	}
 }
 
-void UpdateManager::EnemyFormationSpawn(int &counter, std::vector<EnemyFormation> &vector)
+void UpdateManager::EnemyFormationSpawn(int &counter, std::vector<EnemyFormation> &vector, std::vector<Boss2> &boss2v)
 {
-	if (counter >= 15000)
+	if (counter >= 15000 && boss2v.size() == 0)
 	{
 		EnemyFormation enemy0;
 		EnemyFormation enemy1;
@@ -31,8 +31,8 @@ void UpdateManager::EnemyFormationSpawn(int &counter, std::vector<EnemyFormation
 		EnemyFormation enemy9;
 
 		enemy0.setPosition(0, -280);
-		enemy9.setPosition(355.55556, -280);
-		enemy8.setPosition(711.11112, -245);
+		enemy9.setPosition(355.55556, -245);
+		enemy8.setPosition(711.11112, -280);
 		enemy1.setPosition(88.88889, -245);
 		enemy7.setPosition(622.22223, -245);
 		enemy2.setPosition(177.77778, -210);
@@ -158,6 +158,19 @@ void UpdateManager::BulletSpawn(int &counter, std::vector<Bullet> &vector, Highs
 	}
 }
 
+void UpdateManager::BulletSpawn2(int &counter, std::vector<Bullet> &vector, HighscoreManager &highscore, WeaponManager &weapon, Player2 &player, IngameSound &sound)
+{
+	if (counter >= 175 && weapon.bulletA)
+	{
+		Bullet bulletx;
+		highscore.setShotsFired(1);
+		bulletx.SetPosition(player.getPosition().x - 4, player.getPosition().y);
+		vector.push_back(bulletx);
+		sound.PlaySound("bulletShot");
+		counter = 0;
+	}
+}
+
 void UpdateManager::DoubleShotSpawn(int &counter, std::vector<DoubleShot> &vector, HighscoreManager &highscore, WeaponManager &weapon, Player &player, IngameSound &sound)
 {
 	if (counter >= 300 && weapon.doubleA)
@@ -174,7 +187,36 @@ void UpdateManager::DoubleShotSpawn(int &counter, std::vector<DoubleShot> &vecto
 	}
 }
 
+void UpdateManager::DoubleShotSpawn2(int &counter, std::vector<DoubleShot> &vector, HighscoreManager &highscore, WeaponManager &weapon, Player2 &player, IngameSound &sound)
+{
+	if (counter >= 300 && weapon.doubleA)
+	{
+		DoubleShot doublex;
+		DoubleShot doubley;
+		highscore.setShotsFired(2);
+		doublex.SetPosition(player.getPosition().x - 12, player.getPosition().y);
+		doubley.SetPosition(player.getPosition().x + 10, player.getPosition().y);
+		vector.push_back(doublex);
+		vector.push_back(doubley);
+		sound.PlaySound("bulletShot");
+		counter = 0;
+	}
+}
+
 void UpdateManager::PewSpawn(std::vector<Pew> &vector, HighscoreManager &highscore, WeaponManager &weapon, Player &player, IngameSound &sound, bool &pewOnCooldown)
+{
+	if (weapon.pewA && !pewOnCooldown)
+	{
+		Pew pewx;
+		highscore.setShotsFired(1);
+		pewx.SetPosition(player.getPosition().x - 4, player.getPosition().y);
+		vector.push_back(pewx);
+		sound.PlaySound("pew");
+		pewOnCooldown = true;
+	}
+}
+
+void UpdateManager::PewSpawn2(std::vector<Pew> &vector, HighscoreManager &highscore, WeaponManager &weapon, Player2 &player, IngameSound &sound, bool &pewOnCooldown)
 {
 	if (weapon.pewA && !pewOnCooldown)
 	{

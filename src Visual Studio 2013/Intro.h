@@ -10,10 +10,15 @@
 class Intro : public StateManager
 {
 public:
+	Intro();
 	virtual int Run(sf::RenderWindow &window);
+	void setRunning(bool &m_running);
+	bool getRunning();
 private:
 	sf::Event event;
 	sf::Clock clock;
+	sf::Texture intro;
+	sf::Sprite introSprite;
 	float elapsedTime;
 	float bgSpeed;
 	bool running;

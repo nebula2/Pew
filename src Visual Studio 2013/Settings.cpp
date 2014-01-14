@@ -22,12 +22,14 @@ int Settings::Run(sf::RenderWindow &window)
 	selection = 0;
 
 	//buttons
-	Text difficulty("Difficulty", 70), graphics("Graphics", 70), sounds("Sound", 70), back("Back", 70);
+	Text coop("Coop", 70), difficulty("Difficulty", 70), graphics("Graphics", 70), sounds("Sound", 70), back("Back", 70);
 	
-	difficulty.setPosition(270, 150);
-	graphics.setPosition(270, 350);
-	sounds.setPosition	  (270, 250);
-	back.setPosition	  (270, 450);
+
+	difficulty.setPosition(270, 100);
+	coop.setPosition(270, 200);
+	graphics.setPosition(270, 400);
+	sounds.setPosition	  (270, 300);
+	back.setPosition	  (270, 500);
 
 
 	while (running)
@@ -55,30 +57,34 @@ int Settings::Run(sf::RenderWindow &window)
 					}
 					break;
 				case sf::Keyboard::Down:
-					if (selection < 3)
+					if (selection < 4)
 					{
 						selection += 1;
 						sound.PlaySound("select");
 					}
 					else
 					{
-						selection = 3;
+						selection = 4;
 					}
 					break;
 				case sf::Keyboard::Return:
-					if (selection == 0)
+					if (selection == 0)//diff
 					{
 						return (7);
 					}
-					else if (selection == 1)
+					else if (selection == 1)//coop
+					{
+						return (8);
+					}
+					else if (selection == 2)//sound
 					{
 						return (6);
 					}
-					else if (selection == 2)
+					else if (selection == 3)//graphics
 					{
 						return (4);
 					}
-					else
+					else//back
 					{
 						return 0;
 					}
@@ -89,30 +95,42 @@ int Settings::Run(sf::RenderWindow &window)
 			}
 		}
 
-		if (selection == 0)//Schwierigkeit
+		if (selection == 0)//diff
 		{
 			difficulty.setColor(sf::Color(255, 128, 0));
+			coop.setColor(sf::Color(255, 255, 255));
 			graphics.setColor(sf::Color(255, 255, 255));
 			sounds.setColor(sf::Color(255, 255, 255));
 			back.setColor(sf::Color(255, 255, 255));
 		}
-		else if (selection == 1)//Sound
+		else if (selection == 1)//coop
 		{
 			difficulty.setColor(sf::Color(255, 255, 255));
+			coop.setColor(sf::Color(255, 128, 0));
+			graphics.setColor(sf::Color(255, 255, 255));
+			sounds.setColor(sf::Color(255, 255, 255));
+			back.setColor(sf::Color(255, 255, 255));
+		}
+		else if (selection == 2)//sound
+		{
+			difficulty.setColor(sf::Color(255, 255, 255));
+			coop.setColor(sf::Color(255, 255, 255));
 			graphics.setColor(sf::Color(255, 255, 255));
 			sounds.setColor(sf::Color(255, 128, 0));
 			back.setColor(sf::Color(255, 255, 255));
 		}
-		else if (selection == 2)//Graphics
+		else if (selection == 3)//Graphics
 		{
 			difficulty.setColor(sf::Color(255, 255, 255));
+			coop.setColor(sf::Color(255, 255, 255));
 			graphics.setColor(sf::Color(255, 128, 0));
 			sounds.setColor(sf::Color(255, 255, 255));
 			back.setColor(sf::Color(255, 255, 255));
 		}
-		else
+		else//back
 		{
 			difficulty.setColor(sf::Color(255, 255, 255));
+			coop.setColor(sf::Color(255, 255, 255));
 			graphics.setColor(sf::Color(255, 255, 255));
 			sounds.setColor(sf::Color(255, 255, 255));
 			back.setColor(sf::Color(255, 128, 0));
@@ -123,6 +141,7 @@ int Settings::Run(sf::RenderWindow &window)
 		bg.Render(window);
 		graphics.Render(window);
 		difficulty.Render(window);
+		coop.Render(window);
 		sounds.Render(window);
 		back.Render(window);
 		window.display();

@@ -78,6 +78,7 @@ void RenderManager::DoubleShotDraw(std::vector<DoubleShot> &vector, std::vector<
 			coll::ProjectileToListNoHealth(iterator, shitv, points, sound, highscore);//shit
 			coll::ProjectileToListNoHealth(iterator, boss2weaponv, points, sound, highscore);//boss2Weapon
 			coll::BossCollision(iterator, boss1v, points, sound, highscore, boss1Dead);//boss1
+			coll::ProjectileToList(iterator, enemyFormationv, points, sound, highscore);//enemyFormation
 
 			iterator->Update(window, elapsedTime);
 			iterator->Render(window);
@@ -101,6 +102,7 @@ void RenderManager::PewShotDraw(std::vector<Pew> &vector, std::vector<Pew>::iter
 			coll::ProjectileToListNoHealth(iterator, shitv, points, sound, highscore);//shit
 			coll::ProjectileToListNoHealth(iterator, boss2weaponv, points, sound, highscore);//boss2Weapon
 			coll::Boss2Collision(iterator, boss2v, points, sound, highscore);//boss2
+			coll::ProjectileToList(iterator, enemyFormationv, points, sound, highscore);//enemyFormation
 			
 			iterator->Update(window, elapsedTime);
 			iterator->Render(window);

@@ -7,6 +7,7 @@
 Menu::Menu()
 {
 	playing = false;
+	speed = 0.5;
 }
 
 void Menu::setPlaying(bool &mPlaying)
@@ -149,8 +150,8 @@ int Menu::Run(sf::RenderWindow &window)
 		y_movement += elapsedTime;
 		y = sprite.getPosition().y;
 		x = sprite.getPosition().x;
-		y = 300 + std::sin(y_movement * PI / 180) * debauch;
-		x = 400 + std::cos(x_movement * PI / 180) * debauch;
+		y = 300 + std::sin((y_movement * PI) / 180) * debauch;
+		x = 400 + std::cos((x_movement * PI) / 180) * debauch;
 
 		if (x_movement > 360)
 		{

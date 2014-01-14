@@ -114,3 +114,8 @@ void Player::increaseHealth(int heal)
 		health = 100;
 	}
 }
+
+void Player::setHealth(int &mhealth)
+{
+	health = mhealth;
+}

@@ -4,6 +4,7 @@
 #define ENTITY_H
 
 #include "Player.h"
+//#include "Player2.h"
 #include "Enemy.h"
 #include "EnemyFormation.h"
 #include "SpaceMonkey.h"

@@ -9,6 +9,7 @@
 #include "BasicStuff.h"
 #include "UpdateManager.h"
 #include "RenderManager.h"
+#include "IOtwoPlayer.h"
 
 #include <vector>
 #include <string>
@@ -58,7 +59,10 @@ private:
 	//integer
 	int volume;
 	int points;
+	int player1health;
+	int player2health;
 	int bulletTimeCount;
+	int p2bulletTimeCount;
 	int enemyTimeCount;
 	int enemyFormationCount;
 	int shitCount;

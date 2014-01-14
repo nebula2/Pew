@@ -13,5 +13,6 @@
 #include "SoundSet.h"
 #include "DiffSet.h"
 #include "GraphicSet.h"
+#include "CoopSet.h"
 
 #endif
