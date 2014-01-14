@@ -78,6 +78,15 @@ cl12:
 - Pew schneller 0.8->0.9
 - Enemy Formationsflug geadded
 ______________________________________________________
+cl13:
+- Coop geadded:
+->zweiter player spielt mit maus (linke maustaste zum schießen)
+->die player teilen sich ihr leben bis einer stirbt
+->ein toter spieler wird wiederbelebt, wenn der andere 100 leben hat
+->nur player1 kann die waffen wechseln
+->beide haben die selbe waffe
+______________________________________________________
+
 geplant:
 
 Gameplay->
@@ -102,9 +111,6 @@ Projekt an sich->
 
 ______________________________________________________
 Vorschläge:
-For the menu:
-
-
 
 For the game (depends on what game you are planning, just a few suggestions):
 

@@ -17,6 +17,7 @@ cl1:
 - added music to settings
 
 
+______________________________________________________
 
 cl2:
 
@@ -30,6 +31,7 @@ cl2:
 - healthdrop gives now only 20 health (50 before)
 
 
+______________________________________________________
 
 cl3:
 
@@ -45,6 +47,7 @@ cl3:
 - player can now shoot faster
 
 
+______________________________________________________
 
 cl4:
 
@@ -53,12 +56,12 @@ cl4:
 
 
 - managed to count the shots given by player
-
+______________________________________________________
 cl5:
 
 
 - highscore now supported
-
+______________________________________________________
 cl6:
 
 
@@ -70,7 +73,7 @@ cl6:
 
 - reworked code 
 
-
+______________________________________________________
 cl7:
 - graphics are more organized
 - added a gamelog (named highscore)
@@ -79,31 +82,39 @@ cl7:
   cow which flies y+, is immortal and damages player if collision (to stop camping)
 Bugfix:
 - the bug causing enemies spawning after quitting the game has been fixed
-
+______________________________________________________
 cl8:
 - new enemy added, but no movement (bad luck brian)
-
+______________________________________________________
 cl9:
 - brian now moves as intended, collisions added
 - brian shoots apple which track player
 - added a namespace to the rendermanager to reduce some code 
-
+______________________________________________________
 cl10:
 - settings are now finished
 - did some finetuning for enemies
 - no monkeys will spawn while brian is active
-
+______________________________________________________
 cl11:
 - added enemy to main menu
 - in the graphics settings you now see the active selection
 - sound can now be set in 5% steps
-
+______________________________________________________
 cl12:
 - vector clear got its own function
 - text "New Weapon" repositioned
 - cow DMG 30->25
 - Pew faster 0.8->0.9
 - Enemy formation added
+______________________________________________________
+cl13:
+- Coop added
+-> second player is controlled by mouse (left mouse button for shoot)
+-> players share their life until one is dead
+-> a dead player will be revieved when the other gains 100 life
+-> only first player can switch weapons
+-> both share the same weapon at a time
 
 
 
