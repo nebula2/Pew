@@ -22,6 +22,8 @@ public:
 	HighscoreManager getHighScore();
 	void ClearStuff();
 private:
+	void StartPause();
+	void EndPause();
 
 	//SMFL stuff
 	sf::Event event;
@@ -30,8 +32,6 @@ private:
 	//stringstreams & image
 	std::stringstream healthStream;
 	std::stringstream  pointStream;
-	std::string		      filename;
-	sf::Image			  screenie;
 
 	//vectors
 	std::vector<Bullet>				   bulletv;
@@ -79,6 +79,7 @@ private:
 	float elapsedTime;
 
 	//bool
+	bool paused;
 	bool boss1Dead;
 	bool gotPew;
 	bool pewOnCooldown;

@@ -17,7 +17,7 @@ public:
 	int getHealth();
 	void reduceHealth(int pDamage);
 	void increaseHealth(int heal);
-	void setHealth(int &mhealth); //to sync with player2
+	void setHealth(int mhealth); //to sync with player2
 	sf::Sprite playerSprite;
 	sf::Vector2f getPosition();
 	Player(std::string filepath);

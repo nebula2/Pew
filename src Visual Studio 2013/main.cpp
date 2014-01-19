@@ -27,7 +27,7 @@ int main()
 	}
 	else
 	{
-		window.create(sf::VideoMode(800, 600, 32), "Pew", sf::Style::Titlebar);
+		window.create(sf::VideoMode(800, 600, 32), "Pew", sf::Style::Default);
 	}
 
 	//states

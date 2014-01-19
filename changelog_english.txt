@@ -115,6 +115,16 @@ cl13:
 -> a dead player will be revieved when the other gains 100 life
 -> only first player can switch weapons
 -> both share the same weapon at a time
+______________________________________________________
+cl14:
+- some fixes
+  ->first boss will now be cleared as intended
+  ->after respawn the revieved player should have 100 life
+  ->window style is on default again
+- added pause menu (just press P)
+______________________________________________________
+
+
 
 
 

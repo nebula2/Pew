@@ -80,11 +80,18 @@ cl12:
 ______________________________________________________
 cl13:
 - Coop geadded:
-->zweiter player spielt mit maus (linke maustaste zum schießen)
-->die player teilen sich ihr leben bis einer stirbt
-->ein toter spieler wird wiederbelebt, wenn der andere 100 leben hat
-->nur player1 kann die waffen wechseln
-->beide haben die selbe waffe
+  ->zweiter player spielt mit maus (linke maustaste zum schießen)
+  ->die player teilen sich ihr leben bis einer stirbt
+  ->ein toter spieler wird wiederbelebt, wenn der andere 100 leben hat
+  ->nur player1 kann die waffen wechseln
+  ->beide haben die selbe waffe
+______________________________________________________
+cl14:
+- diverse fixes
+  ->erster boss wird nun gecleared wie gewollt
+  ->nach dem respawn sollte nun der wiederbelebte 100 leben haben
+  ->window style ist wieder auf default
+- pausenmenu geadded (einfach P drücken)
 ______________________________________________________
 
 geplant:
