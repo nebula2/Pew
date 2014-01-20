@@ -29,7 +29,7 @@ void MenuMusic::PlayMusic(std::string music)
 //Sound
 void MenuSound::LoadSoundBuffer()
 {
-	selectBuffer.loadFromFile("audio//select.ogg");
+	selectBuffer.loadFromFile("audio//Select.ogg");
 }
 void MenuSound::setBuffer(int &volume)
 {

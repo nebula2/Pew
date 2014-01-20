@@ -5,7 +5,7 @@
 
 #include <iostream>
 #include <string>
-#include <SFML\Graphics.hpp>
+#include <SFML/Graphics.hpp>
 #include "Player2.h"
 
 class Player

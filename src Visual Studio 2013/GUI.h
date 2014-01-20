@@ -4,7 +4,7 @@
 #define GUI_H
 
 //you need SMFL
-#include <SFML\Graphics.hpp>
+#include <SFML/Graphics.hpp>
 #include <string>
 #include <sstream>
 

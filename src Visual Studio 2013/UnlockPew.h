@@ -3,7 +3,7 @@
 #ifndef UNLOCK_PEW_H
 #define UNLOCK_PEW_H
 
-#include <SFML\Graphics.hpp>
+#include <SFML/Graphics.hpp>
 #include <iostream>
 
 class UnlockPew
