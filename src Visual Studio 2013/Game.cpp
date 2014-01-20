@@ -189,7 +189,7 @@ int Game::Run(sf::RenderWindow &window)
 
 			if (player2.active)
 			{
-				if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left))
+				if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
 				{
 					updateMng.BulletSpawn2(p2bulletTimeCount, bulletv, highscore, weapon, player2, sound);//bullet
 					updateMng.DoubleShotSpawn2(p2bulletTimeCount, dShotv, highscore, weapon, player2, sound);//Doubleshot
