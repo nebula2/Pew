@@ -3,6 +3,7 @@
 #define PI 3.14159
 
 #include "Menu.h"
+#include <cmath>
 
 Menu::Menu()
 {
