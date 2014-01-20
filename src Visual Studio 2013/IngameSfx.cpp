@@ -39,7 +39,7 @@ void IngameSound::LoadSoundBuffer()
 	playerDeathBuffer.loadFromFile("audio//playerDeath.ogg");
 	monkeyFartBuffer.loadFromFile("audio//fart.ogg");
 	pewBuffer.loadFromFile("audio//pew.ogg");
-	boss1HitBuffer.loadFromFile("audio//boss1Hit.ogg");
+	boss1HitBuffer.loadFromFile("audio//boss1hit.ogg");
 	cowBuffer.loadFromFile("audio//cow.ogg");
 }
 
