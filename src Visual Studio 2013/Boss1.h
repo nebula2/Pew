@@ -3,7 +3,7 @@
 #ifndef BOSS1_H
 #define BOSS1_H
 
-#include <SFML\Graphics.hpp>
+#include <SFML/Graphics.hpp>
 #include "IOdiff.h"
 #include "IOsmooth.h"
 

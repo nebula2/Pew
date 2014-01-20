@@ -3,7 +3,7 @@
 #ifndef INGAMESFX_H
 #define INGAMESFX_H
 
-#include <SFML\Audio.hpp>
+#include <SFML/Audio.hpp>
 #include <string>
 
 class IngameMusic

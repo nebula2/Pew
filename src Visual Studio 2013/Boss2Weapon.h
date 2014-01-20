@@ -3,7 +3,7 @@
 #ifndef BOSS2WEAPON_H
 #define BOSS2WEAPON_H
 
-#include <SFML\Graphics.hpp>
+#include <SFML/Graphics.hpp>
 #include "Player.h"
 #include "IOdiff.h"
 #include "IOsmooth.h"

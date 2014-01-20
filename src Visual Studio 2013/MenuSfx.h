@@ -3,7 +3,7 @@
 #ifndef MENUSFX_H
 #define MENUSFX_H
 
-#include <SFML\Audio.hpp>
+#include <SFML/Audio.hpp>
 #include <string>
 
 class MenuMusic

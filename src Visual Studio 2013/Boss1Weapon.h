@@ -4,7 +4,7 @@
 #define BOSS1WEAPON_H
 
 
-#include <SFML\Graphics.hpp>
+#include <SFML/Graphics.hpp>
 #include "IOdiff.h"
 #include "IOsmooth.h"
 

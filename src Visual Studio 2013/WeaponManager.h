@@ -3,7 +3,7 @@
 #ifndef WEAPONMANAGER_H
 #define WEAPONMANAGER_H
 
-#include <SFML\Graphics.hpp>
+#include <SFML/Graphics.hpp>
 
 class WeaponManager
 {

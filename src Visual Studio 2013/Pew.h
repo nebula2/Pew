@@ -4,7 +4,7 @@
 #define PEW_H
 
 //SFML and windows header
-#include <SFML\Graphics.hpp>
+#include <SFML/Graphics.hpp>
 #include <iostream>
 
 class Pew

@@ -3,7 +3,7 @@
 #ifndef COW_H
 #define COW_H
 
-#include <SFML\Graphics.hpp>
+#include <SFML/Graphics.hpp>
 #include "IOdiff.h"
 #include "IOsmooth.h"
 
