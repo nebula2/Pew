@@ -1,0 +1,7 @@
+project(Pew)
+cmake_minimum_required(VERSION 2.8)
+aux_source_directory("src Visual Studio 2013" SRC_LIST)
+find_package(SFML 2 COMPONENTS graphics window audio system REQUIRED)
+include_directories("${SFML_INCLUDE_DIR}")
+add_executable(pew ${SRC_LIST})
+target_link_libraries(pew ${SFML_LIBRARIES})
