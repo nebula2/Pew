@@ -156,9 +156,7 @@ void Healthbar::Update(sf::RenderWindow &window, int health)
 	{
 		health = 100 - health;
 		float x = hbSprite.getPosition().x;
-		static_cast<float>(health);
-		health *= 1.55;
-		hbSprite.setPosition(71.55 - health, 13);
+		hbSprite.setPosition(71.55 - health * 1.55, 13);
 
 	}
 

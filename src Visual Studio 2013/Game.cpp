@@ -54,7 +54,6 @@ int Game::Run(sf::RenderWindow &window)
 		
 	}
 
-	Game::highscore;
 	UpdateManager updateMng;
 	RenderManager renderMng;
 
