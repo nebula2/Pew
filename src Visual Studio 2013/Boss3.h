@@ -1,7 +1,7 @@
 //boss3.h
 
 #ifndef BOSS3_H
-#define BOss3_H
+#define BOSS3_H
 
 #include <SFML/Graphics.hpp>
 #include "IOdiff.h"
