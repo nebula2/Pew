@@ -5,7 +5,7 @@
 
 //Render for enemy Stuff 
 
-void RenderManager::Boss2WeaponDraw(std::vector<Boss2Weapon> &vector, std::vector<Boss2Weapon>::iterator &iterator, float &elapsedTime, Player &pPlayer, sf::RenderWindow &window)
+void RenderManager::Boss2WeaponDraw(std::vector<Boss2Weapon> &vector, std::vector<Boss2Weapon>::iterator &iterator, float &elapsedTime, Player &pPlayer, Player2 &player2, sf::RenderWindow &window)
 {
 	for (iterator = vector.begin(); iterator != vector.end();)
 	{
@@ -15,7 +15,7 @@ void RenderManager::Boss2WeaponDraw(std::vector<Boss2Weapon> &vector, std::vecto
 		}
 		else
 		{
-			iterator->Update(window, elapsedTime, pPlayer);
+			iterator->Update(window, elapsedTime, pPlayer, player2);
 			iterator->Render(window);
 			++iterator;
 		}

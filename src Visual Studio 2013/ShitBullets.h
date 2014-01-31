@@ -5,7 +5,6 @@
 
 #include <SFML/Graphics.hpp>
 #include "SpaceMonkey.h"
-#include "Player.h"
 #include "IOdiff.h"
 #include "IOsmooth.h"
 

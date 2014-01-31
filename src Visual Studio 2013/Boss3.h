@@ -24,5 +24,4 @@ private:
 	int health;
 };
 
-
 #endif

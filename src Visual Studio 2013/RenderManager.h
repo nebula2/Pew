@@ -51,7 +51,7 @@ namespace Rm
 class RenderManager
 {
 public:
-	void Boss2WeaponDraw(std::vector<Boss2Weapon> &vector, std::vector<Boss2Weapon>::iterator &iterator, float &elapsedTime, Player &pPlayer, sf::RenderWindow &window);
+	void Boss2WeaponDraw(std::vector<Boss2Weapon> &vector, std::vector<Boss2Weapon>::iterator &iterator, float &elapsedTime, Player &pPlayer, Player2 &player2, sf::RenderWindow &window);
 	void EnemyDraw(std::vector<Enemy> &vector, float &elapsedTime, HighscoreManager &highscore, sf::RenderWindow &window);
 	
 	void BulletDraw(std::vector<Bullet> &vector, std::vector<Bullet>::iterator &iterator, int &points, IngameSound &sound, HighscoreManager &highscore, std::vector<Enemy> &enemyv, std::vector<SpaceMonkey> &monkeyv, std::vector<ShitBullets> &shitv, std::vector<Boss1> &boss1v, bool &boss1Dead, std::vector<Boss2Weapon> &boss2weaponv, std::vector<EnemyFormation> &enemyFormationv, sf::RenderWindow &window, float &elapsedTime);

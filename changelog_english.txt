@@ -123,7 +123,10 @@ cl14:
   ->window style is on default again
 - added pause menu (just press P)
 ______________________________________________________
-
+HOTFIX
+- if you are at the third boss and the first player is dead,
+  the apples should now track the second player
+______________________________________________________
 
 
 

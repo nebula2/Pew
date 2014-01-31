@@ -24,6 +24,11 @@ public:
 private:
 	void StartPause();
 	void EndPause();
+	void IncrementCounters();
+	void HandleSpawns(sf::RenderWindow &window, MovableBackground &bg, Player &player1, Player2 &player2, UpdateManager &updateMng, IngameSound &sound, GUIcircleShape &pewCD, WeaponManager &weapon);
+	void HandleDraws(sf::RenderWindow &window, RenderManager &renderMng, Player &player1, Player2 &player2, IngameSound &sound);
+	void CountersToNull();
+	void UpdateHud(sf::RenderWindow &window, Player &player1, Healthbar &hudHealth, WeaponManager &weapon);
 
 	//SMFL stuff
 	sf::Event event;

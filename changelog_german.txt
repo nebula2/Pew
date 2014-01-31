@@ -93,6 +93,10 @@ cl14:
   ->window style ist wieder auf default
 - pausenmenu geadded (einfach P drücken)
 ______________________________________________________
+HOTFIX
+- wenn man im coop beim dritten boss ist und der erste spieler tod ist,
+  sollten die äpfel den zweiten player verfolgen
+______________________________________________________
 
 geplant:
 

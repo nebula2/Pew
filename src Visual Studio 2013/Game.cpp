@@ -64,17 +64,7 @@ int Game::Run(sf::RenderWindow &window)
 	GUIcircleShape pewCD;
 
 	//counter + random-x-spawn
-	bulletTimeCount     = 0;
-	enemyTimeCount	    = 0;
-	enemyFormationCount = 0;
-	shitCount	        = 0;
-	healthDropCount     = 0;
-	cowTimeCount	    = 0;
-	randomX		   	    = 0;
-	showLvUp		    = 0;
-	damageChill		    = 0;
-	boss1WeaponCount    = 0;
-	boss2WeaponCount    = 0;
+	Game::CountersToNull();
 
 	//health, points & alive
 	Health health("graphics//health.png");
@@ -143,63 +133,10 @@ int Game::Run(sf::RenderWindow &window)
 
 		if (!paused)
 		{
-			//initialize counts & background movement
-			elapsedTime = clock.restart().asMilliseconds();
-			enemyTimeCount += elapsedTime;
-			bulletTimeCount += elapsedTime;
-			p2bulletTimeCount += elapsedTime;
-			shitCount += elapsedTime;
-			boss1WeaponCount += elapsedTime;
-			boss2WeaponCount += elapsedTime;
-			healthDropCount += elapsedTime;
-			cowTimeCount += elapsedTime;
-			damageChill += elapsedTime;
-			enemyFormationCount += elapsedTime;
-			bg.Update(window, elapsedTime, bgSpeed, bgDirection);
-
-			//sync health
-			player1health = player1.getHealth();
-			player2health = player2.getHealth();
-
-			//spawns
-			updateMng.EnemySpawn(enemyTimeCount, enemyv, enemyFormationv, randomX);//enemy
-			updateMng.EnemyFormationSpawn(enemyFormationCount, enemyFormationv, boss2v);//enemyFormation
-			updateMng.HealthDropSpawn(healthDropCount, healthv, randomX);//health
-			updateMng.SpaceMonkeySpawn(points, monkeyv, boss2v);//monkey
-			updateMng.ShitSpawn(shitCount, monkeyv, shitv, sound);//shit
-			updateMng.Boss1Spawn(points, boss1v);//boss1
-			updateMng.UnlockPewSpawn(boss1Dead, unlockPewv);//unlockpew
-			updateMng.Boss1WeaponSpawn(boss1WeaponCount, b1Weaponv, boss1v, sound);//b1Weapon
-			updateMng.CowSpawn(cowTimeCount, cowv, randomX, sound);//cow
-			updateMng.Boss2Spawn(boss2v, points);//boss2
-			updateMng.Boss2WeaponSpawn(boss2WeaponCount, boss2Weaponv, boss2v);//b2Weapon
-			pewCD.Update(pewOnCooldown, elapsedTime);//pewCooldown
-
-			//player weapon spawn
-			if (player1.active)
-			{
-				if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
-				{
-					updateMng.BulletSpawn(bulletTimeCount, bulletv, highscore, weapon, player1, sound);//bullet
-					updateMng.DoubleShotSpawn(bulletTimeCount, dShotv, highscore, weapon, player1, sound);//Doubleshot
-					updateMng.PewSpawn(pewv, highscore, weapon, player1, sound, pewOnCooldown);//Pew
-				}
-			}
-
-			if (player2.active)
-			{
-				if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
-				{
-					updateMng.BulletSpawn2(p2bulletTimeCount, bulletv, highscore, weapon, player2, sound);//bullet
-					updateMng.DoubleShotSpawn2(p2bulletTimeCount, dShotv, highscore, weapon, player2, sound);//Doubleshot
-					updateMng.PewSpawn2(pewv, highscore, weapon, player2, sound, pewOnCooldown);//Pew
-				}
-			}
-
+			//Handle the spawns
+			Game::HandleSpawns(window, bg, player1, player2, updateMng, sound, pewCD, weapon);
 			//hud update
-			hudHealth.Update(window, player1.getHealth());
-			weapon.setWeapon(elapsedTime, points, gotPew);
-			weapon.Update();
+			Game::UpdateHud(window, player1, hudHealth, weapon);
 		}
 		//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 		//++++++++++++++++++++++++++++++++-DRAW & COLLISION-++++++++++++++++++++++++++++++++++++										
@@ -210,28 +147,11 @@ int Game::Run(sf::RenderWindow &window)
 		if (!paused)
 		{
 
-			if (player1.active)
+			if (player1.active || player2.active)
 			{
-				Rm::StdDraw(healthv, elapsedTime, window);//health
-				Rm::StdDraw(unlockPewv, elapsedTime, window);//unlockPew
-				Rm::StdDraw(monkeyv, elapsedTime, window);//monkey
-				Rm::StdDraw(boss1v, elapsedTime, window);//boss1
-				Rm::StdDraw(cowv, elapsedTime, window);//cow
-				Rm::StdDraw(enemyFormationv, elapsedTime, window);//enemyFormation
-				Rm::StdDraw(boss2v, elapsedTime, window);//boss2
-				Rm::EnemyStdWeapon(shitv, shititerator, window, elapsedTime);//shit
-				Rm::EnemyStdWeapon(b1Weaponv, bWeaponIt, window, elapsedTime);//b1Weapon
+				Game::HandleDraws(window, renderMng, player1, player2, sound);
+				//player collision
 
-				renderMng.Boss2WeaponDraw(boss2Weaponv, boss2WeaponIt, elapsedTime, player1, window);//b2Weapon
-				renderMng.EnemyDraw(enemyv, elapsedTime, highscore, window);//Enemy
-				renderMng.BulletDraw(bulletv, bulletviterator, points, sound, highscore, enemyv, monkeyv, shitv, boss1v, boss1Dead, boss2Weaponv, enemyFormationv, window, elapsedTime);//bullet
-				renderMng.DoubleShotDraw(dShotv, dShotIt, points, sound, highscore, enemyv, monkeyv, shitv, boss1v, boss1Dead, boss2Weaponv, enemyFormationv, window, elapsedTime);//doubleShot
-				renderMng.PewShotDraw(pewv, pewIt, points, sound, highscore, enemyv, monkeyv, shitv, boss1v, boss2v, boss2Weaponv, enemyFormationv, window, elapsedTime);//Pew
-			}
-
-			//player collision
-			if (player1.active)
-			{
 				coll::PlayerEnemyInactive(enemyv, player1, sound);//enemy
 				coll::PlayerEnemyInactive(shitv, player1, sound);//shit
 				coll::PlayerEnemyInactive(b1Weaponv, player1, sound);//b1Weapon
@@ -369,7 +289,7 @@ int Game::Run(sf::RenderWindow &window)
 	}
 	return -1;
 }
-
+//------------------------------------------------------------------------------------------------------------------------------
 void Game::ClearStuff()
 {
 	points = 0;
@@ -408,4 +328,107 @@ void Game::EndPause()
 {
 	//TODO
 	paused = false;
+}
+
+void Game::IncrementCounters()
+{
+	elapsedTime = clock.restart().asMilliseconds();
+	enemyTimeCount += elapsedTime;
+	bulletTimeCount += elapsedTime;
+	p2bulletTimeCount += elapsedTime;
+	shitCount += elapsedTime;
+	boss1WeaponCount += elapsedTime;
+	boss2WeaponCount += elapsedTime;
+	healthDropCount += elapsedTime;
+	cowTimeCount += elapsedTime;
+	damageChill += elapsedTime;
+	enemyFormationCount += elapsedTime;
+}
+
+void Game::HandleSpawns(sf::RenderWindow &window, MovableBackground &bg, Player &player1, Player2 &player2, UpdateManager &updateMng, IngameSound &sound, GUIcircleShape &pewCD, WeaponManager &weapon)
+{
+	//initialize counts & background movement
+	Game::IncrementCounters();
+	bg.Update(window, elapsedTime, bgSpeed, bgDirection);
+
+	//sync health
+	player1health = player1.getHealth();
+	player2health = player2.getHealth();
+
+	//spawns
+	updateMng.EnemySpawn(enemyTimeCount, enemyv, enemyFormationv, randomX);//enemy
+	updateMng.EnemyFormationSpawn(enemyFormationCount, enemyFormationv, boss2v);//enemyFormation
+	updateMng.HealthDropSpawn(healthDropCount, healthv, randomX);//health
+	updateMng.SpaceMonkeySpawn(points, monkeyv, boss2v);//monkey
+	updateMng.ShitSpawn(shitCount, monkeyv, shitv, sound);//shit
+	updateMng.Boss1Spawn(points, boss1v);//boss1
+	updateMng.UnlockPewSpawn(boss1Dead, unlockPewv);//unlockpew
+	updateMng.Boss1WeaponSpawn(boss1WeaponCount, b1Weaponv, boss1v, sound);//b1Weapon
+	updateMng.CowSpawn(cowTimeCount, cowv, randomX, sound);//cow
+	updateMng.Boss2Spawn(boss2v, points);//boss2
+	updateMng.Boss2WeaponSpawn(boss2WeaponCount, boss2Weaponv, boss2v);//b2Weapon
+	pewCD.Update(pewOnCooldown, elapsedTime);//pewCooldown
+
+	//player weapon spawn
+	if (player1.active)
+	{
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+		{
+			updateMng.BulletSpawn(bulletTimeCount, bulletv, highscore, weapon, player1, sound);//bullet
+			updateMng.DoubleShotSpawn(bulletTimeCount, dShotv, highscore, weapon, player1, sound);//Doubleshot
+			updateMng.PewSpawn(pewv, highscore, weapon, player1, sound, pewOnCooldown);//Pew
+		}
+	}
+
+	if (player2.active)
+	{
+		if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+		{
+			updateMng.BulletSpawn2(p2bulletTimeCount, bulletv, highscore, weapon, player2, sound);//bullet
+			updateMng.DoubleShotSpawn2(p2bulletTimeCount, dShotv, highscore, weapon, player2, sound);//Doubleshot
+			updateMng.PewSpawn2(pewv, highscore, weapon, player2, sound, pewOnCooldown);//Pew
+		}
+	}
+}
+
+void Game::HandleDraws(sf::RenderWindow &window, RenderManager &renderMng, Player &player1, Player2 &player2, IngameSound &sound)
+{
+	Rm::StdDraw(healthv, elapsedTime, window);//health
+	Rm::StdDraw(unlockPewv, elapsedTime, window);//unlockPew
+	Rm::StdDraw(monkeyv, elapsedTime, window);//monkey
+	Rm::StdDraw(boss1v, elapsedTime, window);//boss1
+	Rm::StdDraw(cowv, elapsedTime, window);//cow
+	Rm::StdDraw(enemyFormationv, elapsedTime, window);//enemyFormation
+	Rm::StdDraw(boss2v, elapsedTime, window);//boss2
+	Rm::EnemyStdWeapon(shitv, shititerator, window, elapsedTime);//shit
+	Rm::EnemyStdWeapon(b1Weaponv, bWeaponIt, window, elapsedTime);//b1Weapon
+
+	renderMng.Boss2WeaponDraw(boss2Weaponv, boss2WeaponIt, elapsedTime, player1, player2, window);//b2Weapon
+	renderMng.EnemyDraw(enemyv, elapsedTime, highscore, window);//Enemy
+	renderMng.BulletDraw(bulletv, bulletviterator, points, sound, highscore, enemyv, monkeyv, shitv, boss1v, boss1Dead, boss2Weaponv, enemyFormationv, window, elapsedTime);//bullet
+	renderMng.DoubleShotDraw(dShotv, dShotIt, points, sound, highscore, enemyv, monkeyv, shitv, boss1v, boss1Dead, boss2Weaponv, enemyFormationv, window, elapsedTime);//doubleShot
+	renderMng.PewShotDraw(pewv, pewIt, points, sound, highscore, enemyv, monkeyv, shitv, boss1v, boss2v, boss2Weaponv, enemyFormationv, window, elapsedTime);//Pew
+
+}
+
+void Game::CountersToNull()
+{
+	bulletTimeCount = 0;
+	enemyTimeCount = 0;
+	enemyFormationCount = 0;
+	shitCount = 0;
+	healthDropCount = 0;
+	cowTimeCount = 0;
+	randomX = 0;
+	showLvUp = 0;
+	damageChill = 0;
+	boss1WeaponCount = 0;
+	boss2WeaponCount = 0;
+}
+
+void Game::UpdateHud(sf::RenderWindow &window, Player &player1, Healthbar &hudHealth, WeaponManager &weapon)
+{
+	hudHealth.Update(window, player1.getHealth());
+	weapon.setWeapon(elapsedTime, points, gotPew);
+	weapon.Update();
 }

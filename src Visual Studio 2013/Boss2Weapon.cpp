@@ -16,7 +16,7 @@ Boss2Weapon::Boss2Weapon()
 	sprite.setOrigin(22, 25);
 }
 
-void Boss2Weapon::Update(sf::RenderWindow &window, float &elapsedTime, Player &pPlayer)
+void Boss2Weapon::Update(sf::RenderWindow &window, float &elapsedTime, Player &pPlayer, Player2 &player2)
 {
 	if (active)
 	{
@@ -34,13 +34,27 @@ void Boss2Weapon::Update(sf::RenderWindow &window, float &elapsedTime, Player &p
 		}
 
 		//track player
-		if (x < pPlayer.getPosition().x)
+		if (pPlayer.active)
 		{
-			x += speed * elapsedTime;
+			if (x < pPlayer.getPosition().x)
+			{
+				x += speed * elapsedTime;
+			}
+			if (x > pPlayer.getPosition().x)
+			{
+				x -= speed * elapsedTime;
+			}
 		}
-		if (x > pPlayer.getPosition().x)
+		if (!pPlayer.active && player2.active)
 		{
-			x -= speed * elapsedTime;
+			if (x < player2.getPosition().x)
+			{
+				x += speed * elapsedTime;
+			}
+			if (x > player2.getPosition().x)
+			{
+				x -= speed * elapsedTime;
+			}
 		}
 
 		sprite.setPosition(x, y);

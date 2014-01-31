@@ -5,6 +5,7 @@
 
 #include <SFML/Graphics.hpp>
 #include "Player.h"
+#include "Player2.h"
 #include "IOdiff.h"
 #include "IOsmooth.h"
 
@@ -12,7 +13,7 @@ class Boss2Weapon
 {
 public:
 	Boss2Weapon();
-	void Update(sf::RenderWindow &window, float &elapsedTime, Player &pPlayer);
+	void Update(sf::RenderWindow &window, float &elapsedTime, Player &pPlayer, Player2 &player2);
 	void Render(sf::RenderWindow &window);
 	void setPosition(float x, float y);
 	bool active;
