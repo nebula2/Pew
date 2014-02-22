@@ -4,8 +4,7 @@
 #define COW_H
 
 #include <SFML/Graphics.hpp>
-#include "IOdiff.h"
-#include "IOsmooth.h"
+#include "IOstuff.h"
 
 class Cow
 {

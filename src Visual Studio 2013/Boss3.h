@@ -4,7 +4,7 @@
 #define BOSS3_H
 
 #include <SFML/Graphics.hpp>
-#include "IOdiff.h"
+#include "IOstuff.h"
 
 class Boss3
 {

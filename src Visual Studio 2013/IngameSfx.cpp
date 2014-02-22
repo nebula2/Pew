@@ -2,31 +2,6 @@
 
 #include "IngameSfx.h"
 
-//Music
-void IngameMusic::LoadMusic(int &volume)
-{
-	gameTheme.openFromFile("audio//ingamesong.ogg");
-	gameTheme.setVolume(volume);
-}
-
-void IngameMusic::PlayMusic(std::string music)
-{
-	if (music == "ingamesong")
-	{
-		gameTheme.play();
-		gameTheme.setLoop(true);
-	}
-}
-
-void IngameMusic::getCurrentPosition()
-{
-	gameTheme.getPlayingOffset();
-}
-void IngameMusic::Stop()
-{
-	gameTheme.stop();
-}
-
 //Sound
 void IngameSound::LoadSoundBuffer()
 {

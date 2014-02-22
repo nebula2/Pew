@@ -5,8 +5,7 @@
 
 #include "StateManager.h"
 #include "MenuSfx.h"
-#include "IOsound.h"
-#include "Intro.h"
+#include "IOstuff.h"
 #include <math.h>
 
 class Menu : public StateManager
@@ -14,8 +13,6 @@ class Menu : public StateManager
 public: 
 	Menu();
 	virtual int Run(sf::RenderWindow &window);
-	void setPlaying(bool &mPlaying);
-	bool getPlaying();
 private:
 	bool playing;
 	float speed;

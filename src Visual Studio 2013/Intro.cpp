@@ -8,14 +8,6 @@ Intro::Intro()
 	running = false;
 	elapsedTime = 0;
 
-	//music
-	IOsound iosound;
-	iosound.ReadSoundSettings(volume);
-	MenuMusic music;
-	music.LoadMusic(volume);
-	music.PlayMusic("introsong");
-
-
 	//background
 	intro.loadFromFile("graphics//core//intro.jpg");
 	introSprite.setTexture(intro);
@@ -25,20 +17,26 @@ Intro::Intro()
 
 int Intro::Run(sf::RenderWindow &window)
 {	
+	running = true;
+	startintro = false;
+	returnCounter = 0;
+	float y = introSprite.getPosition().y;
 
-	while (!running)
+	if (!startintro)
 	{
 		introSprite.setPosition(0, 600);
-		//draw
-		window.clear();
-		window.draw(introSprite);
-		window.display();
 	}
-	
-	float y = introSprite.getPosition().y;
+
+
+	//stuff for user start
+	Text startText("Return to start", 60);
+	startText.setOrigin(startText.getGlobalBounds().width / 2, startText.getGlobalBounds().height / 2);
+	startText.setPosition(window.getSize().x / 2, window.getSize().y / 2);
+
 
 	while (running)
 	{
+		//handle events
 		while (window.pollEvent(event))
 		{
 			if (event.type == sf::Event::Closed)
@@ -49,9 +47,22 @@ int Intro::Run(sf::RenderWindow &window)
 			{
 				if (event.key.code == sf::Keyboard::Return)
 				{
-					return 3;
+					returnCounter += 1;
+				}
+				if (event.key.code == sf::Keyboard::Escape)
+				{
+					return 0;
 				}
 			}
+		}
+		
+		if (returnCounter == 1)
+		{
+			startintro = true;
+		}
+		if (returnCounter >= 2)
+		{
+			return 3;
 		}
 
 		//move background
@@ -63,22 +74,20 @@ int Intro::Run(sf::RenderWindow &window)
 		if (y <= -1200)
 		{
 			return 3;
+			startintro = false;
 		}
 
 		//draw
 		window.clear();
-		window.draw(introSprite);
+		if (!startintro)
+		{
+			startText.Render(window);
+		}
+		if (startintro)
+		{
+			window.draw(introSprite);
+		}
 		window.display();
 	}
 	return -1; 
-}
-
-void Intro::setRunning(bool &m_running)
-{
-	running = m_running;
-}
-
-bool Intro::getRunning()
-{
-	return running;
 }

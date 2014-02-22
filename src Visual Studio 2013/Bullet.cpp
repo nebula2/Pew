@@ -10,11 +10,7 @@ Bullet::Bullet()
 	active = true;
 	isPew = false;
 
-	if (!bulletTex.loadFromFile("graphics//weapons//bullet.png"))
-	{
-		std::cout << "Bullet konnte nicht geladen werden" << std::endl;
-	}
-
+	bulletTex.loadFromFile("graphics//weapons//bullet.png");
 	bulletTex.setSmooth(false);
 	sprite.setTexture(bulletTex);
 }

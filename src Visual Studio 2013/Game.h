@@ -5,11 +5,10 @@
 
 #include "StateManager.h"
 #include "IngameSfx.h"
-#include "IOsound.h"
 #include "BasicStuff.h"
 #include "UpdateManager.h"
 #include "RenderManager.h"
-#include "IOtwoPlayer.h"
+#include "IOstuff.h"
 
 #include <vector>
 #include <string>

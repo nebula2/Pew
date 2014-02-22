@@ -10,7 +10,7 @@
 //own header
 #include "StateManager.h"
 #include "HighscoreManager.h"
-#include "IOHighscore.h"
+#include "IOstuff.h"
 
 class Highscore : public StateManager
 {

@@ -27,9 +27,6 @@ int Game::Run(sf::RenderWindow &window)
 	IngameSound sound;
 	sound.LoadSoundBuffer();
 	sound.setBuffer(volume);
-	IngameMusic music;
-	music.LoadMusic(volume);
-	music.PlayMusic("ingamesong");
 
 	//background and HUD
 	MovableBackground bg("graphics//core//background.jpg", window);
@@ -289,7 +286,10 @@ int Game::Run(sf::RenderWindow &window)
 	}
 	return -1;
 }
-//------------------------------------------------------------------------------------------------------------------------------
+/*
+------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------
+*/
 void Game::ClearStuff()
 {
 	points = 0;
@@ -317,19 +317,28 @@ void Game::ClearStuff()
 	boss2Weaponv.clear();
 	enemyFormationv.clear();
 }
-
+/*
+------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------
+*/
 void Game::StartPause()
 {
 	paused = true;
 	//TODO
 }
-
+/*
+------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------
+*/
 void Game::EndPause()
 {
 	//TODO
 	paused = false;
 }
-
+/*
+------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------
+*/
 void Game::IncrementCounters()
 {
 	elapsedTime = clock.restart().asMilliseconds();
@@ -344,7 +353,10 @@ void Game::IncrementCounters()
 	damageChill += elapsedTime;
 	enemyFormationCount += elapsedTime;
 }
-
+/*
+------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------
+*/
 void Game::HandleSpawns(sf::RenderWindow &window, MovableBackground &bg, Player &player1, Player2 &player2, UpdateManager &updateMng, IngameSound &sound, GUIcircleShape &pewCD, WeaponManager &weapon)
 {
 	//initialize counts & background movement
@@ -390,7 +402,10 @@ void Game::HandleSpawns(sf::RenderWindow &window, MovableBackground &bg, Player 
 		}
 	}
 }
-
+/*
+------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------
+*/
 void Game::HandleDraws(sf::RenderWindow &window, RenderManager &renderMng, Player &player1, Player2 &player2, IngameSound &sound)
 {
 	Rm::StdDraw(healthv, elapsedTime, window);//health
@@ -410,7 +425,10 @@ void Game::HandleDraws(sf::RenderWindow &window, RenderManager &renderMng, Playe
 	renderMng.PewShotDraw(pewv, pewIt, points, sound, highscore, enemyv, monkeyv, shitv, boss1v, boss2v, boss2Weaponv, enemyFormationv, window, elapsedTime);//Pew
 
 }
-
+/*
+------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------
+*/
 void Game::CountersToNull()
 {
 	bulletTimeCount = 0;
@@ -425,7 +443,10 @@ void Game::CountersToNull()
 	boss1WeaponCount = 0;
 	boss2WeaponCount = 0;
 }
-
+/*
+------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------
+*/
 void Game::UpdateHud(sf::RenderWindow &window, Player &player1, Healthbar &hudHealth, WeaponManager &weapon)
 {
 	hudHealth.Update(window, player1.getHealth());

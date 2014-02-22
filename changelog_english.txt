@@ -128,7 +128,13 @@ HOTFIX
   the apples should now track the second player
 ______________________________________________________
 
-
+cl15:
+- codechanges:
+  ->input/output summed up to IOstuff
+  ->music is now controlled in the main.cpp
+- music will now play correctly in menu,
+  as long as you are not again in main menu
+______________________________________________________
 
 
 

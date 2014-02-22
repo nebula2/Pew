@@ -4,11 +4,11 @@
 #include <iostream>
 #include "StateManager.h"
 #include "WindowStates.h"
-#include "IOscreen.h"
+#include "IOstuff.h"
+#include "Music.h"
 
 int main()
 {
-	bool m_running = true;
 
 	//StateManager IDs
 	std::vector<StateManager*> states;
@@ -16,10 +16,10 @@ int main()
 
 	//create window
 	IOscreen ioscreen;
-	
 	sf::RenderWindow window;
 	window.setFramerateLimit(60);
 	
+	//set window style
 	if (ioscreen.getScreenSettings())
 	{
 		window.create(sf::VideoMode(800, 600, 32), "Pew", sf::Style::Fullscreen);
@@ -29,6 +29,18 @@ int main()
 	{
 		window.create(sf::VideoMode(800, 600, 32), "Pew", sf::Style::Default);
 	}
+
+	//Music
+
+	int volume;
+	int volumeCheck = NULL;
+	IOsound iosound;
+	iosound.ReadSoundSettings(volume);
+	IngameMusic ingMusic;
+	ingMusic.LoadMusic(volume);
+	MenuMusic	menMusic;
+	menMusic.LoadMusic(volume);
+	menMusic.PlayMusic("menu");
 
 	//states
 	Menu state0;
@@ -50,37 +62,56 @@ int main()
 	CoopSet state8;
 	states.push_back(&state8);
 
-	
-
 	//runs states & switches between them
 	while (screenState >= 0)
 	{
-		//main loop
-		screenState = states[screenState]->Run(window);
+
+		std::cout << screenState << std::endl;
 
 		//when screen changes
-		if (screenState == 5)
+		if (screenState == 5)//to give the highscore
 		{
 			state5.setHighscoreManager(state3.getHighScore());
 		}
-		else if (screenState == 1)
-		{
-			m_running = true;
-			state1.setRunning(m_running);
-		}
-		else if (screenState != 1)
-		{
-			m_running = false;
-			state1.setRunning(m_running);
-		}
-		else if (screenState != 3)
+
+		else if (screenState != 3)//to clear the game 
 		{
 			state3.ClearStuff();
 		}
 
-		std::cout << screenState << " screenState" << std::endl;
-		std::cout << m_running << " m_running" << std::endl;
-		std::cout << state1.getRunning() << "intro bool" << std::endl;
+		//Control Music
+
+		if (screenState == 1)
+		{
+			menMusic.Pause("menu");
+			menMusic.MenuVolume(0);
+			menMusic.PlayMusic("intro");
+		}
+		if (screenState != 3)
+		{
+			ingMusic.Pause();
+			menMusic.MenuVolume(volume);
+			/*menMusic.UnpauseMenu();*/
+		}
+		if (screenState == 3)
+		{
+			menMusic.Pause("menu");
+			menMusic.MenuVolume(0);
+			ingMusic.PlayMusic();
+		}
+		if (screenState != 1)
+		{
+			menMusic.Pause("intro");
+			menMusic.MenuVolume(volume);
+		}
+		if (screenState == 0)
+		{
+			menMusic.PlayMusic("menu");
+		}
+
+
+		//main loop
+		screenState = states[screenState]->Run(window);
 	}
 	return 0;
 }

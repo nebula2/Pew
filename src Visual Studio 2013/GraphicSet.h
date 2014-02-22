@@ -4,9 +4,7 @@
 #define GRAPHICSET_H
 
 #include "StateManager.h"
-#include "IOsound.h"
-#include "IOscreen.h"
-#include "IOsmooth.h"
+#include "IOstuff.h"
 #include "MenuSfx.h"
 
 class GraphicSet : public StateManager

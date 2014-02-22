@@ -4,8 +4,7 @@
 #define COOPSET_H
 
 #include "StateManager.h"
-#include "IOtwoPlayer.h"
-#include "IOsound.h"
+#include "IOstuff.h"
 #include "MenuSfx.h"
 
 class CoopSet : public StateManager

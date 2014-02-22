@@ -98,6 +98,13 @@ HOTFIX
   sollten die äpfel den zweiten player verfolgen
 ______________________________________________________
 
+cl15:
+- codeänderungen:
+  ->input/output ist nun komplett in IOstuff
+  ->musik wird in der main gesteuert (noch nicht ausgereift)
+- musik wird nun innerhalb des menus korrekt abgespielt,
+  bis wieder ins hauptmenu gegangen wird
+______________________________________________________
 geplant:
 
 Gameplay->
@@ -105,9 +112,6 @@ Gameplay->
   ein zweites schiff für das ne ki geschrieben wird
 
 Projekt an sich->
-- musik übergeben
-  wird wahrscheinlich leider auf die main fallen wenn mir net bald 
-  was einfällt :/
 - auswertung fertig machen, diese in credits auswerten und dann 
   in txt speichern
   -> dann neuen window state upgrade, um waffen gleich freizuschalten 

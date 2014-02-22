@@ -11,15 +11,6 @@ Menu::Menu()
 	speed = 0.5;
 }
 
-void Menu::setPlaying(bool &mPlaying)
-{
-	playing = mPlaying;
-}
-
-bool Menu::getPlaying()
-{
-	return playing;
-}
 
 int Menu::Run(sf::RenderWindow &window)
 {
@@ -46,10 +37,6 @@ int Menu::Run(sf::RenderWindow &window)
 	MenuSound sound;
 	sound.LoadSoundBuffer();
 	sound.setBuffer(volume);
-
-	MenuMusic music;
-	music.LoadMusic(volume);
-	music.PlayMusic("menusong");
 
 	//buttons
 	Text play("play", 70), again("again", 70), settings("settings", 70), close("close", 70);

@@ -13,10 +13,6 @@ int Settings::Run(sf::RenderWindow &window)
 	sound.LoadSoundBuffer();
 	sound.setBuffer(volume);
 
-	MenuMusic music;
-	music.LoadMusic(volume);
-	music.PlayMusic("menusong");
-
 	//background and "buttons"
 	Background bg("graphics//core//settings.png");
 	selection = 0;

@@ -4,7 +4,6 @@
 #define HEALTHDROP_H
 
 #include <SFML/Graphics.hpp>
-#include <iostream>
 
 class HealthDrop
 {

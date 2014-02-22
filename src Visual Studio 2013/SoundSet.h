@@ -4,7 +4,7 @@
 #define SOUNDSET_H
 
 #include "StateManager.h"
-#include "IOsound.h"
+#include "IOstuff.h"
 #include <sstream>
 
 class SoundSet : public StateManager

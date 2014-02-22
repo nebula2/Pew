@@ -6,16 +6,16 @@
 #include <SFML/Audio.hpp>
 #include <string>
 
-class IngameMusic
-{
-public:
-	void LoadMusic(int &volume);
-	void PlayMusic(std::string music);
-	void getCurrentPosition();
-	void Stop();
-private:
-	sf::Music gameTheme;
-};
+//class IngameMusic
+//{
+//public:
+//	void LoadMusic(int &volume);
+//	void PlayMusic(std::string music);
+//	void getCurrentPosition();
+//	void Stop();
+//private:
+//	sf::Music gameTheme;
+//};
 
 class IngameSound
 {

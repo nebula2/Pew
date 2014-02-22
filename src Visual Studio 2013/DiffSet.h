@@ -4,8 +4,7 @@
 #define DIFFSET_H
 
 #include "StateManager.h"
-#include "IOdiff.h"
-#include "IOsound.h"
+#include "IOstuff.h"
 #include "MenuSfx.h"
 
 class DiffSet : public StateManager

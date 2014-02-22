@@ -5,8 +5,7 @@
 
 #include <SFML/Graphics.hpp>
 #include "HighscoreManager.h"
-#include "IOdiff.h"
-#include "IOsmooth.h"
+#include "IOstuff.h"
 
 class Enemy
 {
