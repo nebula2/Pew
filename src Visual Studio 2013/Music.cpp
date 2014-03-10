@@ -62,13 +62,7 @@ void MenuMusic::Pause(std::string which)
 
 void MenuMusic::UnpauseMenu()
 {
-	enum menuStatus
-	{
-		Stopped,
-		Paused,
-		Playing
-	};
-	if (menuTheme.getStatus() == menuStatus::Paused)
+	if (menuTheme.getStatus() == sf::SoundSource::Paused)
 	{
 		menuTheme.play();
 	}
