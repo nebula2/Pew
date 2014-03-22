@@ -256,7 +256,7 @@ void UpdateManager::Boss2WeaponSpawn(int &counter, std::vector<Boss2Weapon> &bwv
 
 void UpdateManager::Boss3Spawn(std::vector<Boss3> &vector, int &points, IngameSound &sound)
 {
-	if (points >= 10 && points < 19) //4100 -4109
+	if (points >= 4100 && points < 4109)
 	{
 		Boss3 boss3x;
 		sound.PlaySound("boss3spawn");
