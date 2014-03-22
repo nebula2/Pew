@@ -92,6 +92,7 @@ int Game::Run(sf::RenderWindow &window)
 	//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	while (Running)
 	{
+		
 		//handle events
 		while (window.pollEvent(event))
 		{
@@ -150,10 +151,13 @@ int Game::Run(sf::RenderWindow &window)
 				//player collision
 
 				coll::PlayerEnemyInactive(enemyv, player1, sound);//enemy
+
 				coll::PlayerEnemyInactive(shitv, player1, sound);//shit
 				coll::PlayerEnemyInactive(b1Weaponv, player1, sound);//b1Weapon
 				coll::PlayerEnemyInactive(boss2Weaponv, player1, sound);//b2Weapon
 				coll::PlayerEnemyInactive(enemyFormationv, player1, sound);//enemyFormation
+				coll::PlayerEnemyInactive(boss3FWeaponv, player1, sound);//boss3firstWeapon
+				coll::PlayerEnemyInactive(boss3SWeaponv, player1, sound);//boss3secWeapon
 
 				coll::PlayerHealthGet(healthv, player1, sound);//health
 				coll::PlayerUnlockPew(unlockPewv, player1, sound, gotPew, pewOnCooldown);//unlockPew
@@ -165,6 +169,7 @@ int Game::Run(sf::RenderWindow &window)
 					coll::PlayerEnemyActive(cowv, player1, sound);//cow
 					coll::PlayerEnemyActive(monkeyv, player1, sound);//monkey
 					coll::PlayerEnemyActive(boss1v, player1, sound);//boss1
+					coll::PlayerEnemyActive(boss3v, player1, sound);//boss3
 					damageChill = 0;
 				}
 			}
@@ -176,6 +181,8 @@ int Game::Run(sf::RenderWindow &window)
 				coll::PlayerEnemyInactive(b1Weaponv, player2, sound);//b1Weapon
 				coll::PlayerEnemyInactive(boss2Weaponv, player2, sound);//b2Weapon
 				coll::PlayerEnemyInactive(enemyFormationv, player2, sound);//enemyFormation
+				coll::PlayerEnemyInactive(boss3FWeaponv, player2, sound);//boss3firstWeapon
+				coll::PlayerEnemyInactive(boss3SWeaponv, player2, sound);//boss3secWeapon
 
 				coll::PlayerHealthGet(healthv, player2, sound);//health
 				coll::PlayerUnlockPew(unlockPewv, player2, sound, gotPew, pewOnCooldown);//unlockPew
@@ -187,6 +194,7 @@ int Game::Run(sf::RenderWindow &window)
 					coll::PlayerEnemyActive(cowv, player2, sound);//cow
 					coll::PlayerEnemyActive(monkeyv, player2, sound);//monkey
 					coll::PlayerEnemyActive(boss1v, player2, sound);//boss1
+					coll::PlayerEnemyActive(boss3v, player2, sound);//boss3
 					damageChill = 0;
 				}
 			}
@@ -305,6 +313,9 @@ void Game::ClearStuff()
 	cowTimeCount = 0;
 	damageChill = 0;
 	enemyFormationCount = 0;
+	boss3FirstWeaponCount1 = 0;
+	boss3FirstWeaponCount2 = 0;
+	boss3SecWeaponCount = 0;
 
 	//clear vectors
 	healthv.clear();
@@ -316,6 +327,9 @@ void Game::ClearStuff()
 	boss2v.clear();
 	boss2Weaponv.clear();
 	enemyFormationv.clear();
+	boss3v.clear();
+	boss3FWeaponv.clear();
+	boss3SWeaponv.clear();
 }
 /*
 ------------------------------------------------------------------------------------------------------------------------------
@@ -352,6 +366,9 @@ void Game::IncrementCounters()
 	cowTimeCount += elapsedTime;
 	damageChill += elapsedTime;
 	enemyFormationCount += elapsedTime;
+	boss3FirstWeaponCount1 += elapsedTime;
+	boss3FirstWeaponCount2 += elapsedTime;
+	boss3SecWeaponCount += elapsedTime;
 }
 /*
 ------------------------------------------------------------------------------------------------------------------------------
@@ -368,19 +385,26 @@ void Game::HandleSpawns(sf::RenderWindow &window, MovableBackground &bg, Player 
 	player2health = player2.getHealth();
 
 	//spawns
-	updateMng.EnemySpawn(enemyTimeCount, enemyv, enemyFormationv, randomX);//enemy
-	updateMng.EnemyFormationSpawn(enemyFormationCount, enemyFormationv, boss2v);//enemyFormation
-	updateMng.HealthDropSpawn(healthDropCount, healthv, randomX);//health
-	updateMng.SpaceMonkeySpawn(points, monkeyv, boss2v);//monkey
-	updateMng.ShitSpawn(shitCount, monkeyv, shitv, sound);//shit
-	updateMng.Boss1Spawn(points, boss1v);//boss1
-	updateMng.UnlockPewSpawn(boss1Dead, unlockPewv);//unlockpew
-	updateMng.Boss1WeaponSpawn(boss1WeaponCount, b1Weaponv, boss1v, sound);//b1Weapon
-	updateMng.CowSpawn(cowTimeCount, cowv, randomX, sound);//cow
-	updateMng.Boss2Spawn(boss2v, points);//boss2
-	updateMng.Boss2WeaponSpawn(boss2WeaponCount, boss2Weaponv, boss2v);//b2Weapon
-	pewCD.Update(pewOnCooldown, elapsedTime);//pewCooldown
+	if (boss3v.size() == 0) //just for test-------------------------------------------------!_!_!_!_!_!_!_!_
+	{
+		updateMng.EnemySpawn(enemyTimeCount, enemyv, enemyFormationv, randomX);//enemy
+		updateMng.EnemyFormationSpawn(enemyFormationCount, enemyFormationv, boss2v);//enemyFormation
+		updateMng.HealthDropSpawn(healthDropCount, healthv, randomX);//health
+		updateMng.SpaceMonkeySpawn(points, monkeyv, boss2v);//monkey
+		updateMng.ShitSpawn(shitCount, monkeyv, shitv, sound);//shit
+		updateMng.Boss1Spawn(points, boss1v);//boss1
+		updateMng.UnlockPewSpawn(boss1Dead, unlockPewv);//unlockpew
+		updateMng.Boss1WeaponSpawn(boss1WeaponCount, b1Weaponv, boss1v, sound);//b1Weapon
+		updateMng.CowSpawn(cowTimeCount, cowv, randomX, sound);//cow
+		updateMng.Boss2Spawn(boss2v, points);//boss2
+		updateMng.Boss2WeaponSpawn(boss2WeaponCount, boss2Weaponv, boss2v);//b2Weapon
+		updateMng.Boss3Spawn(boss3v, points, sound);//boss3
+	}
+	updateMng.Boss3FirstWeaponSpawn(boss3FirstWeaponCount1, boss3FirstWeaponCount2, boss3FWeaponv, boss3v, sound);
+	updateMng.Boss3SecWeaponSpawn(boss3SecWeaponCount, boss3SWeaponv, boss3v, sound);
+	
 
+	pewCD.Update(pewOnCooldown, elapsedTime);//pewCooldown
 	//player weapon spawn
 	if (player1.active)
 	{
@@ -417,12 +441,16 @@ void Game::HandleDraws(sf::RenderWindow &window, RenderManager &renderMng, Playe
 	Rm::StdDraw(boss2v, elapsedTime, window);//boss2
 	Rm::EnemyStdWeapon(shitv, shititerator, window, elapsedTime);//shit
 	Rm::EnemyStdWeapon(b1Weaponv, bWeaponIt, window, elapsedTime);//b1Weapon
+	Rm::EnemyStdWeapon(boss3FWeaponv, boss3FWeaponIt, window, elapsedTime);//boss3FirstWeapon
+	Rm::EnemyStdWeapon(boss3SWeaponv, boss3SweaponIt, window, elapsedTime);//boss3SecWeapon
+	Rm::StdDraw(boss3v, elapsedTime, window);//boss3
+	
 
 	renderMng.Boss2WeaponDraw(boss2Weaponv, boss2WeaponIt, elapsedTime, player1, player2, window);//b2Weapon
 	renderMng.EnemyDraw(enemyv, elapsedTime, highscore, window);//Enemy
-	renderMng.BulletDraw(bulletv, bulletviterator, points, sound, highscore, enemyv, monkeyv, shitv, boss1v, boss1Dead, boss2Weaponv, enemyFormationv, window, elapsedTime);//bullet
-	renderMng.DoubleShotDraw(dShotv, dShotIt, points, sound, highscore, enemyv, monkeyv, shitv, boss1v, boss1Dead, boss2Weaponv, enemyFormationv, window, elapsedTime);//doubleShot
-	renderMng.PewShotDraw(pewv, pewIt, points, sound, highscore, enemyv, monkeyv, shitv, boss1v, boss2v, boss2Weaponv, enemyFormationv, window, elapsedTime);//Pew
+	renderMng.BulletDraw(bulletv, bulletviterator, points, sound, highscore, enemyv, monkeyv, shitv, boss1v, boss1Dead, boss2Weaponv, enemyFormationv, boss3v,boss3FWeaponv, boss3SWeaponv, window, elapsedTime);//bullet
+	renderMng.DoubleShotDraw(dShotv, dShotIt, points, sound, highscore, enemyv, monkeyv, shitv, boss1v, boss1Dead, boss2Weaponv, enemyFormationv, boss3v, boss3FWeaponv, boss3SWeaponv, window, elapsedTime);//doubleShot
+	renderMng.PewShotDraw(pewv, pewIt, points, sound, highscore, enemyv, monkeyv, shitv, boss1v, boss2v, boss2Weaponv, enemyFormationv, boss3v, boss3FWeaponv, boss3SWeaponv, window, elapsedTime);//Pew
 
 }
 /*
@@ -442,6 +470,9 @@ void Game::CountersToNull()
 	damageChill = 0;
 	boss1WeaponCount = 0;
 	boss2WeaponCount = 0;
+	boss3FirstWeaponCount1 = 0;
+	boss3FirstWeaponCount2 = 0;
+	boss3SecWeaponCount = 0;
 }
 /*
 ------------------------------------------------------------------------------------------------------------------------------

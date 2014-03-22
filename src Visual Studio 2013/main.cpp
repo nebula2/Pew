@@ -34,6 +34,7 @@ int main()
 
 	int volume;
 	int volumeCheck = NULL;
+	int newVolume = NULL;
 	IOsound iosound;
 	iosound.ReadSoundSettings(volume);
 	IngameMusic ingMusic;
@@ -65,9 +66,6 @@ int main()
 	//runs states & switches between them
 	while (screenState >= 0)
 	{
-
-		std::cout << screenState << std::endl;
-
 		//when screen changes
 		if (screenState == 5)//to give the highscore
 		{
@@ -80,7 +78,6 @@ int main()
 		}
 
 		//Control Music
-
 		if (screenState == 1)
 		{
 			menMusic.Pause("menu");
@@ -91,7 +88,6 @@ int main()
 		{
 			ingMusic.Pause();
 			menMusic.MenuVolume(volume);
-			/*menMusic.UnpauseMenu();*/
 		}
 		if (screenState == 3)
 		{
@@ -108,7 +104,12 @@ int main()
 		{
 			menMusic.PlayMusic("menu");
 		}
-
+		if (screenState != 6)
+		{
+			iosound.ReadSoundSettings(volumeCheck);
+			newVolume = (volume != volumeCheck) ? volumeCheck : volume;
+			menMusic.MenuVolume(newVolume);
+		}	
 
 		//main loop
 		screenState = states[screenState]->Run(window);

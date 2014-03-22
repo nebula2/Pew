@@ -16,7 +16,7 @@ Player::Player(std::string filepath)
 	playerSprite.setPosition(400, 300);
 }
 
-void Player::Update(sf::RenderWindow &Window, float elapsedTime)
+void Player::Update(sf::RenderWindow &window, float elapsedTime)
 {
 	float x = playerSprite.getPosition().x;
 	float y = playerSprite.getPosition().y;
@@ -25,7 +25,7 @@ void Player::Update(sf::RenderWindow &Window, float elapsedTime)
 	{
 		if (x <= -7)
 		{
-			x = Window.getSize().x;
+			x = window.getSize().x;
 		}
 		else
 		{
@@ -36,7 +36,7 @@ void Player::Update(sf::RenderWindow &Window, float elapsedTime)
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
 	{
-		if (x >= Window.getSize().x + 7)
+		if (x >= window.getSize().x + 7)
 		{
 			x = 0;
 		}
@@ -62,9 +62,9 @@ void Player::Update(sf::RenderWindow &Window, float elapsedTime)
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
 	{
-		if (y >= Window.getSize().y - 17)
+		if (y >= window.getSize().y - 17)
 		{
-			y = Window.getSize().y - 17;
+			y = window.getSize().y - 17;
 		}
 		else
 		{
@@ -81,11 +81,11 @@ void Player::Update(sf::RenderWindow &Window, float elapsedTime)
 	playerSprite.setPosition(x, y);
 }
 
-void Player::Render(sf::RenderWindow &Window)
+void Player::Render(sf::RenderWindow &window)
 {
 	if (active)
 	{
-		Window.draw(playerSprite);
+		window.draw(playerSprite);
 	}
 }
 

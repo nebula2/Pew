@@ -122,7 +122,7 @@ void UpdateManager::Boss1WeaponSpawn(int &counter, std::vector<Boss1Weapon> &bwV
 		if (bVector[i].active && counter >= 1000)
 		{
 			Boss1Weapon b1Weaponx;
-			b1Weaponx.SetPosition(bVector[i].getPosition().x, bVector[i].getPosition().y);
+			b1Weaponx.setPosition(bVector[i].getPosition().x, bVector[i].getPosition().y);
 			sound.PlaySound("pew");
 			bwVector.push_back(b1Weaponx);
 			counter = 0;
@@ -244,11 +244,58 @@ void UpdateManager::Boss2WeaponSpawn(int &counter, std::vector<Boss2Weapon> &bwv
 {
 	for (int i = 0; i < bvector.size(); i++)
 	{
-		if (bvector[i].active && bvector[i].getfadeIn() == true && counter >= 2000)
+		if (bvector[i].active && bvector[i].getfadeIn() && counter >= 2000)
 		{
 			Boss2Weapon b2Wx;
 			b2Wx.setPosition(bvector[i].getPosition().x, bvector[i].getPosition().y);
 			bwvector.push_back(b2Wx);
+			counter = 0;
+		}
+	}
+}
+
+void UpdateManager::Boss3Spawn(std::vector<Boss3> &vector, int &points, IngameSound &sound)
+{
+	if (points >= 10 && points < 19) //4100 -4109
+	{
+		Boss3 boss3x;
+		sound.PlaySound("boss3spawn");
+		vector.push_back(boss3x);
+		points += 10;
+	}
+}
+
+void UpdateManager::Boss3FirstWeaponSpawn(int &counter1, int &counter2, std::vector<Boss3firstWeapon> &vector, std::vector<Boss3> &bVector, IngameSound &sound)
+{
+	for (int i = 0; i < bVector.size(); i++)
+	{
+		if (bVector[i].active && bVector[i].getCurrentState() == 1.5 && bVector[i].getHead1Active()  && counter1 >= 1500) //left Spawner
+		{
+			Boss3firstWeapon b3Wx1;
+			b3Wx1.setPosition(bVector[i].getHead1XPosition() + 50, bVector[i].getHead1YPosition() + 50);
+			vector.push_back(b3Wx1);
+			counter1 = 0;
+		}
+
+		if (bVector[i].active && bVector[i].getCurrentState() == 1.5 && bVector[i].getHead2Active() && counter2 >= 1500) //right Spawner
+		{
+			Boss3firstWeapon b3Wx2;
+			b3Wx2.setPosition(bVector[i].getHead2XPosition() + 50, bVector[i].getHead2YPosition() + 50);
+			vector.push_back(b3Wx2);
+			counter2 = 0;
+		}
+	}
+}
+
+void UpdateManager::Boss3SecWeaponSpawn(int &counter, std::vector<Boss3SecWeapon> &vector, std::vector<Boss3> &bVector, IngameSound &sound)
+{
+	for (int i = 0; i < bVector.size(); i++)
+	{
+		if (bVector[i].active && bVector[i].getCurrentState() == 2.5 && bVector[i].getCowMActive() && counter >= 1500)
+		{
+			Boss3SecWeapon b3Wx;
+			b3Wx.setPosition(bVector[i].getCowMXPosition() + 50, bVector[i].getCowMYPosition() + 50);
+			vector.push_back(b3Wx);
 			counter = 0;
 		}
 	}

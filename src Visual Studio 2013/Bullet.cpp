@@ -15,7 +15,7 @@ Bullet::Bullet()
 	sprite.setTexture(bulletTex);
 }
 
-void Bullet::Update(sf::RenderWindow &Window, float elapsedTime)
+void Bullet::Update(float elapsedTime)
 {
 	if (active)
 	{
@@ -35,11 +35,11 @@ void Bullet::Update(sf::RenderWindow &Window, float elapsedTime)
 
 }
 
-void Bullet::Render(sf::RenderWindow &Window)
+void Bullet::Render(sf::RenderWindow &window)
 {
 	if (active)
 	{
-		Window.draw(sprite);
+		window.draw(sprite);
 	}
 }
 

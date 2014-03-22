@@ -4,7 +4,6 @@
 #define ENTITY_H
 
 #include "Player.h"
-//#include "Player2.h"
 #include "Enemy.h"
 #include "EnemyFormation.h"
 #include "SpaceMonkey.h"
@@ -19,5 +18,8 @@
 #include "Pew.h"
 #include "Boss2.h"
 #include "Boss2Weapon.h"
+#include "Boss3.h"
+#include "Boss3firstWeapon.h"
+#include "Boss3SecWeapon.h"
 
 #endif

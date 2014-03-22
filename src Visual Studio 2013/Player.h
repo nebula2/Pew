@@ -12,8 +12,8 @@ class Player
 {
 public:
 
-	void Update(sf::RenderWindow &Window, float elapsedTime);
-	void Render(sf::RenderWindow &Window);
+	void Update(sf::RenderWindow &window, float elapsedTime);
+	void Render(sf::RenderWindow &window);
 	int getHealth();
 	void reduceHealth(int pDamage);
 	void increaseHealth(int heal);

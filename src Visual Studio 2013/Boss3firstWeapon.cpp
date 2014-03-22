@@ -1,23 +1,23 @@
-//Boss1Weapon.cpp
+//Boss3firstWeapon.cpp
 
-#include "Boss1Weapon.h"
+#include "Boss3firstWeapon.h"
 
-sf::Texture Boss1Weapon::weaponTex;
+sf::Texture Boss3firstWeapon::weaponTex;
 
-Boss1Weapon::Boss1Weapon()
+Boss3firstWeapon::Boss3firstWeapon()
 {
 	IOsmooth smooth;
 	speed = 0.5;
 	active = true;
 
-	weaponTex.loadFromFile("graphics//enemies//pew.png");
+	weaponTex.loadFromFile("graphics//enemies//cowWeapon.png");
 	weaponTex.setSmooth(smooth.ReadSmoothSettings());
 	sprite.setTexture(weaponTex);
 	sprite.setRotation(180);
 	sprite.setOrigin(23.5, 12);
 }
 
-void Boss1Weapon::Update(sf::RenderWindow &window, float &elapsedTime)
+void Boss3firstWeapon::Update(sf::RenderWindow &window, float &elapsedTime)
 {
 	if (active)
 	{
@@ -34,10 +34,12 @@ void Boss1Weapon::Update(sf::RenderWindow &window, float &elapsedTime)
 		}
 
 		sprite.setPosition(x, y);
+
+		sprite.rotate(5);
 	}
 }
 
-void Boss1Weapon::Render(sf::RenderWindow &window)
+void Boss3firstWeapon::Render(sf::RenderWindow &window)
 {
 	if (active)
 	{
@@ -45,13 +47,13 @@ void Boss1Weapon::Render(sf::RenderWindow &window)
 	}
 }
 
-void Boss1Weapon::setPosition(float x, float y)
+void Boss3firstWeapon::setPosition(float x, float y)
 {
 	sprite.setPosition(x, y);
 }
 
-int Boss1Weapon::getDamage()
+int Boss3firstWeapon::getDamage()
 {
 	IOdiff diff;
-	return 25 * diff.ReadDiffSettings();
+	return 5 * diff.ReadDiffSettings();
 }

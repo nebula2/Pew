@@ -39,7 +39,7 @@ void RenderManager::EnemyDraw(std::vector<Enemy> &vector, float &elapsedTime, Hi
 
 //Player Weapons
 
-void RenderManager::BulletDraw(std::vector<Bullet> &vector, std::vector<Bullet>::iterator &iterator, int &points, IngameSound &sound, HighscoreManager &highscore, std::vector<Enemy> &enemyv, std::vector<SpaceMonkey> &monkeyv, std::vector<ShitBullets> &shitv, std::vector<Boss1> &boss1v, bool &boss1Dead, std::vector<Boss2Weapon> &boss2weaponv,std::vector<EnemyFormation> &enemyFormationv, sf::RenderWindow &window, float &elapsedTime)
+void RenderManager::BulletDraw(std::vector<Bullet> &vector, std::vector<Bullet>::iterator &iterator, int &points, IngameSound &sound, HighscoreManager &highscore, std::vector<Enemy> &enemyv, std::vector<SpaceMonkey> &monkeyv, std::vector<ShitBullets> &shitv, std::vector<Boss1> &boss1v, bool &boss1Dead, std::vector<Boss2Weapon> &boss2weaponv, std::vector<EnemyFormation> &enemyFormationv, std::vector<Boss3> &boss3v, std::vector<Boss3firstWeapon> &b3FWeapon, std::vector<Boss3SecWeapon> &b3SWeapon, sf::RenderWindow &window, float &elapsedTime)
 {
 	for (iterator = vector.begin(); iterator != vector.end();)
 	{
@@ -53,17 +53,22 @@ void RenderManager::BulletDraw(std::vector<Bullet> &vector, std::vector<Bullet>:
 			coll::ProjectileToMonkey(iterator, monkeyv, points, sound, highscore);//monkey
 			coll::ProjectileToListNoHealth(iterator, shitv, points, sound, highscore);//shit
 			coll::ProjectileToListNoHealth(iterator, boss2weaponv, points, sound, highscore);//boss2Weapon
+			coll::ProjectileToListNoHealth(iterator, b3FWeapon, points, sound, highscore);//boss3FirstWeapon
+			coll::ProjectileToList(iterator, b3SWeapon, points, sound, highscore);//boss3SecWeapon
 			coll::BossCollision(iterator, boss1v, points, sound, highscore, boss1Dead);//boss1
 			coll::ProjectileToList(iterator, enemyFormationv, points, sound, highscore);//enemyFormation
+			coll::Boss3Collision(boss3v, iterator, sound, highscore, points);//boss3
 
-			iterator->Update(window, elapsedTime);
+
+
+			iterator->Update(elapsedTime);
 			iterator->Render(window);
 			++iterator;
 		}
 	}
 }
 
-void RenderManager::DoubleShotDraw(std::vector<DoubleShot> &vector, std::vector<DoubleShot>::iterator &iterator, int &points, IngameSound &sound, HighscoreManager &highscore, std::vector<Enemy> &enemyv, std::vector<SpaceMonkey> &monkeyv, std::vector<ShitBullets> &shitv, std::vector<Boss1> &boss1v, bool &boss1Dead, std::vector<Boss2Weapon> &boss2weaponv, std::vector<EnemyFormation> &enemyFormationv, sf::RenderWindow &window, float &elapsedTime)
+void RenderManager::DoubleShotDraw(std::vector<DoubleShot> &vector, std::vector<DoubleShot>::iterator &iterator, int &points, IngameSound &sound, HighscoreManager &highscore, std::vector<Enemy> &enemyv, std::vector<SpaceMonkey> &monkeyv, std::vector<ShitBullets> &shitv, std::vector<Boss1> &boss1v, bool &boss1Dead, std::vector<Boss2Weapon> &boss2weaponv, std::vector<EnemyFormation> &enemyFormationv, std::vector<Boss3> &boss3v, std::vector<Boss3firstWeapon> &b3FWeapon, std::vector<Boss3SecWeapon> &b3SWeapon, sf::RenderWindow &window, float &elapsedTime)
 {
 	for (iterator = vector.begin(); iterator != vector.end();)
 	{
@@ -77,17 +82,20 @@ void RenderManager::DoubleShotDraw(std::vector<DoubleShot> &vector, std::vector<
 			coll::ProjectileToMonkey(iterator, monkeyv, points, sound, highscore);//monkey
 			coll::ProjectileToListNoHealth(iterator, shitv, points, sound, highscore);//shit
 			coll::ProjectileToListNoHealth(iterator, boss2weaponv, points, sound, highscore);//boss2Weapon
+			coll::ProjectileToListNoHealth(iterator, b3FWeapon, points, sound, highscore);//boss3FirstWeapon
+			coll::ProjectileToList(iterator, b3SWeapon, points, sound, highscore);//boss3SecWeapon
 			coll::BossCollision(iterator, boss1v, points, sound, highscore, boss1Dead);//boss1
 			coll::ProjectileToList(iterator, enemyFormationv, points, sound, highscore);//enemyFormation
+			coll::Boss3Collision(boss3v, iterator, sound, highscore, points);//boss3
 
-			iterator->Update(window, elapsedTime);
+			iterator->Update(elapsedTime);
 			iterator->Render(window);
 			++iterator;
 		}
 	}
 }
 
-void RenderManager::PewShotDraw(std::vector<Pew> &vector, std::vector<Pew>::iterator &iterator, int &points, IngameSound &sound, HighscoreManager &highscore, std::vector<Enemy> &enemyv, std::vector<SpaceMonkey> &monkeyv, std::vector<ShitBullets> &shitv, std::vector<Boss1> &boss1v, std::vector<Boss2> &boss2v, std::vector<Boss2Weapon> &boss2weaponv, std::vector<EnemyFormation> &enemyFormationv, sf::RenderWindow &window, float &elapsedTime)
+void RenderManager::PewShotDraw(std::vector<Pew> &vector, std::vector<Pew>::iterator &iterator, int &points, IngameSound &sound, HighscoreManager &highscore, std::vector<Enemy> &enemyv, std::vector<SpaceMonkey> &monkeyv, std::vector<ShitBullets> &shitv, std::vector<Boss1> &boss1v, std::vector<Boss2> &boss2v, std::vector<Boss2Weapon> &boss2weaponv, std::vector<EnemyFormation> &enemyFormationv, std::vector<Boss3> &boss3v, std::vector<Boss3firstWeapon> &b3FWeapon, std::vector<Boss3SecWeapon> &b3SWeapon, sf::RenderWindow &window, float &elapsedTime)
 {
 	for (iterator = vector.begin(); iterator != vector.end();)
 	{
@@ -101,10 +109,13 @@ void RenderManager::PewShotDraw(std::vector<Pew> &vector, std::vector<Pew>::iter
 			coll::ProjectileToMonkey(iterator, monkeyv, points, sound, highscore);//monkey
 			coll::ProjectileToListNoHealth(iterator, shitv, points, sound, highscore);//shit
 			coll::ProjectileToListNoHealth(iterator, boss2weaponv, points, sound, highscore);//boss2Weapon
+			coll::ProjectileToListNoHealth(iterator, b3FWeapon, points, sound, highscore);//boss3FirstWeapon
+			coll::ProjectileToList(iterator, b3SWeapon, points, sound, highscore);//boss3SecWeapon
 			coll::Boss2Collision(iterator, boss2v, points, sound, highscore);//boss2
 			coll::ProjectileToList(iterator, enemyFormationv, points, sound, highscore);//enemyFormation
-			
-			iterator->Update(window, elapsedTime);
+			coll::Boss3Collision(boss3v, iterator, sound, highscore, points);//boss3
+
+			iterator->Update(elapsedTime);
 			iterator->Render(window);
 			++iterator;
 		}

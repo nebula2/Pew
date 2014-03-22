@@ -17,33 +17,33 @@ UnlockPew::UnlockPew()
 	pewDropSprite.setPosition(400, 50);
 }
 
-void UnlockPew::Update(sf::RenderWindow &Window, float elapsedTime)
+void UnlockPew::Update(sf::RenderWindow &window, float elapsedTime)
 {
 	if (UnlockPew::active)
 	{
 		float x = pewDropSprite.getPosition().x;
 		float y = pewDropSprite.getPosition().y;
 
-		if (y <= Window.getSize().y / 2)
+		if (y <= window.getSize().y / 2)
 		{
 			y += speed*elapsedTime;
 		}
-		else if (y >= Window.getSize().y / 2)
+		else if (y >= window.getSize().y / 2)
 		{
-			y = Window.getSize().y / 2;
+			y = window.getSize().y / 2;
 		}
 
-		x = Window.getSize().x / 2;
+		x = window.getSize().x / 2;
 
 		pewDropSprite.setPosition(x, y);
 	}
 }
 
-void UnlockPew::Render(sf::RenderWindow &Window)
+void UnlockPew::Render(sf::RenderWindow &window)
 {
 	if (active)
 	{
-		Window.draw(pewDropSprite);
+		window.draw(pewDropSprite);
 	}
 }
 

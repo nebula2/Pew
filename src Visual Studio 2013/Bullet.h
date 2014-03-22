@@ -9,8 +9,8 @@
 class Bullet
 {
 public:
-	void Update(sf::RenderWindow &Window, float elapsedTime);
-	void Render(sf::RenderWindow &Window);
+	void Update(float elapsedTime);
+	void Render(sf::RenderWindow &window);
 	void SetPosition(float x, float y);
 	Bullet();
 	int getDamage();

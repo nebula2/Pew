@@ -32,5 +32,8 @@ public:
 	void PewSpawn2(std::vector<Pew> &vector, HighscoreManager &highscore, WeaponManager &weapon, Player2 &player, IngameSound &sound, bool &pewOnCooldown);
 	void Boss2Spawn(std::vector<Boss2> &vector, int &points);
 	void Boss2WeaponSpawn(int &counter, std::vector<Boss2Weapon> &bwvector, std::vector<Boss2> &bvector);
+	void Boss3Spawn(std::vector<Boss3> &vector, int &points, IngameSound &sound);
+	void Boss3FirstWeaponSpawn(int &counter1, int &counter2, std::vector<Boss3firstWeapon> &vector, std::vector<Boss3> &bVector, IngameSound &sound);
+	void Boss3SecWeaponSpawn(int &counter, std::vector<Boss3SecWeapon> &vector, std::vector<Boss3> &bVector, IngameSound &sound);
 };
 #endif

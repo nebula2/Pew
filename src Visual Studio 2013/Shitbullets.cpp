@@ -16,14 +16,14 @@ ShitBullets::ShitBullets()
 	sprite.setOrigin(17.5, 17.5);
 }
 
-void ShitBullets::Update(sf::RenderWindow &Window, float elapsedTime)
+void ShitBullets::Update(sf::RenderWindow &window, float elapsedTime)
 {
 	if (active)
 	{
 		float x = sprite.getPosition().x;
 		float y = sprite.getPosition().y;
 
-		if (y <= Window.getSize().y)
+		if (y <= window.getSize().y)
 		{
 			y += speed*elapsedTime;
 		}
@@ -36,11 +36,11 @@ void ShitBullets::Update(sf::RenderWindow &Window, float elapsedTime)
 	}
 }
 
-void ShitBullets::Render(sf::RenderWindow &Window)
+void ShitBullets::Render(sf::RenderWindow &window)
 {
 	if (active)
 	{
-		Window.draw(sprite);
+		window.draw(sprite);
 	}
 }
 

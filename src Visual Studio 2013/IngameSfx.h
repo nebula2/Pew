@@ -6,17 +6,6 @@
 #include <SFML/Audio.hpp>
 #include <string>
 
-//class IngameMusic
-//{
-//public:
-//	void LoadMusic(int &volume);
-//	void PlayMusic(std::string music);
-//	void getCurrentPosition();
-//	void Stop();
-//private:
-//	sf::Music gameTheme;
-//};
-
 class IngameSound
 {
 public:
@@ -37,6 +26,8 @@ private:
 	sf::SoundBuffer pewBuffer;
 	sf::SoundBuffer boss1HitBuffer;
 	sf::SoundBuffer cowBuffer;
+	sf::SoundBuffer boss3spawn;
+	sf::SoundBuffer boss3death;
 
 	sf::Sound bossDeathSound;
 	sf::Sound bulletShotSound;
@@ -48,6 +39,8 @@ private:
 	sf::Sound pewSound;
 	sf::Sound boss1HitSound;
 	sf::Sound cowSound;
+	sf::Sound boss3spawnSound;
+	sf::Sound boss3deathSound;
 };
 
 #endif

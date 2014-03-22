@@ -94,7 +94,7 @@ cl14:
 - pausenmenu geadded (einfach P drücken)
 ______________________________________________________
 HOTFIX
-- wenn man im coop beim dritten boss ist und der erste spieler tod ist,
+- wenn man im coop beim zweiten boss ist und der erste spieler tod ist,
   sollten die äpfel den zweiten player verfolgen
 ______________________________________________________
 
@@ -104,6 +104,12 @@ cl15:
   ->musik wird in der main gesteuert (noch nicht ausgereift)
 - musik wird nun innerhalb des menus korrekt abgespielt,
   bis wieder ins hauptmenu gegangen wird
+______________________________________________________
+cl16:
+- dritten Boss geadded
+  -> besteht aus 3 stadien
+  -> 1 - kuhköpfe; 2 - kühe; 3 - Maschine
+- pew sound (dritte waffe) geändert
 ______________________________________________________
 geplant:
 
@@ -119,8 +125,7 @@ Projekt an sich->
   -> je höher aufgewertet wurde, desto schwieriger das spiel
 - ende:
   credits, save, statistik
-- diff einstellungen adden und anpassen
-  steuerung einstellen adden
+- steuerung einstellen adden
 - evtl highscore. dann alles einzeln in 1000 txt files da ich zu dumm bin
   in den dingern zu lesen
 
@@ -147,4 +152,5 @@ ______________________________________________________
 Bekannte Fehler:
 - Intro pimmelt einfach so rum (bool einführen)
 - Cooldown von pew wird nicht korrekt angezeigt (pewCD angucken)
+- bei boss-tod und kuhspawn wird kein sound abgespielt
 

@@ -37,7 +37,6 @@ public:
 	void LoadMusic(int &volume);
 	void PlayMusic(std::string music);
 	void Pause(std::string which);
-	void UnpauseMenu();
 	void MenuVolume(int volume);
 
 private:

@@ -17,7 +17,7 @@ DoubleShot::DoubleShot()
 	sprite.setTexture(doubleTex);
 }
 
-void DoubleShot::Update(sf::RenderWindow &Window, float elapsedTime)
+void DoubleShot::Update(float elapsedTime)
 {
 	if (active)
 	{
@@ -37,11 +37,11 @@ void DoubleShot::Update(sf::RenderWindow &Window, float elapsedTime)
 
 }
 
-void DoubleShot::Render(sf::RenderWindow &Window)
+void DoubleShot::Render(sf::RenderWindow &window)
 {
 	if (active)
 	{
-		Window.draw(sprite);
+		window.draw(sprite);
 	}
 }
 

@@ -6,17 +6,6 @@
 #include <SFML/Audio.hpp>
 #include <string>
 
-//class MenuMusic
-//{
-//public:
-//	void LoadMusic(int &volume);
-//	void PlayMusic(std::string music);
-//
-//private:
-//	sf::Music menuTheme;
-//	sf::Music introTheme;
-//};
-
 class MenuSound
 {
 public:

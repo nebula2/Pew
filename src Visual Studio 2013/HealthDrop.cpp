@@ -15,14 +15,14 @@ HealthDrop::HealthDrop()
 	healthDropSprite.setOrigin(12.5, 11.5);
 }
 
-void HealthDrop::Update(sf::RenderWindow &Window, float elapsedTime)
+void HealthDrop::Update(sf::RenderWindow &window, float elapsedTime)
 {
 	if (HealthDrop::active)
 	{
 		float x = healthDropSprite.getPosition().x;
 		float y = healthDropSprite.getPosition().y;
 
-		if (y <= Window.getSize().y)
+		if (y <= window.getSize().y)
 		{
 			y += speed*elapsedTime;
 		}
@@ -35,11 +35,11 @@ void HealthDrop::Update(sf::RenderWindow &Window, float elapsedTime)
 	}
 }
 
-void HealthDrop::Render(sf::RenderWindow &Window)
+void HealthDrop::Render(sf::RenderWindow &window)
 {
 	if (active)
 	{
-		Window.draw(healthDropSprite);
+		window.draw(healthDropSprite);
 	}
 }
 

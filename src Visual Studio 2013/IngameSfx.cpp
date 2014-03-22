@@ -16,6 +16,8 @@ void IngameSound::LoadSoundBuffer()
 	pewBuffer.loadFromFile("audio//pew.ogg");
 	boss1HitBuffer.loadFromFile("audio//boss1hit.ogg");
 	cowBuffer.loadFromFile("audio//cow.ogg");
+	boss3spawn.loadFromFile("audio//boss3spawn.ogg");
+	boss3death.loadFromFile("audio//boss3death.ogg");
 }
 
 void IngameSound::setBuffer(int &volume)
@@ -40,6 +42,10 @@ void IngameSound::setBuffer(int &volume)
 		boss1HitSound.setVolume(volume);
 	cowSound.setBuffer(cowBuffer);
 		cowSound.setVolume(volume);
+	boss3spawnSound.setBuffer(boss3spawn);
+		boss3spawnSound.setVolume(volume);
+	boss3deathSound.setBuffer(boss3death);
+		boss3deathSound.setVolume(volume);
 }
 
 void IngameSound::PlaySound(std::string sound)
@@ -83,5 +89,13 @@ void IngameSound::PlaySound(std::string sound)
 	if (sound == "cow")
 	{
 		cowSound.play();
+	}
+	if (sound == "boss3spawn")
+	{
+		boss3spawnSound.play();
+	}
+	if (sound == "boss3death")
+	{
+		boss3deathSound.play();
 	}
 }

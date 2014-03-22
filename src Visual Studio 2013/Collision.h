@@ -111,7 +111,7 @@ namespace coll
 					objList[i].reduceHealth(obj->getDamage());
 					if (objList[i].getHealth() <= 0)
 					{
-						sound.PlaySound("audio//bossDeath.ogg");
+						sound.PlaySound("bossDeath");
 						objList[i].active = false;
 						points += 20;
 						highscore.setEnemyKilled(1);
@@ -208,10 +208,7 @@ namespace coll
 				{
 					objList[i].active = false;
 					sound.PlaySound("healthDrop");
-					if (pPlayer.getHealth() <= 100)
-					{
-						pPlayer.increaseHealth(20);
-					}
+					pPlayer.increaseHealth(20);
 				}
 			}
 		}
@@ -236,6 +233,75 @@ namespace coll
 					if (pPlayer.getHealth() <= 100)
 					{
 						pPlayer.increaseHealth(100);
+					}
+				}
+			}
+		}
+	}
+	template <class Object>
+	void Boss3Collision(std::vector<Boss3> &boss3v, Object &obj, IngameSound &sound, HighscoreManager &highscore, int &points)
+	{
+		//boss3 collision weapon to boss3
+		for (int i = 0; i < boss3v.size(); i++)
+		{
+			//collision for first state
+			if (boss3v[i].getCurrentState() == 1.5)
+			{
+				//collision for left Spawner
+				if (boss3v[i].getHead1Active())
+				{
+					if (obj->sprite.getGlobalBounds().intersects(boss3v[i].headSprite1.getGlobalBounds()))
+					{
+						obj->active = false;
+						sound.PlaySound("enemyCollision");
+						highscore.setShotsGot(1);
+						boss3v[i].setHead1Position(boss3v[i].getHead1XPosition(), boss3v[i].getHead1YPosition() - 2);
+					}
+				}
+
+				//collision for right spawner
+				if (boss3v[i].getHead2Active())
+				{
+					if (obj->sprite.getGlobalBounds().intersects(boss3v[i].headSprite2.getGlobalBounds()))
+					{
+						obj->active = false;
+						sound.PlaySound("enemyCollision");
+						highscore.setShotsGot(1);
+						boss3v[i].setHead2Position(boss3v[i].getHead2XPosition(), boss3v[i].getHead2YPosition() -2);
+					}
+				}
+			}
+//_____________________________________________________________________________________________________________________________________
+			if (boss3v[i].getCurrentState() == 2.5)
+			{
+				//collision for cow spawner
+				if (boss3v[i].getCowMActive())
+				{
+					if (obj->sprite.getGlobalBounds().intersects(boss3v[i].cowSprite.getGlobalBounds()))
+					{
+						obj->active = false;
+						sound.PlaySound("enemyCollision");
+						highscore.setShotsGot(1);
+						boss3v[i].setCowMPosition(boss3v[i].getCowMXPosition(), boss3v[i].getCowMYPosition() -2);
+					}
+				}
+			}
+//_____________________________________________________________________________________________________________________________________
+			if (boss3v[i].getCurrentState() == 3)
+			{
+				if (boss3v[i].active)
+				{
+					if (obj->sprite.getGlobalBounds().intersects(boss3v[i].sprite.getGlobalBounds()))
+					{
+						obj->active = false;
+						sound.PlaySound("enemyCollision");
+						highscore.setShotsGot(1);
+						boss3v[i].reduceHealth(obj->getDamage());
+						if (boss3v[i].getGoneDead())
+						{
+							sound.PlaySound("boss3death");
+							points += 150;
+						}
 					}
 				}
 			}

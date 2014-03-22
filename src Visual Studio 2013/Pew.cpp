@@ -16,7 +16,7 @@ Pew::Pew()
 	sprite.setTexture(pewShotTex);
 }
 
-void Pew::Update(sf::RenderWindow &Window, float elapsedTime)
+void Pew::Update(float elapsedTime)
 {
 	if (active)
 	{
@@ -36,11 +36,11 @@ void Pew::Update(sf::RenderWindow &Window, float elapsedTime)
 
 }
 
-void Pew::Render(sf::RenderWindow &Window)
+void Pew::Render(sf::RenderWindow &window)
 {
 	if (active)
 	{
-		Window.draw(sprite);
+		window.draw(sprite);
 	}
 }
 

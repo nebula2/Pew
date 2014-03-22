@@ -124,7 +124,7 @@ cl14:
 - added pause menu (just press P)
 ______________________________________________________
 HOTFIX
-- if you are at the third boss and the first player is dead,
+- if you are at the second boss and the first player is dead,
   the apples should now track the second player
 ______________________________________________________
 
@@ -136,5 +136,9 @@ cl15:
   as long as you are not again in main menu
 ______________________________________________________
 
-
+cl16:
+- third boss added
+  -> includes 3 states
+  -> 1 - cowheads; 2 - cows; 3 - mashine
+- pew sound (third weapon) changed
 

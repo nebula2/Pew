@@ -9,8 +9,8 @@ class UnlockPew
 {
 public:
 	UnlockPew();
-	void Update(sf::RenderWindow &Window, float elapsedTime);
-	void Render(sf::RenderWindow &Window);
+	void Update(sf::RenderWindow &window, float elapsedTime);
+	void Render(sf::RenderWindow &window);
 	void SetPosition(float x, float y);
 
 	sf::Sprite pewDropSprite;

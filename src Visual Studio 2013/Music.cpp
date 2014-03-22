@@ -58,22 +58,6 @@ void MenuMusic::Pause(std::string which)
 	}
 }
 
-//ÜBERARBEITEN!!!
-
-void MenuMusic::UnpauseMenu()
-{
-	enum menuStatus
-	{
-		Stopped,
-		Paused,
-		Playing
-	};
-	if (menuTheme.getStatus() == menuStatus::Paused)
-	{
-		menuTheme.play();
-	}
-}
-
 void MenuMusic::MenuVolume(int volume)
 {
 	menuTheme.setVolume(volume);

@@ -1,26 +1,26 @@
-//Boss1Weapon.h
-
-#ifndef BOSS1WEAPON_H
-#define BOSS1WEAPON_H
-
+//Boss3SecWeapon.h
+#ifndef BOSS3SECWEAPON_H
+#define BOSS3SECWEAPON_H
 
 #include <SFML/Graphics.hpp>
 #include "IOstuff.h"
 
-class Boss1Weapon
+class Boss3SecWeapon
 {
 public:
+	Boss3SecWeapon();
 	void Update(sf::RenderWindow &window, float &elapsedTime);
 	void Render(sf::RenderWindow &window);
 	void setPosition(float x, float y);
-	Boss1Weapon();
+	int getDamage();
+	void reduceHealth(int pDamage);
+	int  getHealth();
 	bool active;
 	sf::Sprite sprite;
-	int getDamage();
+
 private:
-	sf::Vector2f pPosition;
 	float speed;
 	static sf::Texture weaponTex;
-
+	int health;
 };
 #endif
