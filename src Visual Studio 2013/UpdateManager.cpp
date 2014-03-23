@@ -136,7 +136,7 @@ void UpdateManager::CowSpawn(int &counter, std::vector<Cow> &vector, int &random
 	{
 		randomX = (rand() % 300) + 1;
 		Cow cowx;
-		cowx.setPosition(randomX, -400);
+		cowx.setPosition(randomX, -305);
 		sound.PlaySound("cow");
 		vector.push_back(cowx);
 		counter = 0;

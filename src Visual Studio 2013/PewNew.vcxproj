@@ -1,0 +1,178 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{2FF3F9EA-DFD6-42D1-AF80-0E5AC6222700}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>PewNew</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <IncludePath>F:\Bibliotheken\SFML-2.1R\include;$(IncludePath)</IncludePath>
+    <LibraryPath>F:\Bibliotheken\SFML-2.1R\lib;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+    <IncludePath>F:\Bibliotheken\SFML-2.1R\include;$(IncludePath)</IncludePath>
+    <LibraryPath>F:\Bibliotheken\SFML-2.1R\lib;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>F:\Bibliotheken\SFML-2.1R\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>F:\Bibliotheken\SFML-2.1R\lib</AdditionalLibraryDirectories>
+      <AdditionalDependencies>sfml-audio-d.lib;sfml-graphics-d.lib;sfml-window-d.lib;sfml-system-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>F:\Bibliotheken\SFML-2.1R\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalLibraryDirectories>F:\Bibliotheken\SFML-2.1R\lib</AdditionalLibraryDirectories>
+      <AdditionalDependencies>sfml-audio.lib;sfml-graphics.lib;sfml-window.lib;sfml-system.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="Boss1.cpp" />
+    <ClCompile Include="Boss1Weapon.cpp" />
+    <ClCompile Include="Boss2.cpp" />
+    <ClCompile Include="Boss2Weapon.cpp" />
+    <ClCompile Include="Boss3.cpp" />
+    <ClCompile Include="Boss3firstWeapon.cpp" />
+    <ClCompile Include="Boss3SecWeapon.cpp" />
+    <ClCompile Include="Bullet.cpp" />
+    <ClCompile Include="CoopSet.cpp" />
+    <ClCompile Include="Cow.cpp" />
+    <ClCompile Include="DiffSet.cpp" />
+    <ClCompile Include="DoubleShot.cpp" />
+    <ClCompile Include="Enemy.cpp" />
+    <ClCompile Include="EnemyFormation.cpp" />
+    <ClCompile Include="Game.cpp" />
+    <ClCompile Include="GraphicSet.cpp" />
+    <ClCompile Include="GUI.cpp" />
+    <ClCompile Include="HealthDrop.cpp" />
+    <ClCompile Include="Highscore.cpp" />
+    <ClCompile Include="HighscoreManager.cpp" />
+    <ClCompile Include="IngameSfx.cpp" />
+    <ClCompile Include="Intro.cpp" />
+    <ClCompile Include="IOstuff.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="Menu.cpp" />
+    <ClCompile Include="MenuSfx.cpp" />
+    <ClCompile Include="Music.cpp" />
+    <ClCompile Include="Pew.cpp" />
+    <ClCompile Include="Player.cpp" />
+    <ClCompile Include="Player2.cpp" />
+    <ClCompile Include="RenderManager.cpp" />
+    <ClCompile Include="Settings.cpp" />
+    <ClCompile Include="Shitbullets.cpp" />
+    <ClCompile Include="ShitMonkey.cpp" />
+    <ClCompile Include="SoundSet.cpp" />
+    <ClCompile Include="UnlockPew.cpp" />
+    <ClCompile Include="UpdateManager.cpp" />
+    <ClCompile Include="WeaponManager.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="BasicStuff.h" />
+    <ClInclude Include="Boss1.h" />
+    <ClInclude Include="Boss1Weapon.h" />
+    <ClInclude Include="Boss2.h" />
+    <ClInclude Include="Boss2Weapon.h" />
+    <ClInclude Include="Boss3.h" />
+    <ClInclude Include="Boss3firstWeapon.h" />
+    <ClInclude Include="Boss3SecWeapon.h" />
+    <ClInclude Include="Bullet.h" />
+    <ClInclude Include="Collision.h" />
+    <ClInclude Include="CoopSet.h" />
+    <ClInclude Include="Cow.h" />
+    <ClInclude Include="DiffSet.h" />
+    <ClInclude Include="DoubleShot.h" />
+    <ClInclude Include="Enemy.h" />
+    <ClInclude Include="EnemyFormation.h" />
+    <ClInclude Include="Entity.h" />
+    <ClInclude Include="Game.h" />
+    <ClInclude Include="GraphicSet.h" />
+    <ClInclude Include="GUI.h" />
+    <ClInclude Include="HealthDrop.h" />
+    <ClInclude Include="Highscore.h" />
+    <ClInclude Include="HighscoreManager.h" />
+    <ClInclude Include="IngameSfx.h" />
+    <ClInclude Include="Intro.h" />
+    <ClInclude Include="IOstuff.h" />
+    <ClInclude Include="Menu.h" />
+    <ClInclude Include="MenuSfx.h" />
+    <ClInclude Include="Music.h" />
+    <ClInclude Include="Pew.h" />
+    <ClInclude Include="Player.h" />
+    <ClInclude Include="Player2.h" />
+    <ClInclude Include="RenderManager.h" />
+    <ClInclude Include="Settings.h" />
+    <ClInclude Include="ShitBullets.h" />
+    <ClInclude Include="SoundSet.h" />
+    <ClInclude Include="SpaceMonkey.h" />
+    <ClInclude Include="StateManager.h" />
+    <ClInclude Include="UnlockPew.h" />
+    <ClInclude Include="UpdateManager.h" />
+    <ClInclude Include="WeaponManager.h" />
+    <ClInclude Include="WindowStates.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

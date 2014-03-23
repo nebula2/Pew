@@ -58,19 +58,6 @@ void MenuMusic::Pause(std::string which)
 	}
 }
 
-<<<<<<< HEAD
-=======
-//ÜBERARBEITEN!!!
-
-void MenuMusic::UnpauseMenu()
-{
-	if (menuTheme.getStatus() == sf::SoundSource::Paused)
-	{
-		menuTheme.play();
-	}
-}
-
->>>>>>> fceb53ddab56bf7d7c9268c7bcad42670f7806c4
 void MenuMusic::MenuVolume(int volume)
 {
 	menuTheme.setVolume(volume);

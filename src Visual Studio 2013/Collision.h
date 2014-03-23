@@ -3,14 +3,10 @@
 #ifndef _COLLISION_H
 #define _COLLISION_H
 
-//SFML and windows header
 #include <vector>
-//own header
 #include "Entity.h"
 #include "IngameSfx.h"
 #include "HighscoreManager.h"
-
-//namespace-try for collision detection
 
 namespace coll
 {
@@ -61,7 +57,7 @@ namespace coll
 					objList[i].reduceHealth(obj->getDamage());
 					if (objList[i].getHealth() <= 0)
 					{
-						sound.PlaySound("audio//bossDeath.ogg");
+						sound.PlaySound("bossDeath");
 						objList[i].active = false;
 						points += 20;
 						highscore.setMonkeyKilled(1);
@@ -138,7 +134,7 @@ namespace coll
 					objList[i].reduceHealth(obj->getDamage());
 					if (objList[i].getHealth() <= 0)
 					{
-						sound.PlaySound("audio//bossDeath.ogg");
+						sound.PlaySound("bossDeath");
 						objList[i].active = false;
 						points += 20;
 						highscore.setEnemyKilled(1);
@@ -287,7 +283,7 @@ namespace coll
 				}
 			}
 //_____________________________________________________________________________________________________________________________________
-			if (boss3v[i].getCurrentState() == 3)
+			if (boss3v[i].getCurrentState() >= 3 && boss3v[i].getCurrentState() <= 4)
 			{
 				if (boss3v[i].active)
 				{

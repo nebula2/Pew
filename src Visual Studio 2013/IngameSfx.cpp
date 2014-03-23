@@ -13,11 +13,11 @@ void IngameSound::LoadSoundBuffer()
 	playerCollisionBuffer.loadFromFile("audio//playerCollision.ogg");
 	playerDeathBuffer.loadFromFile("audio//playerDeath.ogg");
 	monkeyFartBuffer.loadFromFile("audio//fart.ogg");
-	pewBuffer.loadFromFile("audio//pew.ogg");
+	pewBuffer.loadFromFile("audio//pew.wav");
 	boss1HitBuffer.loadFromFile("audio//boss1hit.ogg");
-	cowBuffer.loadFromFile("audio//cow.ogg");
+	cowBuffer.loadFromFile("audio//cow.wav");
 	boss3spawn.loadFromFile("audio//boss3spawn.ogg");
-	boss3death.loadFromFile("audio//boss3death.ogg");
+	boss3death.loadFromFile("audio//boss3death.wav");
 }
 
 void IngameSound::setBuffer(int &volume)
@@ -54,48 +54,52 @@ void IngameSound::PlaySound(std::string sound)
 	{
 		bulletShotSound.play();
 	}
-	if (sound == "fart")
+	else if (sound == "fart")
 	{
 		monkeyFartSound.play();
 	}
-	if (sound == "enemyCollision")
+	else if (sound == "enemyCollision")
 	{
 		enemyCollisionSound.play();
 	}
-	if (sound == "playerCollision")
+	else if (sound == "playerCollision")
 	{
 		playerCollisionSound.play();
 	}
-	if (sound == "bossDeath")
+	else if (sound == "bossDeath")
 	{
 		bossDeathSound.play();
 	}
-	if (sound == "healthDrop")
+	else if (sound == "healthDrop")
 	{
 		healthDropSound.play();
 	}
-	if (sound == "playerDeath")
+	else if (sound == "playerDeath")
 	{
 		playerDeathSound.play();
 	}
-	if (sound == "pew")
+	else if (sound == "pew")
 	{
 		pewSound.play();
+		std::cout << "pewSound \n";
 	}
-	if (sound == "boss1Hit")
+	else if (sound == "boss1Hit")
 	{
 		boss1HitSound.play();
 	}
-	if (sound == "cow")
+	else if (sound == "cow")
 	{
+		std::cout << "cowSound \n";
 		cowSound.play();
 	}
-	if (sound == "boss3spawn")
+	else if (sound == "boss3spawn")
 	{
+		std::cout << "boss3spawnSound \n";
 		boss3spawnSound.play();
 	}
-	if (sound == "boss3death")
+	else /*(sound == "boss3death")*/
 	{
+		std::cout << "boss3deathSound \n";
 		boss3deathSound.play();
 	}
 }

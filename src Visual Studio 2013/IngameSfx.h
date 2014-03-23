@@ -4,6 +4,7 @@
 #define INGAMESFX_H
 
 #include <SFML/Audio.hpp>
+#include <iostream>
 #include <string>
 
 class IngameSound

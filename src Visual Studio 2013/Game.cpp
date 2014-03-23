@@ -389,7 +389,6 @@ void Game::HandleSpawns(sf::RenderWindow &window, MovableBackground &bg, Player 
 	{
 		updateMng.EnemySpawn(enemyTimeCount, enemyv, enemyFormationv, randomX);//enemy
 		updateMng.EnemyFormationSpawn(enemyFormationCount, enemyFormationv, boss2v);//enemyFormation
-		updateMng.HealthDropSpawn(healthDropCount, healthv, randomX);//health
 		updateMng.SpaceMonkeySpawn(points, monkeyv, boss2v);//monkey
 		updateMng.ShitSpawn(shitCount, monkeyv, shitv, sound);//shit
 		updateMng.Boss1Spawn(points, boss1v);//boss1
@@ -400,6 +399,7 @@ void Game::HandleSpawns(sf::RenderWindow &window, MovableBackground &bg, Player 
 		updateMng.Boss2WeaponSpawn(boss2WeaponCount, boss2Weaponv, boss2v);//b2Weapon
 		updateMng.Boss3Spawn(boss3v, points, sound);//boss3
 	}
+	updateMng.HealthDropSpawn(healthDropCount, healthv, randomX);//health
 	updateMng.Boss3FirstWeaponSpawn(boss3FirstWeaponCount1, boss3FirstWeaponCount2, boss3FWeaponv, boss3v, sound);
 	updateMng.Boss3SecWeaponSpawn(boss3SecWeaponCount, boss3SWeaponv, boss3v, sound);
 	
