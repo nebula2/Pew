@@ -5,6 +5,13 @@ arrow keys to select
 enter to apply
 
 ingame:
+esc for pause
+
+- first player -
 q and e to switch the current weapon
 arrow keys for movement
 space for shoot
+
+- second player -
+mouse movement for movement
+left mouse button for shoot

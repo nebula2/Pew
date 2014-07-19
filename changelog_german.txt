@@ -111,6 +111,13 @@ cl16:
   -> 1 - kuhköpfe; 2 - kühe; 3 - Maschine
 - pew sound (dritte waffe) geändert
 ______________________________________________________
+cl17:
+- code angesichts des state handlings geändert, 
+  dazu noch diverse codeverbesserungen
+- pause ist nun auf escape. hinweise werden gezeigt
+- sound wird nun wirklich ordentlich aktualisiert
+- intro nudelt nicht direkt beim start des spiels los
+______________________________________________________
 geplant:
 
 Gameplay->
@@ -150,7 +157,5 @@ kommt auf jeden was von
 puhhh 
 ______________________________________________________
 Bekannte Fehler:
-- Intro pimmelt einfach so rum (bool einführen)
 - Cooldown von pew wird nicht korrekt angezeigt (pewCD angucken)
-- bei boss-tod und kuhspawn wird kein sound abgespielt
 

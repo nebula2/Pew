@@ -141,4 +141,9 @@ cl16:
   -> includes 3 states
   -> 1 - cowheads; 2 - cows; 3 - mashine
 - pew sound (third weapon) changed
-
+______________________________________________________
+cl17:
+- code changed (state handling), some code improvements
+- pause is now on escape, hints are shown
+- sound is now really updated as supposed
+- intro starts now when supposed
