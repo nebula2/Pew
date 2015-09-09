@@ -7,9 +7,9 @@
 #include <string>
 #include <SFML/Graphics.hpp>
 
-class Player2
-{
+class Player2{
 public:
+	Player2();
 
 	void Update(sf::RenderWindow &window, float elapsedTime);
 	void Render(sf::RenderWindow &window);
@@ -19,7 +19,6 @@ public:
 	void setHealth(int mhealth); //to sync with player1
 	sf::Sprite playerSprite;
 	sf::Vector2f getPosition();
-	Player2(std::string filepath);
 
 	bool active;
 

@@ -5,17 +5,20 @@
 
 #include "GUI.h"
 
-class MessageHandler
-{
+namespace sf{
+	class RenderWindow;
+}
+
+class MessageHandler{
 public:
-	MessageHandler(sf::RenderWindow &window);
-	void UpdateStream(std::stringstream &stream, int &points, std::string string);
+	MessageHandler();
+
+	void UpdateStream(std::stringstream &stream, int &value, std::string string);
 	void UpdatelvUp(int &points, int &showLvUp, sf::RenderWindow &window, float &elapsedTime);
 	void Render(sf::RenderWindow &window, std::string string);
-	
 
 private:
-	Text pauseText, lvUp, gameOver, pHealthS, pointS;
+	Text pauseText, lvUp, gameOver, pHealthS, pointS, pausedInfo;
 };
 
 #endif

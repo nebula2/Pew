@@ -4,8 +4,7 @@
 
 sf::Texture HealthDrop::healthDropTex;
 
-HealthDrop::HealthDrop()
-{
+HealthDrop::HealthDrop(){
 	speed = 0.2;
 	active = true;
 
@@ -15,35 +14,26 @@ HealthDrop::HealthDrop()
 	healthDropSprite.setOrigin(12.5, 11.5);
 }
 
-void HealthDrop::Update(sf::RenderWindow &window, float elapsedTime)
-{
-	if (HealthDrop::active)
-	{
+void HealthDrop::Update(sf::RenderWindow &window, float elapsedTime){
+	if (HealthDrop::active){
 		float x = healthDropSprite.getPosition().x;
 		float y = healthDropSprite.getPosition().y;
 
 		if (y <= window.getSize().y)
-		{
 			y += speed*elapsedTime;
-		}
+
 		else
-		{
 			active = false;
-		}
 
 		healthDropSprite.setPosition(x, y);
 	}
 }
 
-void HealthDrop::Render(sf::RenderWindow &window)
-{
+void HealthDrop::Render(sf::RenderWindow &window){
 	if (active)
-	{
 		window.draw(healthDropSprite);
-	}
 }
 
-void HealthDrop::SetPosition(float x, float y)
-{
+void HealthDrop::SetPosition(float x, float y){
 	healthDropSprite.setPosition(x, y);
 }

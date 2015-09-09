@@ -3,20 +3,28 @@
 #ifndef SETTINGS_H
 #define SETTINGS_H
 
-#include "StateManager.h"
+#include "Game.h"
 #include "MenuSfx.h"
 #include "IOstuff.h"
 
-class Settings : public StateManager
-{
+class Settings : public GameState{
 public:
-	virtual int Run(sf::RenderWindow &window);
+	Settings();
+	~Settings();
 
+	void HandleEvents(Game &game);
+	void Update(Game &game);
+	void Render(Game &game);
+	
 private:
-	bool playing;
-	sf::Event event;
-	int selection;
+	int selection = 0;
 	int volume;
+
+	//myStuff
+	IOsound iosound;
+	MenuSound sound;
+	Background bg;
+	Text difficulty, graphics, sounds, back;
 };
 
 #endif

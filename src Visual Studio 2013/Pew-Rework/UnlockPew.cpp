@@ -4,8 +4,7 @@
 
 sf::Texture UnlockPew::pewDropTex;
 
-UnlockPew::UnlockPew()
-{
+UnlockPew::UnlockPew(){
 	speed = 0.1;
 	active = true;
 
@@ -17,21 +16,16 @@ UnlockPew::UnlockPew()
 	pewDropSprite.setPosition(400, 50);
 }
 
-void UnlockPew::Update(sf::RenderWindow &window, float elapsedTime)
-{
-	if (UnlockPew::active)
-	{
+void UnlockPew::Update(sf::RenderWindow &window, float elapsedTime){
+	if (UnlockPew::active){
 		float x = pewDropSprite.getPosition().x;
 		float y = pewDropSprite.getPosition().y;
 
 		if (y <= window.getSize().y / 2)
-		{
 			y += speed*elapsedTime;
-		}
+		
 		else if (y >= window.getSize().y / 2)
-		{
 			y = window.getSize().y / 2;
-		}
 
 		x = window.getSize().x / 2;
 
@@ -39,15 +33,11 @@ void UnlockPew::Update(sf::RenderWindow &window, float elapsedTime)
 	}
 }
 
-void UnlockPew::Render(sf::RenderWindow &window)
-{
+void UnlockPew::Render(sf::RenderWindow &window){
 	if (active)
-	{
 		window.draw(pewDropSprite);
-	}
 }
 
-void UnlockPew::SetPosition(float x, float y)
-{
+void UnlockPew::SetPosition(float x, float y){
 	pewDropSprite.setPosition(x, y);
 }

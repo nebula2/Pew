@@ -5,8 +5,7 @@
 
 #include <SFML/Graphics.hpp>
 
-class WeaponManager
-{
+class WeaponManager{
 public:
 
 	WeaponManager();

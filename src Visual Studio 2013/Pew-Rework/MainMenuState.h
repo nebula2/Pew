@@ -7,8 +7,7 @@
 #include "MenuSfx.h"
 #include "IOstuff.h"
 
-class MainMenuState : public GameState
-{
+class MainMenuState : public GameState{
 public:
 	MainMenuState();
 	~MainMenuState();

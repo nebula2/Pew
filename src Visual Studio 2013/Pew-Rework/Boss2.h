@@ -7,8 +7,7 @@
 #include <math.h>
 #include "IOstuff.h"
 
-class Boss2
-{
+class Boss2{
 public:
 	Boss2();
 	void Update(sf::RenderWindow &window, float elapsedTime);
@@ -31,6 +30,7 @@ private:
 	int debauch;
 	bool fadeIn;
 	bool moveLeft;
+	bool hasTargetTexture;
 };
 
 #endif

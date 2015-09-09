@@ -3,24 +3,29 @@
 #ifndef HIGHSCORE_H
 #define HIGHSCORE_H
 
-//SFML and windows header
 #include <SFML/Graphics.hpp>
 #include <sstream>
 
-//own header
-#include "StateManager.h"
+#include "Game.h"
 #include "HighscoreManager.h"
 #include "IOstuff.h"
 
-class Highscore : public StateManager
-{
+class Highscore : public GameState{
 public:
-	virtual int Run(sf::RenderWindow &window);
-	void setHighscoreManager(HighscoreManager pMng);
+	Highscore();
+	~Highscore();
+
+	void HandleEvents(Game &game);
+	void Update(Game &game);
+	void Render(Game &game);
+
 private:
-	sf::Event event;
+
+	//mystuff
 	HighscoreManager mng;
 	IOHighscore ioHighscore;
+	Background bg;
+	Text pointText, eMissedText, eKilledText, mKilledText, sFiredText, sGotText;
 
 	//streams
 	std::stringstream pointsStream;
@@ -29,7 +34,6 @@ private:
 	std::stringstream mKilledStream;
 	std::stringstream sFiredStream;
 	std::stringstream sGotStream;
-
 };
 
 #endif

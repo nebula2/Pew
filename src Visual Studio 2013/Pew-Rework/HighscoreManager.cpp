@@ -2,8 +2,7 @@
 
 #include "HighscoreManager.h"
 
-HighscoreManager::HighscoreManager()
-{
+HighscoreManager::HighscoreManager(){
 	hSfired = 0;
 	hPoints = 0;
 	hMissed = 0;
@@ -13,53 +12,41 @@ HighscoreManager::HighscoreManager()
 }
 
 //setter
-void HighscoreManager::setPoints(int points) //in game initialized
-{
+void HighscoreManager::setPoints(int points){ //in game initialized
 	hPoints = points;
 }
-void HighscoreManager::setEnemyMissed(int missed) //enemy
-{
+void HighscoreManager::setEnemyMissed(int missed){ //enemy
 	hMissed += missed;
 }
-void HighscoreManager::setEnemyKilled(int ekilled)//collision
-{
+void HighscoreManager::setEnemyKilled(int ekilled){//collision
 	hEkilled += ekilled;
 }
-void HighscoreManager::setMonkeyKilled(int mkilled)//collision
-{
+void HighscoreManager::setMonkeyKilled(int mkilled){//collision
 	hMkilled += mkilled;
 }
-void HighscoreManager::setShotsFired(int sfired)//game
-{
+void HighscoreManager::setShotsFired(int sfired){//game
 	hSfired += sfired;
 }
-void HighscoreManager::setShotsGot(int sgot)//collision
-{
+void HighscoreManager::setShotsGot(int sgot){//collision
 	hSgot += sgot;
 }
 
 //getter
-int HighscoreManager::getPoints()
-{
+int HighscoreManager::getPoints(){
 	return hPoints;
 }
-int HighscoreManager::getEnemyMissed()
-{
+int HighscoreManager::getEnemyMissed(){
 	return hMissed;
 }
-int HighscoreManager::getEnemyKilled()
-{
+int HighscoreManager::getEnemyKilled(){
 	return hEkilled;
 }
-int HighscoreManager::getMonkeyKilled()
-{
+int HighscoreManager::getMonkeyKilled(){
 	return hMkilled;
 }
-int HighscoreManager::getShotsFired()
-{
+int HighscoreManager::getShotsFired(){
 	return hSfired;
 }
-int HighscoreManager::getShotsGot()
-{
+int HighscoreManager::getShotsGot(){
 	return hSgot;
 }

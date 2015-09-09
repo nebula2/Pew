@@ -2,79 +2,45 @@
 
 #include "Intro.h"
 
-Intro::Intro()
-{
-	//basic
-	running = false;
+Intro::Intro(){
 	elapsedTime = 0;
 
-	//background
 	intro.loadFromFile("graphics//core//intro.jpg");
+	intro.setSmooth(false);
 	introSprite.setTexture(intro);
 	introSprite.setPosition(0, 600);
 	bgSpeed = 0.03;
+	y = introSprite.getPosition().y;
 }
 
-int Intro::Run(sf::RenderWindow &window)
-{	
-	running = true;
-	startintro = false;
-	returnCounter = 0;
-	float y = introSprite.getPosition().y;
+Intro::~Intro(){
+}
 
-	if (!startintro)
-		introSprite.setPosition(0, 600);
-
-
-	//stuff for user start
-	Text startText("Return to start", 60);
-	startText.setOrigin(startText.getGlobalBounds().width / 2, startText.getGlobalBounds().height / 2);
-	startText.setPosition(window.getSize().x / 2, window.getSize().y / 2);
-
-
-	while (running)
+void Intro::HandleEvents(Game &game){
+	sf::Event pEvent;
+	
+	while (game.window.pollEvent(pEvent))
 	{
-		//handle events
-		while (window.pollEvent(event))
-		{
-			if (event.type == sf::Event::Closed)
-				return (-1);
-			if (event.type == sf::Event::KeyPressed)
-			{
-				if (event.key.code == sf::Keyboard::Return)
-					returnCounter += 1;
-				if (event.key.code == sf::Keyboard::Escape)
-					return 0;
+		if (pEvent.type == sf::Event::Closed)
+			game.setRunning(false);
 
-			}
+		if (pEvent.type == sf::Event::KeyPressed){
+			if (pEvent.key.code == sf::Keyboard::Escape)
+				game.setRunning(false);
+
+			if (pEvent.key.code == sf::Keyboard::Return)
+				game.ChangeState(Game::gameStates::PLAY);
 		}
-		
-		if (returnCounter == 1)
-			startintro = true;
-		if (returnCounter >= 2)
-			return 3;
-
-		//move background
-		elapsedTime = clock.restart().asMilliseconds();
-		y -= bgSpeed * elapsedTime;
-		introSprite.setPosition(0, y);
-
-		//end intro
-		if (y <= -1200)
-		{
-			return 3;
-			startintro = false;
-		}
-
-		//draw
-		window.clear();
-
-		if (!startintro)
-			startText.Render(window);
-		if (startintro)
-			window.draw(introSprite);
-
-		window.display();
 	}
-	return -1; 
+}
+void Intro::Update(Game &game){
+	elapsedTime = pClock.restart().asMilliseconds();
+	y -= bgSpeed * elapsedTime;
+	introSprite.setPosition(0, y);
+
+	if (y <= -1200)
+		game.ChangeState(Game::gameStates::PLAY);
+}
+void Intro::Render(Game &game){
+		game.window.draw(introSprite);
 }

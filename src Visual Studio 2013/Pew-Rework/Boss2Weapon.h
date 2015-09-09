@@ -8,8 +8,7 @@
 #include "Player2.h"
 #include "IOstuff.h"
 
-class Boss2Weapon
-{
+class Boss2Weapon{
 public:
 	Boss2Weapon();
 	void Update(sf::RenderWindow &window, float &elapsedTime, Player &pPlayer, Player2 &player2);
@@ -21,6 +20,7 @@ public:
 private:
 	float speed;
 	static sf::Texture weaponTex;
+	bool hasTargetTexture;
 };
 
 #endif

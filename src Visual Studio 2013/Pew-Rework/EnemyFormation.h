@@ -6,8 +6,7 @@
 #include <SFML/Graphics.hpp>
 #include "IOstuff.h"
 
-class EnemyFormation
-{
+class EnemyFormation{
 public:
 	EnemyFormation();
 	void Update(sf::RenderWindow &window, float elapsedTime);
@@ -25,6 +24,7 @@ private:
 	static sf::Texture texture;
 	int health;
 	int damage;
+	bool hasTargetTexture;
 };
 
 #endif

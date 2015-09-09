@@ -16,7 +16,5 @@ void MenuSound::setBuffer(int &volume)
 void MenuSound::PlaySound(std::string sound)
 {
 	if (sound == "select")
-	{
 		selectSound.play();
-	}
 }

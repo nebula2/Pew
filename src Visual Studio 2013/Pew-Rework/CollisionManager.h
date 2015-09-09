@@ -9,21 +9,17 @@
 #include "IngameSfx.h"
 #include "Collision.h"
 
-namespace CollisionManager
-{
+namespace CollisionManager{
 	template <class C>
 	/**
 	For Weapons which are not Pew
 	**/
-	void WeaponToEnemy(std::vector<C> &vector, int &points, IngameSound &sound, HighscoreManager &highscore, std::vector<Enemy> &enemyv, std::vector<SpaceMonkey> &monkeyv, std::vector<ShitBullets> &shitv, std::vector<Boss1> &boss1v, bool &boss1Dead, std::vector<Boss2Weapon> &boss2weaponv, std::vector<EnemyFormation> &enemyFormationv, std::vector<Boss3> &boss3v, std::vector<Boss3firstWeapon> &b3FWeapon, std::vector<Boss3SecWeapon> &b3SWeapon, bool &boss3dead, sf::RenderWindow &window)
-	{
-		for (auto it = vector.begin(); it != vector.end();)
-		{
+	void WeaponToEnemy(std::vector<C> &vector, int &points, IngameSound &sound, HighscoreManager &highscore, std::vector<Enemy> &enemyv, std::vector<SpaceMonkey> &monkeyv, std::vector<ShitBullets> &shitv, std::vector<Boss1> &boss1v, bool &boss1Dead, std::vector<Boss2Weapon> &boss2weaponv, std::vector<EnemyFormation> &enemyFormationv, std::vector<Boss3> &boss3v, std::vector<Boss3firstWeapon> &b3FWeapon, std::vector<Boss3SecWeapon> &b3SWeapon, bool &boss3dead, sf::RenderWindow &window){
+		for (auto it = vector.begin(); it != vector.end();){
 			if (!it->active)
 				it = vector.erase(it);
 
-			else
-			{
+			else{
 				coll::ProjectileToList(it, enemyv, points, sound, highscore);//enemy
 				coll::ProjectileToMonkey(it, monkeyv, points, sound, highscore);//monkey
 				coll::ProjectileToListNoHealth(it, shitv, points, sound, highscore);//shit
@@ -43,15 +39,12 @@ namespace CollisionManager
 	/**
 	For Pew 
 	**/
-	void PewToEnemy(std::vector<C> &vector, int &points, IngameSound &sound, HighscoreManager &highscore, std::vector<Enemy> &enemyv, std::vector<SpaceMonkey> &monkeyv, std::vector<ShitBullets> &shitv, std::vector<Boss1> &boss1v, std::vector<Boss2> &boss2v, std::vector<Boss2Weapon> &boss2weaponv, std::vector<EnemyFormation> &enemyFormationv, std::vector<Boss3> &boss3v, std::vector<Boss3firstWeapon> &b3FWeapon, std::vector<Boss3SecWeapon> &b3SWeapon, bool &boss3dead, sf::RenderWindow &window)
-	{
-		for (auto it = vector.begin(); it != vector.end();)
-		{
+	void PewToEnemy(std::vector<C> &vector, int &points, IngameSound &sound, HighscoreManager &highscore, std::vector<Enemy> &enemyv, std::vector<SpaceMonkey> &monkeyv, std::vector<ShitBullets> &shitv, std::vector<Boss1> &boss1v, std::vector<Boss2> &boss2v, std::vector<Boss2Weapon> &boss2weaponv, std::vector<EnemyFormation> &enemyFormationv, std::vector<Boss3> &boss3v, std::vector<Boss3firstWeapon> &b3FWeapon, std::vector<Boss3SecWeapon> &b3SWeapon, bool &boss3dead, sf::RenderWindow &window){
+		for (auto it = vector.begin(); it != vector.end();){
 			if (!it->active)
 				it = vector.erase(it);
 
-			else
-			{
+			else{
 				coll::ProjectileToList(it, enemyv, points, sound, highscore);//enemy
 				coll::ProjectileToMonkey(it, monkeyv, points, sound, highscore);//monkey
 				coll::ProjectileToListNoHealth(it, shitv, points, sound, highscore);//shit

@@ -5,8 +5,7 @@
 
 #include <SFML/Graphics.hpp>
 
-class UnlockPew
-{
+class UnlockPew{
 public:
 	UnlockPew();
 	void Update(sf::RenderWindow &window, float elapsedTime);

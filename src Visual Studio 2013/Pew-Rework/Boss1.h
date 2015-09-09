@@ -6,8 +6,7 @@
 #include <SFML/Graphics.hpp>
 #include "IOstuff.h"
 
-class Boss1
-{
+class Boss1{
 public:
 	Boss1();
 	void Update(sf::RenderWindow &window, float elapsedTime);
@@ -25,6 +24,7 @@ private:
 	static  sf::Texture enemyTex;
 	int		health;
 	bool	moveLeft;
+	bool hasTargetTexture;
 };
 
 #endif

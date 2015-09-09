@@ -6,11 +6,10 @@ sf::Texture Boss3::enemyTex;
 sf::Texture Boss3::headSpawnerTex;
 sf::Texture Boss3::cowSpawnerTex;
 
-Boss3::Boss3()
-{
+Boss3::Boss3(){
 	IOdiff   diff;
 	IOsmooth smooth;
-
+	hasTargetTexture = false;
 	speed =		   0.5;
 	health =	   50 * diff.ReadDiffSettings();
 	startHealth =  50 * diff.ReadDiffSettings();
@@ -65,21 +64,17 @@ Boss3::Boss3()
 	*/
 }
 
-void Boss3::Update(sf::RenderWindow &window, float elapsedTime)
-{
+void Boss3::Update(sf::RenderWindow &window, float elapsedTime){
 	float x = sprite.getPosition().x;
 	float y = sprite.getPosition().y;
 	float h1y = headSprite1.getPosition().y;
 	float h2y = headSprite2.getPosition().y;
 	float cmy = cowSprite.getPosition().y;
 
-	if (Boss3::active)
-	{
+	if (Boss3::active)	{
 
 		if (health <= 0)
-		{
 			goneDead = true;
-		}
 
 		//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 		//+++++++++++++++++++++++++++++++++++-MOVEMENT-+++++++++++++++++++++++++++++++++++++++++
@@ -92,64 +87,47 @@ void Boss3::Update(sf::RenderWindow &window, float elapsedTime)
 		*/
 
 		//______________________________________________________________________________________
-		if (currentState >= 1 && currentState <= 2.5)
-		{
+		if (currentState >= 1 && currentState <= 2.5)		{
 			if (moveLeft && x > - 100)
-			{
 				x -= speed * elapsedTime;
-			}
 			else
-			{
 				moveLeft = false;
-			}
 
 			if (!moveLeft && x < window.getSize().x - 400)
-			{
 				x += speed * elapsedTime;
-			}
+
 			else
-			{
 				moveLeft = true;
-			}
+			
 			sprite.setPosition(x, y);
 		}
 
 		//______________________________________________________________________________________
-		if (currentState == 3)
-		{
+		if (currentState == 3){
 			//move fast to the start position
-			if (!state3Pos)
-			{
-				if (x < window.getSize().x / 2)
-				{
+			if (!state3Pos){
+				if (x < window.getSize().x / 2){
 					x += speed * elapsedTime * 2;
 					moveLeft = false;
 					state3Pos = true;
 				}
-				if (x >= window.getSize().x / 2)
-				{
+				if (x >= window.getSize().x / 2){
 					x -= speed * elapsedTime * 2;
 					moveLeft = false;
 					state3Pos = true;
 				}
 			}
 			//RIGHT
-			if (!moveLeft && !moveDown && !moveUp)
-			{
-				if (x < window.getSize().x -200)
-				{
+			if (!moveLeft && !moveDown && !moveUp){
+				if (x < window.getSize().x -200){
 					if (health > startHealth / 2)
-					{
 						x += speed * elapsedTime;
-					}
+					
 					else 
-					{
 						x += speed * elapsedTime * 1.5;
-					}
 				}
 
-				if (x >= window.getSize().x -200)
-				{
+				if (x >= window.getSize().x -200){
 					x = window.getSize().x -200;
 					moveLeft = true;
 					moveDown = true;
@@ -157,43 +135,31 @@ void Boss3::Update(sf::RenderWindow &window, float elapsedTime)
 			}
 
 			//DOWN
-			if (moveLeft && moveDown && !moveUp)
-			{
-				if (y < window.getSize().y -200)
-				{
+			if (moveLeft && moveDown && !moveUp){
+				if (y < window.getSize().y -200){
 					if (health > startHealth / 2)
-					{
 						y += speed * elapsedTime;
-					}
+
 					else
-					{
 						y += speed * elapsedTime * 1.5;
-					}
 				}
 				
-				if (y >= window.getSize().y -200)
-				{
+				if (y >= window.getSize().y -200){
 					y = window.getSize().y -200;
 					moveDown = false;
 				}
 			}
 
 			//LEFT
-			if (moveLeft && !moveDown && !moveUp)
-			{
-				if (x > 200)
-				{
+			if (moveLeft && !moveDown && !moveUp){
+				if (x > 200){
 					if (health > startHealth / 2)
-					{
 						x -= speed * elapsedTime;
-					}
+					
 					else
-					{
 						x -= speed * elapsedTime * 1.5;
-					}
 				}
-				if (x <= 200)
-				{
+				if (x <= 200){
 					x = 200;
 					moveLeft = false;
 					moveUp = true;
@@ -201,21 +167,16 @@ void Boss3::Update(sf::RenderWindow &window, float elapsedTime)
 			}
 
 			//UP
-			if (!moveLeft && !moveDown && moveUp)
-			{
-				if (y > 200)
-				{
+			if (!moveLeft && !moveDown && moveUp){
+				if (y > 200){
 					if (health > startHealth / 2)
-					{
 						y -= speed * elapsedTime;
-					}
+
 					else
-					{
 						y -= speed * elapsedTime * 1.5;
-					}
+					
 				}
-				if (y <= 200)
-				{
+				if (y <= 200){
 					y = 200;
 					moveUp = false;
 				}
@@ -223,37 +184,28 @@ void Boss3::Update(sf::RenderWindow &window, float elapsedTime)
 			sprite.setPosition(x, y);
 		}
 		//______________________________________________________________________________________
-		if (currentState == 4)
-		{
+		if (currentState == 4){
 			//DIE Motherf***er
-			if (!topAfterDeath)
-			{
+			if (!topAfterDeath){
 				if (y > -600)
-				{
 					y -= speed * elapsedTime;
-				}
-				if (y <= -590 && y > -600)
-				{
+				
+				if (y <= -590 && y > -600){
 					topAfterDeath = true;
 					sprite.setRotation(0);
 				}
 				sprite.setPosition(x, y);
 			}
 			if (topAfterDeath)
-			{
 				fallToGround = true;
-			}
-			if (fallToGround)
-			{
-				if (y < 700)
-				{
+			
+			if (fallToGround){
+				if (y < 700){
 					y += speed * elapsedTime * 2;
 					sprite.setPosition(x, y);
 				}
 				if (y >= 700)
-				{
 					active = false;
-				}
 			}
 		}
 		//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -262,11 +214,9 @@ void Boss3::Update(sf::RenderWindow &window, float elapsedTime)
 
 		//______________________________________________________________________________________
 		//state 0
-		if (currentState == 0)
-		{
+		if (currentState == 0){
 			sprite.setColor(transColor);
-			if (y < 0)
-			{
+			if (y < 0){
 				y += speed * elapsedTime / 7;
 				sprite.setPosition(x, y);
 			}
@@ -276,8 +226,7 @@ void Boss3::Update(sf::RenderWindow &window, float elapsedTime)
 			headSprite2.setPosition(x + 400, y + 150);
 			cowSprite.setPosition(x + 100, y + 150);
 
-			if (y >= 0 && y < 2)
-			{
+			if (y >= 0 && y < 2){
 				sprite.setColor(startColor);
 				sprite.setPosition(sprite.getPosition().x, 0);
 				currentState = 1; 
@@ -286,64 +235,50 @@ void Boss3::Update(sf::RenderWindow &window, float elapsedTime)
 
 		//______________________________________________________________________________________
 		//state 1
-		if (currentState == 1)
-		{
+		if (currentState == 1){
 			//activate heads
-			if (!head1Active || !head2Active)
-			{
+			if (!head1Active || !head2Active){
 				head1Active = true;
 				head2Active = true;
 			}
 
 			//positioning
 			if (h1y < 200)
-			{
 				headSprite1.setPosition(x, h1y += speed * elapsedTime / 6);
-			}
+			
 			else 
-			{
 				headSprite1.setPosition(x, y + 200);
-			}
 
 			if (h2y < 200)
-			{
 				headSprite2.setPosition(x + 400, h2y += speed * elapsedTime / 6);
-			}
+			
 			else
-			{
 				headSprite2.setPosition(x + 400, y + 200);
-			}
 
 			if ((h1y >= 199 && h1y <= 201) || (h2y >= y + 199 && h2y <= y + 201))
-			{
 				currentState = 1.5;
-			}
 		}
 		
 		//______________________________________________________________________________________
 		//state 1.5 (collision movement for the mashines controlled by collision)
-		if (currentState == 1.5)
-		{
+		if (currentState == 1.5){
 			shootHeads1 = true;
 			shootHeads2 = true;
 
 			headSprite1.setPosition(sprite.getPosition().x, h1y);
 			headSprite2.setPosition(sprite.getPosition().x + 400, h2y);
 
-			if (h1y <= y + 150)
-			{
+			if (h1y <= y + 150){
 				shootHeads1 = false;
 				head1Active = false;
 				state1Dead = true;
 			}
-			if (h2y <= y + 150)
-			{
+			if (h2y <= y + 150){
 				shootHeads2 = false;
 				head2Active = false;
 				state1Dead = true;
 			}
-			if (!shootHeads1 && !shootHeads2 && state1Dead)
-			{
+			if (!shootHeads1 && !shootHeads2 && state1Dead){
 				currentState = 2;
 				cowSprite.setPosition(x + 100, y + 150);
 				cowMActive = true;
@@ -351,18 +286,14 @@ void Boss3::Update(sf::RenderWindow &window, float elapsedTime)
 		}
 		//______________________________________________________________________________________
 		//state2
-		if (currentState == 2)
-		{
-			if (cmy <= y + 200)
-			{
+		if (currentState == 2){
+			if (cmy <= y + 200){
 				cowSprite.setPosition(x + 100, cmy += speed * elapsedTime / 4);
 			}
-			else 
-			{
+			else{
 				cowSprite.setPosition(x + 100, y + 200);
 			}
-			if (cmy >= 199 && cmy < 201)
-			{
+			if (cmy >= 199 && cmy < 201){
 				cowSprite.setPosition(sprite.getPosition().x + 100, cmy);
 				currentState = 2.5;
 				shootCows = true;
@@ -370,27 +301,21 @@ void Boss3::Update(sf::RenderWindow &window, float elapsedTime)
 		}
 		//______________________________________________________________________________________
 		//state 2.5
-		if (currentState == 2.5)
-		{
+		if (currentState == 2.5){
 			cowSprite.setPosition(sprite.getPosition().x + 100, cmy);
 
-			if (cmy <= y + 150)
-			{
+			if (cmy <= y + 150){
 				shootCows = false;
 				cowMActive = false;
 			}
 			if (!cowMActive)
-			{
 				currentState = 3;
-			}
 		}
 		//______________________________________________________________________________________
 		//state 3
-		if (currentState == 3)
-		{
+		if (currentState == 3){
 			//get good position to rotate
-			if (y <= 175 && sprite.getOrigin().x != enemyTex.getSize().x / 2)
-			{
+			if (y <= 175 && sprite.getOrigin().x != enemyTex.getSize().x / 2){
 				y += speed * elapsedTime / 2;
 			}
 
@@ -400,137 +325,109 @@ void Boss3::Update(sf::RenderWindow &window, float elapsedTime)
 			sprite.rotate(5);
 
 			if (health <= 0)
-			{
 				currentState = 4;
-			}
 		}
 	}
 }
 
 void Boss3::Render(sf::RenderWindow &window)
 {
-	if (active)
-	{
+	if (active){
 		if (cowMActive)
-		{
 			window.draw(cowSprite);
-		}
+		
 		if (head1Active)
-		{
 			window.draw(headSprite1);
-		}
+		
 		if (head2Active)
-		{
 			window.draw(headSprite2);
-		}
 
 		window.draw(sprite);
 	}
 }
 
 //for collision stuff
-void Boss3::setBossPosition(float x, float y)
-{
+void Boss3::setBossPosition(float x, float y){
 	sprite.setPosition(x, y);
 }
 
-void Boss3::setHead1Position(float x, float y)
-{
+void Boss3::setHead1Position(float x, float y){
 	headSprite1.setPosition(x, y);
 }
 
-float Boss3::getHead1XPosition()
-{
+float Boss3::getHead1XPosition(){
 	return headSprite1.getPosition().x;
 }
 
-float Boss3::getHead1YPosition()
-{
+float Boss3::getHead1YPosition(){
 	return headSprite1.getPosition().y;
 }
 
-void Boss3::setHead2Position(float x, float y)
-{
+void Boss3::setHead2Position(float x, float y){
 	headSprite2.setPosition(x, y);
 }
 
-float Boss3::getHead2XPosition()
-{
+float Boss3::getHead2XPosition(){
 	return headSprite2.getPosition().x;
 }
 
-float Boss3::getHead2YPosition()
-{
+float Boss3::getHead2YPosition(){
 	return headSprite2.getPosition().y;
 }
 
-void Boss3::setCowMPosition(float x, float y)
-{
+void Boss3::setCowMPosition(float x, float y){
 	cowSprite.setPosition(x, y);
 }
 
-float Boss3::getCowMXPosition()
-{
+float Boss3::getCowMXPosition(){
 	return cowSprite.getPosition().x;
 }
 
-float Boss3::getCowMYPosition()
-{
+float Boss3::getCowMYPosition(){
 	return cowSprite.getPosition().y;
 }
 
-int Boss3::getDamage()
-{
+int Boss3::getDamage(){
 	return damage;
 }
 
-int Boss3::getHealth()
-{
+int Boss3::getHealth(){
 	return health;
 }
 
-void Boss3::reduceHealth(int pDamage)
-{
+void Boss3::reduceHealth(int pDamage){
 	int newhealth = health - pDamage;
 	health = newhealth;
 }
 
 //weaponspawning indicator
-float Boss3::getCurrentState()
-{
+float Boss3::getCurrentState(){
 	return currentState;
 }
 
-bool Boss3::getCowMActive()
-{
+bool Boss3::getCowMActive(){
 	return cowMActive;
 }
-bool Boss3::getHead1Active()
-{
+bool Boss3::getHead1Active(){
 	return head1Active;
 }
 
-bool Boss3::getHead2Active()
-{
+bool Boss3::getHead2Active(){
 	return head2Active;
 }
 
-bool Boss3::getShootCows()
-{
+bool Boss3::getShootCows(){
 	return shootCows;
 }
 
-bool Boss3::getShootHeads1()
-{
+bool Boss3::getShootHeads1(){
 	return shootHeads1;
 }
 
-bool Boss3::getShootHeads2()
-{
+bool Boss3::getShootHeads2(){
 	return shootHeads2;
 }
 
-bool Boss3::getGoneDead()
-{
+bool Boss3::getGoneDead(){
 	return goneDead;
 }

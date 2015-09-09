@@ -6,8 +6,7 @@
 #include <SFML/Audio.hpp>
 #include <string>
 
-class MenuSound
-{
+class MenuSound{
 public:
 
 	void LoadSoundBuffer();

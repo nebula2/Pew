@@ -6,8 +6,7 @@
 #include <SFML/Graphics.hpp>
 #include "IOstuff.h"
 
-class Boss3firstWeapon
-{
+class Boss3firstWeapon{
 public:
 	Boss3firstWeapon();
 	void Update(sf::RenderWindow &window, float &elapsedTime);
@@ -19,6 +18,7 @@ public:
 private:
 	float speed;
 	static sf::Texture weaponTex;
+	bool hasTargetTexture;
 };
 
 #endif

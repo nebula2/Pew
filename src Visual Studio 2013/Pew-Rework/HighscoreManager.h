@@ -4,8 +4,7 @@
 #define HIGHSCOREMANAGER_H
 
 
-class HighscoreManager
-{
+class HighscoreManager{
 public:
 	HighscoreManager();
 	void setPoints(int points);

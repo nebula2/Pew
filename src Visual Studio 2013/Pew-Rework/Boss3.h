@@ -8,8 +8,7 @@
 
 #include <iostream>
 
-class Boss3
-{
+class Boss3{
 public:
 	Boss3();
 	void Update(sf::RenderWindow &window, float elapsedTime);
@@ -69,6 +68,7 @@ private:
 	static sf::Texture cowSpawnerTex;
 	sf::Color		   startColor;
 	sf::Color		   transColor = sf::Color(255, 255, 255, 128);
+	bool hasTargetTexture;
 };
 
 #endif

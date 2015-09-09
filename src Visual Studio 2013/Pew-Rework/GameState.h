@@ -6,8 +6,7 @@
 
 class Game;
 
-class GameState
-{
+class GameState{
 public:
 	virtual void HandleEvents(Game &game) = 0;
 	virtual void Update(Game &game) = 0;

@@ -2,146 +2,152 @@
 
 #include "Settings.h"
 
-int Settings::Run(sf::RenderWindow &window)
-{
-	bool running = true;
 
+Settings::Settings(){
 	//sound
-	IOsound iosound;
 	iosound.ReadSoundSettings(volume);
-	MenuSound sound;
 	sound.LoadSoundBuffer();
 	sound.setBuffer(volume);
 
-	//background and "buttons"
-	Background bg("graphics//core//settings.png");
-	selection = 0;
+	//background
+	bg.setFilePath("graphics//core//settings.png");
 
 	//buttons
-	Text coop("Coop", 70), difficulty("Difficulty", 70), graphics("Graphics", 70), sounds("Sound", 70), back("Back", 70);
-	
+	difficulty.setStringAndSize("Difficulty", 70);
+	graphics.setStringAndSize("Graphics", 70);
+	sounds.setStringAndSize("Sound", 70);
+	back.setStringAndSize("Back", 70);
+
 
 	difficulty.setPosition(270, 100);
-	coop.setPosition(270, 200);
-	graphics.setPosition(270, 400);
-	sounds.setPosition	  (270, 300);
-	back.setPosition	  (270, 500);
+	sounds.setPosition(270, 200);
+	graphics.setPosition(270, 300);
+	back.setPosition(270, 400);
+}
+Settings::~Settings(){
+}
+void Settings::HandleEvents(Game &game){
+	sf::Event pEvent;
 
-
-	while (running)
-	{
-		while (window.pollEvent(event))
-		{
-			if (event.type == sf::Event::Closed)
-			{
-				return (-1);
-			}
-			//keyboard
-			if (event.type == sf::Event::KeyPressed)
-			{
-				switch (event.key.code)
-				{
-				case sf::Keyboard::Up:
-					if (selection > 0)
-					{
-						selection -= 1;
-						sound.PlaySound("select");
-					}
-					else
-					{
-						selection = 0;
-					}
-					break;
-				case sf::Keyboard::Down:
-					if (selection < 4)
-					{
-						selection += 1;
-						sound.PlaySound("select");
-					}
-					else
-					{
-						selection = 4;
-					}
-					break;
-				case sf::Keyboard::Return:
-					if (selection == 0)//diff
-					{
-						return (7);
-					}
-					else if (selection == 1)//coop
-					{
-						return (8);
-					}
-					else if (selection == 2)//sound
-					{
-						return (6);
-					}
-					else if (selection == 3)//graphics
-					{
-						return (4);
-					}
-					else//back
-					{
-						return 0;
-					}
-				default:
-					break;
-
+	while (game.window.pollEvent(pEvent))	{
+		if (pEvent.type == sf::Event::Closed)
+			game.setRunning(false);
+		
+		//keyboard
+		if (pEvent.type == sf::Event::KeyPressed){
+			switch (pEvent.key.code){
+			case sf::Keyboard::Up:
+				if (selection > 0){
+					selection -= 1;
+					sound.PlaySound("select");
 				}
+				else
+					selection = 0;
+				break;
+			case sf::Keyboard::Down:
+				if (selection < 3){
+					selection += 1;
+					sound.PlaySound("select");
+				}
+				else
+					selection = 3;
+				break;
+			case sf::Keyboard::Return:
+				if (selection == 0)//diff
+					game.ChangeState(Game::gameStates::DIFFSET);
+				
+				else if (selection == 1)//sound
+					game.ChangeState(Game::gameStates::SOUNDSET);
+				
+				else if (selection == 2)//graphics
+					game.ChangeState(Game::gameStates::GRAPHICSET);
+				
+				else//back
+					game.ChangeState(Game::gameStates::MAINMENU);
+			default:
+				break;
 			}
 		}
+		//mouse selection
+		if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left)){
+			switch (selection){
+			case 0:
+				game.ChangeState(Game::gameStates::DIFFSET);
+				break;
+			case 1:
+				game.ChangeState(Game::gameStates::SOUNDSET);
+				break;
+			case 2:
+				game.ChangeState(Game::gameStates::GRAPHICSET);
+				break;
+			case 3:
+				game.ChangeState(Game::gameStates::MAINMENU);
+				break;
+			default:
+				break;
+			}
+		}
+	}
+}
+void Settings::Update(Game &game){
 
-		if (selection == 0)//diff
-		{
-			difficulty.setColor(sf::Color(255, 128, 0));
-			coop.setColor(sf::Color(255, 255, 255));
-			graphics.setColor(sf::Color(255, 255, 255));
-			sounds.setColor(sf::Color(255, 255, 255));
-			back.setColor(sf::Color(255, 255, 255));
-		}
-		else if (selection == 1)//coop
-		{
-			difficulty.setColor(sf::Color(255, 255, 255));
-			coop.setColor(sf::Color(255, 128, 0));
-			graphics.setColor(sf::Color(255, 255, 255));
-			sounds.setColor(sf::Color(255, 255, 255));
-			back.setColor(sf::Color(255, 255, 255));
-		}
-		else if (selection == 2)//sound
-		{
-			difficulty.setColor(sf::Color(255, 255, 255));
-			coop.setColor(sf::Color(255, 255, 255));
-			graphics.setColor(sf::Color(255, 255, 255));
-			sounds.setColor(sf::Color(255, 128, 0));
-			back.setColor(sf::Color(255, 255, 255));
-		}
-		else if (selection == 3)//Graphics
-		{
-			difficulty.setColor(sf::Color(255, 255, 255));
-			coop.setColor(sf::Color(255, 255, 255));
-			graphics.setColor(sf::Color(255, 128, 0));
-			sounds.setColor(sf::Color(255, 255, 255));
-			back.setColor(sf::Color(255, 255, 255));
-		}
-		else//back
-		{
-			difficulty.setColor(sf::Color(255, 255, 255));
-			coop.setColor(sf::Color(255, 255, 255));
-			graphics.setColor(sf::Color(255, 255, 255));
-			sounds.setColor(sf::Color(255, 255, 255));
-			back.setColor(sf::Color(255, 128, 0));
-		}
-
-		//draw
-		window.clear();
-		bg.Render(window);
-		graphics.Render(window);
-		difficulty.Render(window);
-		coop.Render(window);
-		sounds.Render(window);
-		back.Render(window);
-		window.display();
+	//do crazy mouse stuff !!!BOOJAH!!! #21. Century
+	//play
+	if (difficulty.getGlobalBounds().intersects(sf::Rect<float>(sf::Mouse::getPosition(game.window).x, sf::Mouse::getPosition(game.window).y + 1.0f, 1.0f, 1.0f))){
+		if (selection != 0)
+		selection = 0;
+		sound.PlaySound("select");
 	}
 
-	return (-1);
+	//again
+	if (sounds.getGlobalBounds().intersects(sf::Rect<float>(sf::Mouse::getPosition(game.window).x, sf::Mouse::getPosition(game.window).y + 1.0f, 1.0f, 1.0f))){
+		if (selection != 1)
+		selection = 1;
+		sound.PlaySound("select");
+	}
+	//settings
+	if (graphics.getGlobalBounds().intersects(sf::Rect<float>(sf::Mouse::getPosition(game.window).x, sf::Mouse::getPosition(game.window).y + 1.0f, 1.0f, 1.0f))){
+		if (selection != 2)
+		selection = 2;
+		sound.PlaySound("select");
+	}
+	//close
+	if (back.getGlobalBounds().intersects(sf::Rect<float>(sf::Mouse::getPosition(game.window).x, sf::Mouse::getPosition(game.window).y + 1.0f, 1.0f, 1.0f))){
+		if (selection != 3)
+		selection = 3;
+		sound.PlaySound("select");
+	}
+
+	//do crazy color shit
+	if (selection == 0){//diff
+		difficulty.setColor(sf::Color(255, 128, 0));
+		graphics.setColor(sf::Color(255, 255, 255));
+		sounds.setColor(sf::Color(255, 255, 255));
+		back.setColor(sf::Color(255, 255, 255));
+	}
+	else if (selection == 1){//sound
+		difficulty.setColor(sf::Color(255, 255, 255));
+		graphics.setColor(sf::Color(255, 255, 255));
+		sounds.setColor(sf::Color(255, 128, 0));
+		back.setColor(sf::Color(255, 255, 255));
+	}
+	else if (selection == 2){//Graphics
+		difficulty.setColor(sf::Color(255, 255, 255));
+		graphics.setColor(sf::Color(255, 128, 0));
+		sounds.setColor(sf::Color(255, 255, 255));
+		back.setColor(sf::Color(255, 255, 255));
+	}
+	else{//back
+		difficulty.setColor(sf::Color(255, 255, 255));
+		graphics.setColor(sf::Color(255, 255, 255));
+		sounds.setColor(sf::Color(255, 255, 255));
+		back.setColor(sf::Color(255, 128, 0));
+	}
+}
+void Settings::Render(Game &game){
+	bg.Render(game.window);
+	graphics.Render(game.window);
+	difficulty.Render(game.window);
+	sounds.Render(game.window);
+	back.Render(game.window);
 }

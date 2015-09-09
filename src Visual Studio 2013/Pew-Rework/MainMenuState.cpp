@@ -4,8 +4,7 @@
 #include "MainMenuState.h"
 #include <cmath>
 
-MainMenuState::MainMenuState()
-{
+MainMenuState::MainMenuState(){
 	bg.setFilePath("graphics//core//menu.png");
 	
 	//sound & music
@@ -16,7 +15,6 @@ MainMenuState::MainMenuState()
 	speed	  = 0.5;
 	selection = 0;
 
-
 	//Enemy
 	elapsedTime = 0;
 	x_movement =  0;
@@ -25,41 +23,34 @@ MainMenuState::MainMenuState()
 	texture.loadFromFile("graphics//enemies//enemy.png");
 	texture.setSmooth(false);
 	sprite.setTexture(texture);
-	sprite.setOrigin(36.5, 35);
-
-	//buttons
+	sprite.setOrigin(texture.getSize().x / 2, texture.getSize().y / 2);
+	
+	//initialize buttons
 	play.setStringAndSize	 ("play", 70);
+	play.setPosition(270, 150);
 	again.setStringAndSize	 ("again", 70);
+	again.setPosition(270, 150);
 	settings.setStringAndSize("settings", 70);
-	close.setStringAndSize	 ("close", 70);
-
-	play.setPosition	(270, 150);
-	again.setPosition	(270, 150);
 	settings.setPosition(270, 250);
+	close.setStringAndSize	 ("close", 70);
 	close.setPosition	(270, 350);
 }
 
-MainMenuState::~MainMenuState()
-{
+MainMenuState::~MainMenuState(){
 }
 
-void MainMenuState::HandleEvents(Game &game)
-{
+void MainMenuState::HandleEvents(Game &game){
 	sf::Event pEvent;
 
-	while (game.window.pollEvent(pEvent))
-	{
+	while (game.window.pollEvent(pEvent)){
 		if (pEvent.type == sf::Event::Closed)
 			game.setRunning(false);
 
 		//Keyboard selection
-		if (pEvent.type == sf::Event::KeyPressed)
-		{
-			switch (pEvent.key.code)
-			{
+		if (pEvent.type == sf::Event::KeyPressed){
+			switch (pEvent.key.code){
 			case sf::Keyboard::Up:
-				if (selection > 0)
-				{
+				if (selection > 0){
 					selection -= 1;
 					sound.PlaySound("select");
 				}
@@ -68,8 +59,7 @@ void MainMenuState::HandleEvents(Game &game)
 				break;
 
 			case sf::Keyboard::Down:
-				if (selection < 2)
-				{
+				if (selection < 2){
 					selection += 1;
 					sound.PlaySound("select");
 				}
@@ -78,13 +68,11 @@ void MainMenuState::HandleEvents(Game &game)
 				break;
 
 			case sf::Keyboard::Return:
-				if (selection == 0)
-				{
+				if (selection == 0){
 					if (!game.getIntroPlayed())
 					game.ChangeState(Game::gameStates::INTRO);
 
-					else
-					{
+					else{
 						game.setIntroPlayed(true);
 						game.ChangeState(Game::gameStates::PLAY);
 					}
@@ -98,27 +86,75 @@ void MainMenuState::HandleEvents(Game &game)
 				break;
 			}
 		}
+		//mouse selection
+		if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left)){
+			switch (selection){
+			case 0:
+				if (!game.getIntroPlayed()){
+					game.ChangeState(Game::gameStates::INTRO);
+				}
+				else{
+					game.setIntroPlayed(true);
+					game.ChangeState(Game::gameStates::PLAY);
+				}
+				break;
+			case 1:
+				game.ChangeState(Game::gameStates::SETTINGS);
+				break;
+			case 2:
+				game.setRunning(false);
+				break;
+			default:
+				break;
+			}
+		}
 	}
 }
 
-void MainMenuState::Update(Game &game)
-{
-	if (selection == 0)//Spielen
-	{
+void MainMenuState::Update(Game &game){
+
+	//do crazy mouse stuff !!!BOOJAH!!! #21. Century
+	//play
+	if (play.getGlobalBounds().intersects(sf::Rect<float>(sf::Mouse::getPosition(game.window).x, sf::Mouse::getPosition(game.window).y + 1.0f, 1.0f, 1.0f))){
+		if (selection != 0)
+		selection = 0;
+		sound.PlaySound("select");
+	}
+
+	//again
+	if (again.getGlobalBounds().intersects(sf::Rect<float>(sf::Mouse::getPosition(game.window).x, sf::Mouse::getPosition(game.window).y + 1.0f, 1.0f, 1.0f))){
+		if (selection != 0)
+		selection = 0;
+		sound.PlaySound("select");
+	}
+	//settings
+	if (settings.getGlobalBounds().intersects(sf::Rect<float>(sf::Mouse::getPosition(game.window).x, sf::Mouse::getPosition(game.window).y + 1.0f, 1.0f, 1.0f))){
+		if (selection != 1)
+		selection = 1;
+		sound.PlaySound("select");
+	}
+	//close
+	if (close.getGlobalBounds().intersects(sf::Rect<float>(sf::Mouse::getPosition(game.window).x, sf::Mouse::getPosition(game.window).y + 1.0f, 1.0f, 1.0f))){
+		if (selection != 2)
+		selection = 2;
+		sound.PlaySound("select");
+	}
+
+	//Do color shit
+
+	if (selection == 0){//Spielen
 		play.setColor(sf::Color(255, 128, 0));
 		again.setColor(sf::Color(255, 128, 0));
 		settings.setColor(sf::Color(255, 255, 255));
 		close.setColor(sf::Color(255, 255, 255));
 	}
-	else if (selection == 1)//Settings
-	{
+	else if (selection == 1){//Settings
 		play.setColor(sf::Color(255, 255, 255));
 		again.setColor(sf::Color(255, 255, 255));
 		settings.setColor(sf::Color(255, 128, 0));
 		close.setColor(sf::Color(255, 255, 255));
 	}
-	else//Beenden
-	{
+	else{//Beenden
 		play.setColor(sf::Color(255, 255, 255));
 		again.setColor(sf::Color(255, 255, 255));
 		settings.setColor(sf::Color(255, 255, 255));
@@ -127,8 +163,8 @@ void MainMenuState::Update(Game &game)
 
 	//moving enemy
 	elapsedTime = pClock.restart().asMilliseconds();
-	x_movement += elapsedTime;
-	y_movement += elapsedTime;
+	x_movement += elapsedTime / 4;
+	y_movement += elapsedTime / 4;
 	y = sprite.getPosition().y;
 	x = sprite.getPosition().x;
 	y = 300 + std::sin((y_movement * PI) / 180) * debauch;
@@ -143,8 +179,7 @@ void MainMenuState::Update(Game &game)
 	sprite.setPosition(x, y);
 }
 
-void MainMenuState::Render(Game &game)
-{
+void MainMenuState::Render(Game &game){
 	bg.Render(game.window);
 	game.window.draw(sprite);
 	settings.Render(game.window);

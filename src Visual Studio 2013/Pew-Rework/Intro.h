@@ -3,24 +3,24 @@
 #ifndef INTRO_H
 #define INTRO_H
 
-#include "StateManager.h"
+#include "Game.h"
 
 
-class Intro : public StateManager
-{
+class Intro : public GameState{
 public:
 	Intro();
-	virtual int Run(sf::RenderWindow &window);
+	~Intro();
+
+	void HandleEvents(Game &game);
+	void Update(Game &game);
+	void Render(Game &game);
+
 private:
-	sf::Event event;
-	sf::Clock clock;
+	sf::Clock   pClock;
 	sf::Texture intro;
-	sf::Sprite introSprite;
+	sf::Sprite  introSprite;
 	float elapsedTime;
-	float bgSpeed;
-	bool running;
-	bool startintro;
-	int returnCounter;
+	float bgSpeed, y;
 };
 
 #endif

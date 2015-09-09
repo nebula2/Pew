@@ -5,8 +5,7 @@
 
 #include <SFML/Graphics.hpp>
 
-class HealthDrop
-{
+class HealthDrop{
 public:
 	HealthDrop();
 	void Update(sf::RenderWindow &window, float elapsedTime);

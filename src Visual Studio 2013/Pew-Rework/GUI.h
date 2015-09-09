@@ -3,25 +3,27 @@
 #ifndef GUI_H
 #define GUI_H
 
-//you need SMFL
 #include <SFML/Graphics.hpp>
 #include <string>
 #include <sstream>
+#include <iostream>
 
-class Background
-{
+//static background
+class Background{
 public:
-	Background(std::string filepath);
+	Background();
+	void setFilePath(std::string filepath);
 	void Render(sf::RenderWindow &window);
 private:
 	sf::Texture bgTex;
 	sf::Sprite  bgSprite;
 };
 
-class MovableBackground
-{
+//movable background
+class MovableBackground{
 public:
-	MovableBackground(std::string filepath, sf::RenderWindow &window);
+	MovableBackground();
+	void setStuff(std::string filepath, sf::Vector2f windowSize);
 	void Update(sf::RenderWindow &window, float &elapsedTime, float &speed);
 	void Render(sf::RenderWindow &window);
 	float getY();
@@ -32,14 +34,12 @@ private:
 	float bgY;
 };
 
-class Text
-{
+//Text to show on screen
+class Text{
 public:
-	Text(int size);
-	Text(std::string output, int size);
 	Text();
-	void setString(std::string string);
 	void setSize(int size);
+	void setStringAndSize(std::string output, int size);
 	void setColor(sf::Color color);
 	void setPosition(float x, float y);
 	void setOrigin(float x, float y);
@@ -51,10 +51,11 @@ private:
 	sf::Font font;
 };
 
-class Health
-{
+//Health
+class Health{
 public:
-	Health(std::string filepath);
+	Health();
+	void setFilePath(std::string filepath);
 	void setPosition(float x, float y);
 	void Render(sf::RenderWindow &window);
 	sf::Vector2f getPosition();
@@ -63,8 +64,8 @@ private:
 	sf::Sprite healthSprite;
 };
 
-class Healthbar
-{
+//Healthbar
+class Healthbar{
 public:
 	Healthbar();
 	void Update(sf::RenderWindow &window, int health);
@@ -74,8 +75,8 @@ private:
 	sf::Sprite	hbSprite;
 };
 
-class GUIcircleShape
-{
+//circleShape (currently used for showing PewCooldown
+class GUIcircleShape{
 public:
 	GUIcircleShape();
 	void Update(bool &pewOnCooldown, float &elapsedTime);
@@ -86,5 +87,4 @@ private:
 	float speed;
 	float texY;
 };
-
 #endif

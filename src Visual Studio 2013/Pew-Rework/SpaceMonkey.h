@@ -6,8 +6,7 @@
 #include <SFML/Graphics.hpp>
 #include "IOstuff.h"
 
-class SpaceMonkey
-{
+class SpaceMonkey{
 public:
 	SpaceMonkey();
 	void Update(sf::RenderWindow &window, float elapsedTime);
@@ -25,6 +24,7 @@ private:
 	static  sf::Texture enemyTex;
 	int		health;
 	bool	moveLeft;
+	bool hasTargetTexture;
 };
 
 #endif

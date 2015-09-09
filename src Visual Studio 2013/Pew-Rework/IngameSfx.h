@@ -6,8 +6,7 @@
 #include <SFML/Audio.hpp>
 #include <string>
 
-class IngameSound
-{
+class IngameSound{
 public:
 
 	void LoadSoundBuffer();

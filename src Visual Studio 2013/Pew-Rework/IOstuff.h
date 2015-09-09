@@ -22,8 +22,7 @@ to set the difficulty
 3 = crazy
 */
 
-class IOdiff
-{
+class IOdiff{
 public:
 	int ReadDiffSettings();
 	void WriteDiffSettings(int &diff);
@@ -35,8 +34,7 @@ public:
 
 #include "HighscoreManager.h"
 
-class IOHighscore
-{
+class IOHighscore{
 public:
 
 	void WriteHighscore(HighscoreManager &highscore);
@@ -54,8 +52,7 @@ private:
 
 //returnes or sets if window is fullscreen or 800x600
 
-class IOscreen
-{
+class IOscreen{
 public:
 	bool getScreenSettings();
 	void setScreenSettings(bool &screen);
@@ -68,8 +65,7 @@ to set the graphics smooth or not
 controlled with a bool by SFML
 */
 
-class IOsmooth
-{
+class IOsmooth{
 public:
 	bool ReadSmoothSettings();
 	void WriteSmoothSettings(bool &smooth);
@@ -79,8 +75,7 @@ public:
 
 //read and write volume of sound and music
 
-class IOsound
-{
+class IOsound{
 public:
 	void ReadSoundSettings(int &volume);
 	void WriteSoundSettings(int &volume);
@@ -90,8 +85,7 @@ public:
 
 //for Coop
 
-class IOtwoPlayer
-{
+class IOtwoPlayer{
 public:
 	bool ReadSettings();
 	void WriteSettings(bool &twoPlayer);

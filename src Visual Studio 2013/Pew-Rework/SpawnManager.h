@@ -10,9 +10,9 @@
 #include "IngameSfx.h"
 #include "HighscoreManager.h"
 #include "WeaponManager.h"
+#include <SFML\Graphics.hpp>
 
-class SpawnManager
-{
+class SpawnManager{
 public:
 	void HealthDropSpawn(int &counter, std::vector<HealthDrop> &vector, int &randomX);
 
@@ -36,13 +36,13 @@ public:
 	void Boss3SecWeaponSpawn(int &counter, std::vector<Boss3SecWeapon> &vector, std::vector<Boss3> &bVector, IngameSound &sound);
 
 	//weapon spawns
-	void BulletSpawn(int &counter, std::vector<Bullet> &vector, HighscoreManager &highscore, WeaponManager &weapon, Player &player, IngameSound &sound);
-	void BulletSpawn2(int &counter, std::vector<Bullet> &vector, HighscoreManager &highscore, WeaponManager &weapon, Player2 &player, IngameSound &sound);
+	void BulletSpawn(int &counter, std::vector<Bullet> &vector, HighscoreManager &highscore, WeaponManager &weapon, Player &player, IngameSound &sound, sf::RenderWindow& window);
+	void BulletSpawn2(int &counter, std::vector<Bullet> &vector, HighscoreManager &highscore, WeaponManager &weapon, Player2 &player, IngameSound &sound, sf::RenderWindow& window);
 	
-	void DoubleShotSpawn(int &counter, std::vector<DoubleShot> &vector, HighscoreManager &highscore, WeaponManager &weapon, Player &player, IngameSound &sound);
-	void DoubleShotSpawn2(int &counter, std::vector<DoubleShot> &vector, HighscoreManager &highscore, WeaponManager &weapon, Player2 &player, IngameSound &sound);
+	void DoubleShotSpawn(int &counter, std::vector<DoubleShot> &vector, HighscoreManager &highscore, WeaponManager &weapon, Player &player, IngameSound &sound, sf::RenderWindow& window);
+	void DoubleShotSpawn2(int &counter, std::vector<DoubleShot> &vector, HighscoreManager &highscore, WeaponManager &weapon, Player2 &player, IngameSound &sound, sf::RenderWindow& window);
 	
-	void PewSpawn(std::vector<Pew> &vector, HighscoreManager &highscore, WeaponManager &weapon, Player &player, IngameSound &sound, bool &pewOnCooldown);
-	void PewSpawn2(std::vector<Pew> &vector, HighscoreManager &highscore, WeaponManager &weapon, Player2 &player, IngameSound &sound, bool &pewOnCooldown);
+	void PewSpawn(std::vector<Pew> &vector, HighscoreManager &highscore, WeaponManager &weapon, Player &player, IngameSound &sound, bool &pewOnCooldown, sf::RenderWindow& window);
+	void PewSpawn2(std::vector<Pew> &vector, HighscoreManager &highscore, WeaponManager &weapon, Player2 &player, IngameSound &sound, bool &pewOnCooldown, sf::RenderWindow& window);
 };
 #endif

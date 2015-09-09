@@ -6,15 +6,17 @@
 #include "Game.h"
 #include "GameState.h"
 #include "IngameSfx.h"
+#include "IOstuff.h"
 #include "BasicStuffIncludes.h"
+
 #include "UpdateManager.h"
 #include "RenderManager.h"
 #include "SpawnManager.h"
 #include "CollisionManager.h"
-#include "IOstuff.h"
+#include "MessageHandler.h"
 
-class PlayState : public GameState
-{
+
+class PlayState : public GameState{
 public:
 	PlayState();
 	~PlayState();
@@ -40,20 +42,20 @@ private:
 	Player				player1;
 	Player2				player2;
 	SpawnManager		spawnManager;
-	Text				pauseText, pHealthS, pointS, lvUp, gameOver;
+	WeaponManager		weapon;
+	MessageHandler		messageHandler;
 	MovableBackground	bg;
 	Background			hud;
 	IOsound				iosound;
-	IOtwoPlayer			secPlayer;
 	IngameSound			sound;
 	Healthbar			hudHealth;
-	WeaponManager		weapon;
 	GUIcircleShape		pewCD;
 	Health				health;
 
 	//SFML Stuff
 	sf::Event pEvent;
 	sf::Clock pClock;
+	sf::Vector2i mousePos;
 
 	//stringstream
 	std::stringstream healthStream;
@@ -81,11 +83,9 @@ private:
 
 	//integer
 	int volume;
-	int points;
-	int player1health;
-	int player2health;
+	int playerHealth;
+	int points = 0;
 	int bulletTimeCount;
-	int p2bulletTimeCount;
 	int enemyTimeCount;
 	int enemyFormationCount;
 	int shitCount;
@@ -110,6 +110,7 @@ private:
 	bool gotPew			= false;
 	bool pewOnCooldown  = false;
 	bool boss3dead		= false;
+	/*bool isCoop			= false;*/
 };
 
 #endif

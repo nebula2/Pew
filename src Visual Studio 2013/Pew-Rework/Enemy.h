@@ -7,8 +7,7 @@
 #include "HighscoreManager.h"
 #include "IOstuff.h"
 
-class Enemy
-{
+class Enemy{
 public:
 	Enemy();
 	void Update(sf::RenderWindow &window, float elapsedTime, HighscoreManager &highscore);
@@ -17,7 +16,7 @@ public:
 	void SetPosition(float x, float y);
 	void reduceHealth(int pDamage);
 	//getter
-	int  getHealth();
+	int getHealth();
 	int getDamage();
 
 	sf::Sprite sprite;
@@ -26,5 +25,8 @@ private:
 	float speed;
 	static sf::Texture enemyTex;
 	int health;
+	float rotation;
+	float _elapsedTime;
+	bool hasTargetTexture;
 };
 #endif

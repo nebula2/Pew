@@ -133,10 +133,9 @@ int Menu::Run(sf::RenderWindow &window)
 		}
 
 		//moving enemy
-		sprite.rotate(5);
 		elapsedTime = clock.restart().asMilliseconds();
-		x_movement += elapsedTime /5;
-		y_movement += elapsedTime /5;
+		x_movement += elapsedTime;
+		y_movement += elapsedTime;
 		y = sprite.getPosition().y;
 		x = sprite.getPosition().x;
 		y = 300 + std::sin((y_movement * PI) / 180) * debauch;

@@ -2,15 +2,10 @@
 
 #include "PlayState.h"
 
-PlayState::PlayState()
-{
-	points = 0;
+PlayState::PlayState(){
 	CountersToNull();
-
-	//pause
-	paused = false;
-	pauseText.setStringAndSize("PAUSED", 60);
-	pauseText.setOrigin(pauseText.getGlobalBounds().width / 2, pauseText.getGlobalBounds().height / 2);
+	mousePos.x = 0;
+	mousePos.y = 0;
 
 	//sound & music
 	iosound.ReadSoundSettings(volume);
@@ -23,209 +18,89 @@ PlayState::PlayState()
 	bgSpeed = 0.3f;
 	health.setPosition(0, 12.5);
 
-	//what happens if sec player is active
-	if (!secPlayer.ReadSettings())
-		player2.active = false;
+	player2.active = false;
+	playerHealth = player1.getHealth();
 
 	//unlock pew
 	boss1Dead = false;
 	gotPew = false;
 	pewOnCooldown = false;
-
-	//health, points & alive
-	pHealthS.setSize(18);
-	pHealthS.setPosition(23, 12.5);
-	pHealthS.setColor(sf::Color::Green);
-
-	pointS.setSize(25);
-	pointS.setPosition(650, 8);
-	pointS.setColor(sf::Color::Black);
-	std::stringstream pointStream;
-
-	lvUp.setStringAndSize("NEW WEAPON", 60);
-	lvUp.setColor(sf::Color::Yellow);
-	lvUp.setOrigin(lvUp.getGlobalBounds().width / 2, lvUp.getGlobalBounds().height / 2);
-
-	gameOver.setStringAndSize("GAME OVER", 56);
-	gameOver.setPosition(210, 250);
-	gameOver.setColor(sf::Color::White);
 }
 
-PlayState::~PlayState()
-{
+PlayState::~PlayState(){
 }
 
-void PlayState::HandleEvents(Game &game)
-{
+void PlayState::HandleEvents(Game &game){
 	sf::Event pEvent;
-	while (game.window.pollEvent(pEvent))
-	{
+	while (game.window.pollEvent(pEvent))	{
 		if (pEvent.type == sf::Event::Closed)
 			game.setRunning(false);
 
-		if (pEvent.type == sf::Event::KeyPressed)
-		{
-			if (pEvent.key.code == sf::Keyboard::Escape)
-				game.ChangeState(Game::gameStates::MAINMENU);
-
-			if (pEvent.key.code == sf::Keyboard::P)
-			{
+		if (pEvent.type == sf::Event::KeyPressed){
+			if (pEvent.key.code == sf::Keyboard::Escape){
 				if (!paused)
 					StartPause();
-				else EndPause();
+				else 
+					game.ChangeState(Game::gameStates::MAINMENU);
 			}
+	
+			if (pEvent.key.code == sf::Keyboard::Return && !paused)
+				EndPause();
 		}
 	}
 }
 
-void PlayState::Update(Game &game)
-{
+void PlayState::Update(Game &game){
+
+	//always set the mouse position
+	mousePos = sf::Mouse::getPosition(game.window);
+
 	if (paused)
 		pClock.restart();
 
-	if (!paused)
-	{
-		//Handle the spawns
+	if (!paused){
+		//Handle everything
 		HandleSpawns(game);
-
-		//Handle Updaze
 		HandleUpdates(game);
-		UpdateHUD(game.window);
-
-		//Handle Collision
 		HandleCollisions(game);
 
-		if (player1.active || player2.active)
-		{
-			//player collision
-			coll::PlayerEnemyInactive(enemyv, player1, sound);//enemy
-			coll::PlayerEnemyInactive(shitv, player1, sound);//shit
-			coll::PlayerEnemyInactive(b1Weaponv, player1, sound);//b1Weapon
-			coll::PlayerEnemyInactive(boss2Weaponv, player1, sound);//b2Weapon
-			coll::PlayerEnemyInactive(enemyFormationv, player1, sound);//enemyFormation
-			coll::PlayerEnemyInactive(boss3FWeaponv, player1, sound);//boss3firstWeapon
-			coll::PlayerEnemyInactive(boss3SWeaponv, player1, sound);//boss3secWeapon
-			coll::PlayerHealthGet(healthv, player1, sound);//health
-			coll::PlayerUnlockPew(unlockPewv, player1, sound, gotPew, pewOnCooldown);//unlockPew
-
-			//for enemies that are not set inactive there is a damagechill.. otherwise player would instantly die
-			if (damageChill > 500)
-			{
-				coll::PlayerEnemyActive(cowv, player1, sound);//cow
-				coll::PlayerEnemyActive(monkeyv, player1, sound);//monkey
-				coll::PlayerEnemyActive(boss1v, player1, sound);//boss1
-				coll::PlayerEnemyActive(boss2v, player1, sound);//boss2
-				coll::PlayerEnemyActive(boss3v, player1, sound);//boss3
-				damageChill = 0;
-			}
-		}
-
-		if (player2.active)
-		{
-			coll::PlayerEnemyInactive(enemyv, player2, sound);//enemy
-			coll::PlayerEnemyInactive(shitv, player2, sound);//shit
-			coll::PlayerEnemyInactive(b1Weaponv, player2, sound);//b1Weapon
-			coll::PlayerEnemyInactive(boss2Weaponv, player2, sound);//b2Weapon
-			coll::PlayerEnemyInactive(enemyFormationv, player2, sound);//enemyFormation
-			coll::PlayerEnemyInactive(boss3FWeaponv, player2, sound);//boss3firstWeapon
-			coll::PlayerEnemyInactive(boss3SWeaponv, player2, sound);//boss3secWeapon
-			coll::PlayerHealthGet(healthv, player2, sound);//health
-			coll::PlayerUnlockPew(unlockPewv, player2, sound, gotPew, pewOnCooldown);//unlockPew
-
-			//for enemies that are not set inactive there is a damagechill.. otherwise player would instantly die
-			if (damageChill > 500)
-			{
-				coll::PlayerEnemyActive(cowv, player2, sound);//cow
-				coll::PlayerEnemyActive(monkeyv, player2, sound);//monkey
-				coll::PlayerEnemyActive(boss1v, player2, sound);//boss1
-				coll::PlayerEnemyActive(boss2v, player2, sound);//boss2
-				coll::PlayerEnemyActive(boss3v, player2, sound);//boss3
-				damageChill = 0;
-			}
-		}
-
 		//health & points into string
-		pHealthS.Update(healthStream, player1.getHealth());
-		pointS.Update(pointStream, points);
-
-		//players
-		if (player1.active)
-		{
-			player1.Update(game.window, elapsedTime);
-
-			//sync health
-			if (player2.active)
-			{
-				player2.Update(game.window, elapsedTime);
-
-				if (player2.getHealth() < player1.getHealth())
-					player1.setHealth(player2health);
-
-				if (player1.getHealth() < player2.getHealth())
-					player2.setHealth(player1health);
-			}
-		}
-
-		//revieve a player
-		if (secPlayer.ReadSettings())
-		{
-			if (player1.active && player1.getHealth() == 100 && !player2.active)
-			{
-				player2.active = true;
-				player2.setHealth(100);
-			}
-			if (player2.active && player2.getHealth() == 100 && !player1.active)
-			{
-				player1.active = true;
-				player1.setHealth(100);
-			}
-		}
+		playerHealth = player1.getHealth();
+		messageHandler.UpdateStream(healthStream, playerHealth, "pHealthS");
+		messageHandler.UpdateStream(pointStream, points, "");
 	}
 }
 
-void PlayState::Render(Game &game)
-{
+void PlayState::Render(Game &game){
 	bg.Render(game.window);
 
-	if (player1.active || player2.active)
+	if (player1.active /*|| player2.active*/)
 		if (!paused)
 			HandleDraws(game);
 
 		if (gotPew)
 			pewCD.Render(game.window);
 
-	if (paused)
-	{
-		pauseText.setPosition(game.window.getSize().x / 2, game.window.getSize().y / 2);
-		pauseText.Render(game.window);
-	}
-
-	//new weapon draw
-	if (points >= 1000 && points <= 1050)
-	{
-		showLvUp += elapsedTime;
-		if (showLvUp >= 0 && showLvUp <= 2000)
-		{
-			lvUp.setPosition(game.window.getSize().x / 2, game.window.getSize().y / 2);
-			lvUp.Render(game.window);
+		if (paused){
+			messageHandler.Render(game.window, "pauseText");
+			messageHandler.Render(game.window, "pausedInfo");
 		}
-		else if (showLvUp > 2000)
-			showLvUp = 0;
-	}
 
 	//draw HUD
 	hudHealth.Render(game.window);
 	hud.Render(game.window);
-	pHealthS.Render(game.window);
+	messageHandler.Render(game.window, "pHealthS");
 	health.Render(game.window);
-	pointS.Render(game.window);
+	messageHandler.Render(game.window, "");
 	weapon.Render(game.window);
 
+	//new Weapon draw
+	messageHandler.UpdatelvUp(points, showLvUp, game.window, elapsedTime);
+
 	//Game over 
-	if (!player1.active)
-	{
+	if (!player1.active){
 		game.highscore.setPoints(points);
-		gameOver.Render(game.window);
+		messageHandler.Render(game.window, "gameOver");
 
 		game.window.display();
 		ClearStuff();
@@ -234,14 +109,12 @@ void PlayState::Render(Game &game)
 	}
 }
 
-void PlayState::ClearStuff()
-{
+void PlayState::ClearStuff(){
 	points = 0;
 
 	//restart counters
 	enemyTimeCount = 0;
 	bulletTimeCount = 0;
-	p2bulletTimeCount = 0;
 	shitCount = 0;
 	boss1WeaponCount = 0;
 	boss2WeaponCount = 0;
@@ -267,20 +140,16 @@ void PlayState::ClearStuff()
 	boss3FWeaponv.clear();
 	boss3SWeaponv.clear();
 }
-void PlayState::StartPause()
-{
+void PlayState::StartPause(){
 	paused = true;
 }
-void PlayState::EndPause()
-{
+void PlayState::EndPause(){
 	paused = false;
 }
-void PlayState::IncrementCounters()
-{
+void PlayState::IncrementCounters(){
 	elapsedTime = pClock.restart().asMilliseconds();
 	enemyTimeCount += elapsedTime;
 	bulletTimeCount += elapsedTime;
-	p2bulletTimeCount += elapsedTime;
 	shitCount += elapsedTime;
 	boss1WeaponCount += elapsedTime;
 	boss2WeaponCount += elapsedTime;
@@ -292,19 +161,13 @@ void PlayState::IncrementCounters()
 	boss3FirstWeaponCount2 += elapsedTime;
 	boss3SecWeaponCount += elapsedTime;
 }
-void PlayState::HandleSpawns(Game &game)
-{
+void PlayState::HandleSpawns(Game &game){
 	//initialize counts & background movement
 	IncrementCounters();
 	bg.Update(game.window, elapsedTime, bgSpeed);
 
-	//sync health
-	player1health = player1.getHealth();
-	player2health = player2.getHealth();
-
 	//spawns
-	if (boss3v.size() == 0)
-	{
+	if (boss3v.size() == 0){
 		spawnManager.EnemySpawn(enemyTimeCount, enemyv, enemyFormationv, randomX);		//enemy
 		spawnManager.EnemyFormationSpawn(enemyFormationCount, enemyFormationv, boss2v);//enemyFormation
 		spawnManager.SpaceMonkeySpawn(points, monkeyv, boss2v);							//monkey
@@ -326,29 +189,16 @@ void PlayState::HandleSpawns(Game &game)
 	pewCD.Update(pewOnCooldown, elapsedTime);//pewCooldown
 
 	//player weapon spawn
-	if (player1.active)
-	{
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
-		{
-			spawnManager.BulletSpawn(bulletTimeCount, bulletv, game.highscore, weapon, player1, sound);//bullet
-			spawnManager.DoubleShotSpawn(bulletTimeCount, dShotv, game.highscore, weapon, player1, sound);//Doubleshot
-			spawnManager.PewSpawn(pewv, game.highscore, weapon, player1, sound, pewOnCooldown);//Pew
-		}
-	}
-
-	if (player2.active)
-	{
-		if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
-		{
-			spawnManager.BulletSpawn2(p2bulletTimeCount, bulletv, game.highscore, weapon, player2, sound);//bullet
-			spawnManager.DoubleShotSpawn2(p2bulletTimeCount, dShotv, game.highscore, weapon, player2, sound);//Doubleshot
-			spawnManager.PewSpawn2(pewv, game.highscore, weapon, player2, sound, pewOnCooldown);//Pew
+	if (player1.active){
+		if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left)){
+			spawnManager.BulletSpawn(bulletTimeCount, bulletv, game.highscore, weapon, player1, sound, game.window);//bullet
+			spawnManager.DoubleShotSpawn(bulletTimeCount, dShotv, game.highscore, weapon, player1, sound, game.window);//Doubleshot
+			spawnManager.PewSpawn(pewv, game.highscore, weapon, player1, sound, pewOnCooldown, game.window);//Pew
 		}
 	}
 }
 
-void PlayState::HandleUpdates(Game &game)
-{
+void PlayState::HandleUpdates(Game &game){
 	UpdateManager::EnemyUpdate(enemyv, game.window, elapsedTime, game.highscore);				//enemy
 	UpdateManager::StdUpdate(enemyFormationv, game.window, elapsedTime);						//enemyFormation
 	UpdateManager::StdUpdate(monkeyv, game.window, elapsedTime);								//monkey
@@ -367,15 +217,19 @@ void PlayState::HandleUpdates(Game &game)
 	UpdateManager::WeaponUpdate(bulletv, elapsedTime);								//bullet
 	UpdateManager::WeaponUpdate(dShotv, elapsedTime);								//double shot
 	UpdateManager::WeaponUpdate(pewv, elapsedTime);									//pewv
-}
 
-void PlayState::HandleDraws(Game &game)
-{
+	UpdateHUD(game.window);
+
 	if (player1.active)
-		player1.Render(game.window);
+	player1.Update(game.window, elapsedTime);
 
 	if (player2.active)
-		player2.Render(game.window);
+	player2.Update(game.window, elapsedTime);
+}
+
+void PlayState::HandleDraws(Game &game){
+	if (player1.active)
+		player1.Render(game.window);
 
 	Rm::StdDraw(healthv, game.window);//health
 	Rm::StdDraw(unlockPewv, game.window);//unlockPew
@@ -401,15 +255,35 @@ void PlayState::HandleDraws(Game &game)
 	Rm::StdDraw(pewv,game.window);//Pew
 }
 
-void PlayState::HandleCollisions(Game &game)
-{
+void PlayState::HandleCollisions(Game &game){
 	CollisionManager::WeaponToEnemy(bulletv, points, sound, game.highscore, enemyv, monkeyv, shitv, boss1v, boss1Dead, boss2Weaponv, enemyFormationv, boss3v, boss3FWeaponv, boss3SWeaponv, boss3dead, game.window);//bullet
 	CollisionManager::WeaponToEnemy(dShotv, points, sound, game.highscore, enemyv, monkeyv, shitv, boss1v, boss1Dead, boss2Weaponv, enemyFormationv, boss3v, boss3FWeaponv, boss3SWeaponv, boss3dead, game.window);//doubleShot
 	CollisionManager::PewToEnemy(pewv, points, sound, game.highscore, enemyv, monkeyv, shitv, boss1v, boss2v, boss2Weaponv, enemyFormationv, boss3v, boss3FWeaponv, boss3SWeaponv, boss3dead, game.window);//Pew
+	if (player1.active)	{
+		//player collision
+		coll::PlayerEnemyInactive(enemyv, player1, sound);//enemy
+		coll::PlayerEnemyInactive(shitv, player1, sound);//shit
+		coll::PlayerEnemyInactive(b1Weaponv, player1, sound);//b1Weapon
+		coll::PlayerEnemyInactive(boss2Weaponv, player1, sound);//b2Weapon
+		coll::PlayerEnemyInactive(enemyFormationv, player1, sound);//enemyFormation
+		coll::PlayerEnemyInactive(boss3FWeaponv, player1, sound);//boss3firstWeapon
+		coll::PlayerEnemyInactive(boss3SWeaponv, player1, sound);//boss3secWeapon
+		coll::PlayerHealthGet(healthv, player1, sound);//health
+		coll::PlayerUnlockPew(unlockPewv, player1, sound, gotPew, pewOnCooldown);//unlockPew
+
+		//for enemies that are not set inactive there is a damagechill.. otherwise player would instantly die
+		if (damageChill > 500){
+			coll::PlayerEnemyActive(cowv, player1, sound);//cow
+			coll::PlayerEnemyActive(monkeyv, player1, sound);//monkey
+			coll::PlayerEnemyActive(boss1v, player1, sound);//boss1
+			coll::PlayerEnemyActive(boss2v, player1, sound);//boss2
+			coll::PlayerEnemyActive(boss3v, player1, sound);//boss3
+			damageChill = 0;
+		}
+	}
 }
 
-void PlayState::CountersToNull()
-{
+void PlayState::CountersToNull(){
 	bulletTimeCount = 0;
 	enemyTimeCount = 0;
 	enemyFormationCount = 0;
@@ -426,8 +300,7 @@ void PlayState::CountersToNull()
 	boss3SecWeaponCount = 0;
 }
 
-void PlayState::UpdateHUD(sf::RenderWindow &window)
-{
+void PlayState::UpdateHUD(sf::RenderWindow &window){
 	hudHealth.Update(window, player1.getHealth());
 	weapon.setWeapon(elapsedTime, points, gotPew);
 	weapon.Update();

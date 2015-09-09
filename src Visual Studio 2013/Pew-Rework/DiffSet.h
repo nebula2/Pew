@@ -3,19 +3,29 @@
 #ifndef DIFFSET_H
 #define DIFFSET_H
 
-#include "StateManager.h"
+#include "Game.h"
 #include "IOstuff.h"
 #include "MenuSfx.h"
 
-class DiffSet : public StateManager
-{
+class DiffSet : public GameState{
 public:
-	virtual int Run(sf::RenderWindow &window);
+	DiffSet();
+	~DiffSet();
+
+	void HandleEvents(Game &game);
+	void Update(Game &game);
+	void Render(Game &game);
+
 private:
-	sf::Event event;
-	bool running;
 	int selection;
 	int volume;
+
+	//MyStuff
+	IOdiff diff;
+	Background bg;
+	IOsound iosound;
+	MenuSound sound;
+	Text easy, normal, crazy, info;
 };
 
 #endif

@@ -7,8 +7,7 @@
 #include "SpaceMonkey.h"
 #include "IOstuff.h"
 
-class ShitBullets
-{
+class ShitBullets{
 public:
 	void Update(sf::RenderWindow &window, float elapsedTime);
 	void Render(sf::RenderWindow &window);
@@ -23,5 +22,6 @@ private:
 	sf::Vector2f pPosition;
 	float speed;
 	static sf::Texture shitTex;
+	bool hasTargetTexture;
 };
 #endif

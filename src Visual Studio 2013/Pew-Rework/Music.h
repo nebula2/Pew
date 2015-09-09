@@ -17,8 +17,7 @@ music will now be controlled in the main.cpp
 
 //Ingame
 
-class IngameMusic
-{
+class IngameMusic{
 public:
 	void LoadMusic(int &volume);
 	void PlayMusic();
@@ -32,8 +31,7 @@ private:
 
 //Menu + Settings
 
-class MenuMusic
-{
+class MenuMusic{
 public:
 	void LoadMusic(int &volume);
 	void PlayMusic(std::string music);

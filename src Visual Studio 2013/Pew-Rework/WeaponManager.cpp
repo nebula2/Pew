@@ -2,8 +2,7 @@
 
 #include "WeaponManager.h"
 
-WeaponManager::WeaponManager()
-{
+WeaponManager::WeaponManager(){
 	currentWeapon = 0;
 	delay = 0;
 
@@ -27,64 +26,52 @@ WeaponManager::WeaponManager()
 
 }
 
-void WeaponManager::setWeapon(float elapsedTime, int &points, bool &gotPew)
-{
+void WeaponManager::setWeapon(float elapsedTime, int &points, bool &gotPew){
 	delay += elapsedTime;
 
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q) && (currentWeapon != 0) && delay >= 200)
-	{
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q) && (currentWeapon != 0) && delay >= 200){
 		currentWeapon -= 1;
 		delay = 0;
 	}
 
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::E) && (currentWeapon != 1) && delay >= 200 && points >= 1000)
-	{
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::E) && (currentWeapon != 1) && delay >= 200 && points >= 1000){
 		currentWeapon += 1;
 		delay = 0;
 	}
 
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::E) && (currentWeapon != 2) && delay >= 200 && gotPew)
-	{
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::E) && (currentWeapon != 2) && delay >= 200 && gotPew){
 		currentWeapon += 1;
 		delay = 0;
 	}
 }
 
-void WeaponManager::Update()
-{
+void WeaponManager::Update(){
 
-	if (currentWeapon == 0)
-	{
+	if (currentWeapon == 0){
 		bulletA = true;
 		doubleA = false;
 		pewA = false;
 	}
-	if (currentWeapon == 1)
-	{
+	if (currentWeapon == 1){
 		bulletA = false;
 		doubleA = true;
 		pewA = false;
 	}
-	if (currentWeapon == 2)
-	{
+	if (currentWeapon == 2){
 		bulletA = false;
 		doubleA = false;
 		pewA = true;
 	}
 }
 
-void WeaponManager::Render(sf::RenderWindow &window)
-{
-	if (bulletA == true)
-	{
+void WeaponManager::Render(sf::RenderWindow &window){
+	if (bulletA == true){
 		window.draw(bulletSprite);
 	}
-	if (doubleA == true)
-	{
+	if (doubleA == true){
 		window.draw(doubleSprite);
 	}
-	if (pewA == true)
-	{
+	if (pewA == true){
 		window.draw(pewSprite);
 	}
 }

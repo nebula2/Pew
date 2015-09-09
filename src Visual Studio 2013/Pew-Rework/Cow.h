@@ -6,8 +6,7 @@
 #include <SFML/Graphics.hpp>
 #include "IOstuff.h"
 
-class Cow
-{
+class Cow{
 public:
 	Cow();
 	void Update(sf::RenderWindow &window, float elapsedTime);
@@ -20,6 +19,7 @@ private:
 	float speed;
 	static sf::Texture cowTex;
 	int damage;
+	bool hasTargetTexture;
 };
 
 #endif
