@@ -116,28 +116,32 @@ void MainMenuState::Update(Game &game){
 	//do crazy mouse stuff !!!BOOJAH!!! #21. Century
 	//play
 	if (play.getGlobalBounds().intersects(sf::Rect<float>(sf::Mouse::getPosition(game.window).x, sf::Mouse::getPosition(game.window).y + 1.0f, 1.0f, 1.0f))){
-		if (selection != 0)
-		selection = 0;
-		sound.PlaySound("select");
+		if (selection != 0){
+			selection = 0;
+			sound.PlaySound("select");
+		}
 	}
 
 	//again
 	if (again.getGlobalBounds().intersects(sf::Rect<float>(sf::Mouse::getPosition(game.window).x, sf::Mouse::getPosition(game.window).y + 1.0f, 1.0f, 1.0f))){
-		if (selection != 0)
-		selection = 0;
-		sound.PlaySound("select");
+		if (selection != 0){
+			selection = 0;
+			sound.PlaySound("select");
+		}
 	}
 	//settings
 	if (settings.getGlobalBounds().intersects(sf::Rect<float>(sf::Mouse::getPosition(game.window).x, sf::Mouse::getPosition(game.window).y + 1.0f, 1.0f, 1.0f))){
-		if (selection != 1)
-		selection = 1;
-		sound.PlaySound("select");
+		if (selection != 1){
+			selection = 1;
+			sound.PlaySound("select");
+		}
 	}
 	//close
 	if (close.getGlobalBounds().intersects(sf::Rect<float>(sf::Mouse::getPosition(game.window).x, sf::Mouse::getPosition(game.window).y + 1.0f, 1.0f, 1.0f))){
-		if (selection != 2)
-		selection = 2;
-		sound.PlaySound("select");
+		if (selection != 2){
+			selection = 2;
+			sound.PlaySound("select");
+		}
 	}
 
 	//Do color shit

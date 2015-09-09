@@ -70,22 +70,25 @@ void DiffSet::Update(Game &game){
 	//do crazy mouse stuff !!!BOOJAH!!! #21. Century
 	//play
 	if (easy.getGlobalBounds().intersects(sf::Rect<float>(sf::Mouse::getPosition(game.window).x, sf::Mouse::getPosition(game.window).y + 1.0f, 1.0f, 1.0f))){
-		if (selection != 1)
+		if (selection != 1){
 			selection = 1;
-		sound.PlaySound("select");
+			sound.PlaySound("select");
+		}
 	}
 
 	//again
 	if (normal.getGlobalBounds().intersects(sf::Rect<float>(sf::Mouse::getPosition(game.window).x, sf::Mouse::getPosition(game.window).y + 1.0f, 1.0f, 1.0f))){
-		if (selection != 2)
+		if (selection != 2){
 			selection = 2;
-		sound.PlaySound("select");
+			sound.PlaySound("select");
+		}
 	}
 	//settings
 	if (crazy.getGlobalBounds().intersects(sf::Rect<float>(sf::Mouse::getPosition(game.window).x, sf::Mouse::getPosition(game.window).y + 1.0f, 1.0f, 1.0f))){
-		if (selection != 3)
+		if (selection != 3){
 			selection = 3;
-		sound.PlaySound("select");
+			sound.PlaySound("select");
+		}
 	}
 
 	//change the color depending on selection
