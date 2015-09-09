@@ -26,7 +26,6 @@ Settings::Settings(){
 }
 Settings::~Settings(){
 }
-
 void Settings::HandleEvents(Game &game){
 	sf::Event pEvent;
 
@@ -90,38 +89,33 @@ void Settings::HandleEvents(Game &game){
 		}
 	}
 }
-
 void Settings::Update(Game &game){
 
 	//do crazy mouse stuff !!!BOOJAH!!! #21. Century
 	//play
 	if (difficulty.getGlobalBounds().intersects(sf::Rect<float>(sf::Mouse::getPosition(game.window).x, sf::Mouse::getPosition(game.window).y + 1.0f, 1.0f, 1.0f))){
-		if (selection != 0){
-			selection = 0;
-			sound.PlaySound("select");
-		}
+		if (selection != 0)
+		selection = 0;
+		sound.PlaySound("select");
 	}
 
 	//again
 	if (sounds.getGlobalBounds().intersects(sf::Rect<float>(sf::Mouse::getPosition(game.window).x, sf::Mouse::getPosition(game.window).y + 1.0f, 1.0f, 1.0f))){
-		if (selection != 1){
-			selection = 1;
-			sound.PlaySound("select");
-		}
+		if (selection != 1)
+		selection = 1;
+		sound.PlaySound("select");
 	}
 	//settings
 	if (graphics.getGlobalBounds().intersects(sf::Rect<float>(sf::Mouse::getPosition(game.window).x, sf::Mouse::getPosition(game.window).y + 1.0f, 1.0f, 1.0f))){
-		if (selection != 2){
-			selection = 2;
-			sound.PlaySound("select");
-		}
+		if (selection != 2)
+		selection = 2;
+		sound.PlaySound("select");
 	}
 	//close
 	if (back.getGlobalBounds().intersects(sf::Rect<float>(sf::Mouse::getPosition(game.window).x, sf::Mouse::getPosition(game.window).y + 1.0f, 1.0f, 1.0f))){
-		if (selection != 3){
-			selection = 3;
-			sound.PlaySound("select");
-		}
+		if (selection != 3)
+		selection = 3;
+		sound.PlaySound("select");
 	}
 
 	//do crazy color shit

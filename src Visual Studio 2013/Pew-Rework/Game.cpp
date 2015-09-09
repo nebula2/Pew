@@ -1,7 +1,6 @@
 //Game.cpp
 
 #include "Game.h"
-#include <Windows.h>
 
 Game::Game(){
 	running = true;
@@ -29,22 +28,6 @@ Game::~Game(){
 
 void Game::Run(){
 	while (running)	{
-
-		//trap mouse curser in window
-		HWND hwnd;
-		hwnd = FindWindow(0,LPCWSTR("Pew"));
-		RECT r;
-		//top left coords
-		r.left = window.getPosition().x;
-		r.top = window.getPosition().y;
-		//bottom right coords
-		r.right = window.getPosition().x + window.getSize().x;
-		r.bottom = window.getPosition().y + window.getSize().y;
-
-		GetWindowRect(hwnd, &r);
-		ClipCursor(&r);
-
-		//do the game stuff
 		Update();
 		HandleEvents();
 		Render();
