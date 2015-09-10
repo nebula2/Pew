@@ -26,6 +26,7 @@ public:
 private:
 	float speed;
 	sf::Texture playerTex;
+	sf::Texture playerTexMoving;
 	int health;
 
 };

@@ -4,7 +4,7 @@
 
 GraphicSet::GraphicSet(){
 	//basic stuff
-	bg.setFilePath("graphics//core//settings.jpg");
+	bg.setFilePath("graphics/core/settings.jpg");
 
 	isFull = ioscreen.getScreenSettings();
 

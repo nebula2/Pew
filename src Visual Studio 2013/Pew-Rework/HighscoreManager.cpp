@@ -12,41 +12,33 @@ HighscoreManager::HighscoreManager(){
 }
 
 //setter
+
+//sets the Points the player got to the highscore
 void HighscoreManager::setPoints(int points){ //in game initialized
 	hPoints = points;
 }
+
+//sets the Enemies the player missed to the highscore
 void HighscoreManager::setEnemyMissed(int missed){ //enemy
 	hMissed += missed;
 }
+
+//sets the Enemies the player killed to the highscore
 void HighscoreManager::setEnemyKilled(int ekilled){//collision
 	hEkilled += ekilled;
 }
+
+//sets the Monkeys the player killed to the highscore
 void HighscoreManager::setMonkeyKilled(int mkilled){//collision
 	hMkilled += mkilled;
 }
+
+//sets the Shots the player fired to the highscore
 void HighscoreManager::setShotsFired(int sfired){//game
 	hSfired += sfired;
 }
+
+//sets the Shots the player got to the highscore
 void HighscoreManager::setShotsGot(int sgot){//collision
 	hSgot += sgot;
-}
-
-//getter
-int HighscoreManager::getPoints(){
-	return hPoints;
-}
-int HighscoreManager::getEnemyMissed(){
-	return hMissed;
-}
-int HighscoreManager::getEnemyKilled(){
-	return hEkilled;
-}
-int HighscoreManager::getMonkeyKilled(){
-	return hMkilled;
-}
-int HighscoreManager::getShotsFired(){
-	return hSfired;
-}
-int HighscoreManager::getShotsGot(){
-	return hSgot;
 }

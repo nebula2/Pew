@@ -3,7 +3,7 @@
 #include "SoundSet.h"
 
 SoundSet::SoundSet(){
-	bg.setFilePath("graphics//core//soundset.jpg");
+	bg.setFilePath("graphics/core/soundset.jpg");
 
 	selectionString.setSize(50);
 	selectionString.setPosition(350, 250);

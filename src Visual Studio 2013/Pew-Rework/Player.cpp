@@ -8,8 +8,11 @@ Player::Player(){
 	health = 100;
 	active = true;
 
-	playerTex.loadFromFile("graphics//player.png");
+	playerTex.loadFromFile("graphics/player.png");
 	playerTex.setSmooth(false);
+
+	playerTexMoving.loadFromFile("graphics/player_move.png");
+
 	playerSprite.setTexture(playerTex);
 	playerSprite.setOrigin(playerTex.getSize().x / 2, playerTex.getSize().y / 2);
 	playerSprite.setPosition(400, 300);
@@ -26,6 +29,7 @@ void Player::Update(sf::RenderWindow &window, float elapsedTime){
 		
 		else{
 			x -= speed*elapsedTime;
+			playerSprite.setTexture(playerTexMoving);
 		}
 	}
 
@@ -35,6 +39,7 @@ void Player::Update(sf::RenderWindow &window, float elapsedTime){
 		
 		else{
 			x += speed*elapsedTime;
+			playerSprite.setTexture(playerTexMoving);
 		}
 	}
 
@@ -44,6 +49,7 @@ void Player::Update(sf::RenderWindow &window, float elapsedTime){
 		
 		else{
 			y -= speed*elapsedTime;
+			playerSprite.setTexture(playerTexMoving);
 		}
 	}
 
@@ -53,13 +59,18 @@ void Player::Update(sf::RenderWindow &window, float elapsedTime){
 		
 		else{
 			y += speed*elapsedTime;
+			playerSprite.setTexture(playerTexMoving);
 		}
 	}
 
 	//rotate the player so that he points to the mouse cursor
-	if (!sf::Keyboard::isKeyPressed(sf::Keyboard::A) && !sf::Keyboard::isKeyPressed(sf::Keyboard::D))
-		playerSprite.setRotation((-atan2(sf::Mouse::getPosition(window).x - x, sf::Mouse::getPosition(window).y - y)*180 / 3.14159));
+	if (!sf::Keyboard::isKeyPressed(sf::Keyboard::A) && !sf::Keyboard::isKeyPressed(sf::Keyboard::D) && !sf::Keyboard::isKeyPressed(sf::Keyboard::S) && !sf::Keyboard::isKeyPressed(sf::Keyboard::W)){
+		playerSprite.setTexture(playerTex);
+	}
+		
 	
+
+	playerSprite.setRotation((-atan2(sf::Mouse::getPosition(window).x - x, sf::Mouse::getPosition(window).y - y) * 180 / 3.14159));
 	playerSprite.setPosition(x, y);
 }
 

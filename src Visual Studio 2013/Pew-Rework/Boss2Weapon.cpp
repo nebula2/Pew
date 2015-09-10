@@ -9,7 +9,7 @@ Boss2Weapon::Boss2Weapon(){
 	speed = 0.3;
 	active = true;
 	hasTargetTexture = false;
-	weaponTex.loadFromFile("graphics//enemies//boss2weapon.png");
+	weaponTex.loadFromFile("graphics/enemies/boss2weapon.png");
 	weaponTex.setSmooth(smooth.ReadSmoothSettings());
 	sprite.setTexture(weaponTex);
 	sprite.setOrigin(22, 25);
@@ -54,14 +54,14 @@ void Boss2Weapon::Render(sf::RenderWindow &window)
 		//check for mouseOver
 	if (sprite.getGlobalBounds().intersects(sf::Rect<float>(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y + 1.0f, 1.0f, 1.0f))){
 		if (!hasTargetTexture){
-			weaponTex.loadFromFile("graphics//enemies//boss2weapon_target.png");
+			weaponTex.loadFromFile("graphics/enemies/boss2weapon_target.png");
 			sprite.setTexture(weaponTex);
 			hasTargetTexture = true;
 		}
 	}
 	else{
 		if (hasTargetTexture){
-			weaponTex.loadFromFile("graphics//enemies//boss2weapon.png");
+			weaponTex.loadFromFile("graphics/enemies/boss2weapon.png");
 			sprite.setTexture(weaponTex);
 			hasTargetTexture = false;
 		}

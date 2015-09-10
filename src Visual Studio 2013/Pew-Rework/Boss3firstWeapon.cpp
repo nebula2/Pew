@@ -9,7 +9,7 @@ Boss3firstWeapon::Boss3firstWeapon(){
 	speed = 0.5;
 	active = true;
 	hasTargetTexture = false;
-	weaponTex.loadFromFile("graphics//enemies//cowWeapon.png");
+	weaponTex.loadFromFile("graphics/enemies/cowWeapon.png");
 	weaponTex.setSmooth(smooth.ReadSmoothSettings());
 	sprite.setTexture(weaponTex);
 	sprite.setRotation(180);
@@ -38,14 +38,14 @@ void Boss3firstWeapon::Render(sf::RenderWindow &window){
 		//check for mouseOver
 	if (sprite.getGlobalBounds().intersects(sf::Rect<float>(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y + 1.0f, 1.0f, 1.0f))){
 		if (!hasTargetTexture){
-			weaponTex.loadFromFile("graphics//enemies//cowWeapon_target.png");
+			weaponTex.loadFromFile("graphics/enemies/cowWeapon_target.png");
 			sprite.setTexture(weaponTex);
 			hasTargetTexture = true;
 		}
 	}
 	else{
 		if (hasTargetTexture){
-			weaponTex.loadFromFile("graphics//enemies//cowWeapon.png");
+			weaponTex.loadFromFile("graphics/enemies/cowWeapon.png");
 			sprite.setTexture(weaponTex);
 			hasTargetTexture = false;
 		}

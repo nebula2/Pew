@@ -33,9 +33,9 @@ Boss3::Boss3(){
 	fallToGround =  false;
 	startColor = sprite.getColor();
 
-	enemyTex.loadFromFile       ("graphics//enemies//cowmashine.jpg");
-	headSpawnerTex.loadFromFile("graphics//enemies//motor.png");
-	cowSpawnerTex.loadFromFile  ("graphics//enemies//cowspawner.png");
+	enemyTex.loadFromFile       ("graphics/enemies/cowmashine.jpg");
+	headSpawnerTex.loadFromFile("graphics/enemies/motor.png");
+	cowSpawnerTex.loadFromFile  ("graphics/enemies/cowspawner.png");
 	
 	enemyTex.setSmooth(smooth.ReadSmoothSettings());
 	headSpawnerTex.setSmooth(smooth.ReadSmoothSettings());

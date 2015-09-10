@@ -8,7 +8,7 @@ Player2::Player2(){
 	health = 100;
 	active = true;
 
-	playerTex.loadFromFile("graphics//player2.png");
+	playerTex.loadFromFile("graphics/player2.png");
 	playerTex.setSmooth(false);
 	playerSprite.setTexture(playerTex);
 	playerSprite.setOrigin(23, 17);

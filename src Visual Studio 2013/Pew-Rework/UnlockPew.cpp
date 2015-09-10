@@ -8,7 +8,7 @@ UnlockPew::UnlockPew(){
 	speed = 0.1;
 	active = true;
 
-	pewDropTex.loadFromFile("graphics//pewDrop.png");
+	pewDropTex.loadFromFile("graphics/pewDrop.png");
 
 	pewDropTex.setSmooth(false);
 	pewDropSprite.setTexture(pewDropTex);

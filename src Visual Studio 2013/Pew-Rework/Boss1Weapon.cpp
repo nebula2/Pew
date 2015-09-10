@@ -9,7 +9,7 @@ Boss1Weapon::Boss1Weapon(){
 	speed = 0.5;
 	active = true;
 	hasTargetTexture = false;
-	weaponTex.loadFromFile("graphics//enemies//pew.png");
+	weaponTex.loadFromFile("graphics/enemies/pew.png");
 	weaponTex.setSmooth(smooth.ReadSmoothSettings());
 	sprite.setTexture(weaponTex);
 	sprite.setRotation(180);

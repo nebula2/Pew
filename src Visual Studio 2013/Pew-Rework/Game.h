@@ -15,6 +15,7 @@
 #include "PlayState.h"
 #include "Intro.h"
 #include "Highscore.h"
+#include "HighscoreList.h"
 #include "Settings.h"
 #include "DiffSet.h"
 #include "GraphicSet.h"
@@ -25,7 +26,7 @@ public:
 	 Game();
 	~Game();
 
-	enum class gameStates{ MAINMENU, INTRO, PLAY, SETTINGS, GRAPHICSET, SOUNDSET, DIFFSET, HIGHSCORE };
+	enum class gameStates{ MAINMENU, INTRO, PLAY, SETTINGS, GRAPHICSET, SOUNDSET, DIFFSET, HIGHSCORE, HIGHSCORELIST};
 
 	void Run();
 	void ChangeState(gameStates newState);

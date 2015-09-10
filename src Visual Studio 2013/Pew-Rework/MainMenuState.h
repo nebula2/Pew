@@ -18,7 +18,7 @@ private:
 	IOsound iosound;
 	MenuSound sound;
 	Background bg;
-	Text play, again, settings, close;
+	Text play, again, highscore, settings, close;
 
 	float		speed;
 	float		elapsedTime;

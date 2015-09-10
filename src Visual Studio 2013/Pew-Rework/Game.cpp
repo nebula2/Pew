@@ -1,11 +1,13 @@
 //Game.cpp
 
 #include "Game.h"
+#include <Windows.h>
 
 Game::Game(){
 	running = true;
 	playedIntro = false;
 
+	//check settings for fullscreen
 	if (ioscreen.getScreenSettings()){
 		window.create(sf::VideoMode(800, 600, 32), "Pew", sf::Style::Fullscreen);
 		window.setMouseCursorVisible(true);
@@ -13,9 +15,14 @@ Game::Game(){
 	else
 		window.create(sf::VideoMode(800, 600, 32), "Pew", sf::Style::Default);
 
+	//window stuff
 	window.setFramerateLimit(60);
 	window.setVerticalSyncEnabled(true);
 
+	//hide the console
+	ShowWindow(GetConsoleWindow(), SW_HIDE);
+
+	//Sound and Music
 	iosound.ReadSoundSettings(volume);
 	ingMusic.LoadMusic(volume);
 	menMusic.LoadMusic(volume);
@@ -28,6 +35,24 @@ Game::~Game(){
 
 void Game::Run(){
 	while (running)	{
+
+		
+		//trap mouse curser in window
+		HWND hwnd;
+		hwnd = FindWindow(0,LPCWSTR("Pew"));
+		RECT r;
+		//top left coords
+		r.left = window.getPosition().x;
+		r.top = window.getPosition().y;
+		//bottom right coords
+		r.right = window.getPosition().x + window.getSize().x;
+		r.bottom = window.getPosition().y + window.getSize().y;
+
+		//clip mouse to window
+		GetWindowRect(hwnd, &r);
+		ClipCursor(&r);
+		
+		//do the game stuff
 		Update();
 		HandleEvents();
 		Render();
@@ -68,6 +93,9 @@ void Game::ChangeState(gameStates newState){
 		break;
 	case gameStates::SOUNDSET:
 		CurrentState = std::move(std::unique_ptr<SoundSet>(new SoundSet));
+		break;
+	case gameStates::HIGHSCORELIST:
+		CurrentState = std::move(std::unique_ptr<HighscoreList>(new HighscoreList));
 		break;
 	}
 }

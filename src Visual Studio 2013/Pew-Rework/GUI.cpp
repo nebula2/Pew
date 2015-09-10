@@ -95,7 +95,7 @@ sf::FloatRect Text::getGlobalBounds(){
 //health
 Health::Health(){
 	healthTexture.setSmooth(false);
-	healthTexture.loadFromFile("graphics//health.png");
+	healthTexture.loadFromFile("graphics/health.png");
 	healthSprite.setTexture(healthTexture);
 }
 
@@ -113,7 +113,7 @@ sf::Vector2f Health::getPosition(){
 
 //healthbar
 Healthbar::Healthbar(){
-	hbTex.loadFromFile("graphics//core//healthbar.jpg");
+	hbTex.loadFromFile("graphics/core/healthbar.jpg");
 	hbTex.setSmooth(false);
 	hbSprite.setTexture(hbTex);
 	hbSprite.setPosition(71.55, 13);
@@ -135,7 +135,7 @@ void Healthbar::Render(sf::RenderWindow &window){
 //CircleShape
 GUIcircleShape::GUIcircleShape(){
 	speed = 0.02;
-	if (!texture.loadFromFile("graphics//pewcd.png"))
+	if (!texture.loadFromFile("graphics/pewcd.png"))
 		std::cout << "cd nicht geladen also dat bild ne";
 	texture.setSmooth(false);
 	shape.setRadius(25);

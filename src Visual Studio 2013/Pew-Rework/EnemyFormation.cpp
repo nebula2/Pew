@@ -12,7 +12,7 @@ EnemyFormation::EnemyFormation(){
 	active = true;
 	health = 4 * diff.ReadDiffSettings();
 	hasTargetTexture = false;
-	texture.loadFromFile("graphics//enemies//enemyFormation.png");
+	texture.loadFromFile("graphics/enemies/enemyFormation.png");
 	texture.setSmooth(smooth.ReadSmoothSettings());
 	sprite.setTexture(texture);
 }
@@ -36,14 +36,14 @@ void EnemyFormation::Render(sf::RenderWindow &window){
 	//check for mouseOver
 	if (sprite.getGlobalBounds().intersects(sf::Rect<float>(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y + 1.0f, 1.0f, 1.0f))){
 		if (!hasTargetTexture){
-			texture.loadFromFile("graphics//enemies//enemyFormation_target.png");
+			texture.loadFromFile("graphics/enemies/enemyFormation_target.png");
 			sprite.setTexture(texture);
 			hasTargetTexture = true;
 		}
 	}
 	else{
 		if (hasTargetTexture){
-			texture.loadFromFile("graphics//enemies//enemyFormation.png");
+			texture.loadFromFile("graphics/enemies/enemyFormation.png");
 			sprite.setTexture(texture);
 			hasTargetTexture = false;
 		}

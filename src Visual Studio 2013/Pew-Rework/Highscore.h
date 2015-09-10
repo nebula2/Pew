@@ -34,6 +34,8 @@ private:
 	std::stringstream mKilledStream;
 	std::stringstream sFiredStream;
 	std::stringstream sGotStream;
+
+	bool highscoreWritten; ///< false = have to write highscore into file
 };
 
 #endif

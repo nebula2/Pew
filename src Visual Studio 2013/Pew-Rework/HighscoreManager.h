@@ -7,6 +7,8 @@
 class HighscoreManager{
 public:
 	HighscoreManager();
+
+	//setter
 	void setPoints(int points);
 	void setEnemyMissed(int missed);
 	void setEnemyKilled(int ekilled);
@@ -14,12 +16,21 @@ public:
 	void setShotsFired(int sfired);
 	void setShotsGot(int sgot);
 
-	int getPoints();
-	int getEnemyMissed();
-	int getEnemyKilled();
-	int getMonkeyKilled();
-	int getShotsFired();
-	int getShotsGot();
+	//getter
+
+	//returns earned points
+	int getPoints() const { return hPoints; };
+	//returns missed enemies
+	int getEnemyMissed() const { return hMissed; };
+	//returns killed enemies
+	int getEnemyKilled() const { return hEkilled; };
+	//returns killed monkeys
+	int getMonkeyKilled() const { return hMkilled; };
+	//returns fired shots
+	int getShotsFired() const {	return hSfired;	};
+	//returns collided shots
+	int getShotsGot() const { return hSgot; };
+
 private:
 	int hPoints;
 	int hMissed;

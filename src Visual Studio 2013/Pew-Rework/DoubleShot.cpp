@@ -20,7 +20,7 @@ DoubleShot::DoubleShot(float playerPosX, float playerPosY, sf::RenderWindow& win
 	_direction = normalize(_direction);
 
 
-	doubleTex.loadFromFile("graphics//weapons//double.png");
+	doubleTex.loadFromFile("graphics/weapons/double.png");
 
 	doubleTex.setSmooth(false);
 	sprite.setTexture(doubleTex);

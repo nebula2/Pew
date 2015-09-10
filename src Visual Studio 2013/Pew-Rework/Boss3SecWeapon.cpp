@@ -11,7 +11,7 @@ Boss3SecWeapon::Boss3SecWeapon(){
 	active = true;
 	health = 3;
 	hasTargetTexture = false;
-	weaponTex.loadFromFile("graphics//enemies//smallCow.png");
+	weaponTex.loadFromFile("graphics/enemies/smallCow.png");
 	weaponTex.setSmooth(smooth.ReadSmoothSettings());
 	sprite.setTexture(weaponTex);
 	sprite.setOrigin(23.5, 12);
@@ -38,14 +38,14 @@ void Boss3SecWeapon::Render(sf::RenderWindow &window){
 		//check for mouseOver
 	if (sprite.getGlobalBounds().intersects(sf::Rect<float>(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y + 1.0f, 1.0f, 1.0f))){
 		if (!hasTargetTexture){
-			weaponTex.loadFromFile("raphics//enemies//smallCow_target.png");
+			weaponTex.loadFromFile("raphics/enemies/smallCow_target.png");
 			sprite.setTexture(weaponTex);
 			hasTargetTexture = true;
 		}
 	}
 	else{
 		if (hasTargetTexture){
-			weaponTex.loadFromFile("raphics//enemies//smallCow.png");
+			weaponTex.loadFromFile("raphics/enemies/smallCow.png");
 			sprite.setTexture(weaponTex);
 			hasTargetTexture = false;
 		}

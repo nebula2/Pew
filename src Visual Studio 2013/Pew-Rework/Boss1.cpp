@@ -8,12 +8,12 @@ Boss1::Boss1(){
 	IOdiff diff;
 	IOsmooth smooth;
 	hasTargetTexture = false;
-	speed = 0.4;
+	speed = 0.4f;
 	health = 50 * diff.ReadDiffSettings();
 	active = true;
 	moveLeft = true;
 
-	enemyTex.loadFromFile("graphics//enemies//robbe.png");
+	enemyTex.loadFromFile("graphics/enemies/robbe.png");
 	enemyTex.setSmooth(smooth.ReadSmoothSettings());
 	sprite.setTexture(enemyTex);
 	sprite.setOrigin(75, 65);

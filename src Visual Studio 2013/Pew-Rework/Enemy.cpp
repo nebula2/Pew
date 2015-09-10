@@ -12,7 +12,7 @@ Enemy::Enemy(){
 	active = true;
 	health = 2 * diff.ReadDiffSettings();
 
-	enemyTex.loadFromFile("graphics//enemies//enemy.png");
+	enemyTex.loadFromFile("graphics/enemies/enemy.png");
 	enemyTex.setSmooth(smooth.ReadSmoothSettings());
 	sprite.setTexture(enemyTex);
 	sprite.setOrigin(36.5, 35);
@@ -55,14 +55,14 @@ void Enemy::Render(sf::RenderWindow &window){
 		//check for mouseOver
 		if (sprite.getGlobalBounds().intersects(sf::Rect<float>(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y + 1.0f, 1.0f, 1.0f))){
 			if (!hasTargetTexture){
-				enemyTex.loadFromFile("graphics//enemies//enemy_target.png");
+				enemyTex.loadFromFile("graphics/enemies/enemy_target.png");
 				sprite.setTexture(enemyTex);
 				hasTargetTexture = true;
 			}
 		}
 		else{
 			if (hasTargetTexture){
-				enemyTex.loadFromFile("graphics//enemies//enemy.png");
+				enemyTex.loadFromFile("graphics/enemies/enemy.png");
 				sprite.setTexture(enemyTex);
 				hasTargetTexture = false;
 			}

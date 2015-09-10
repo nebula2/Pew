@@ -13,7 +13,7 @@ namespace coll{
 	template <class Object, class ObjectList>
 	void ProjectileToList(Object &obj, std::vector<ObjectList> &objList, int &points, IngameSound &sound, HighscoreManager &highscore)	{
 		//collision detection for normal enemies
-		for (int i = 0; i < objList.size(); i++)		{
+		for (unsigned int i = 0; i < objList.size(); i++)		{
 			if (objList[i].active)			{
 				if (obj->sprite.getGlobalBounds().intersects(objList[i].sprite.getGlobalBounds()))				{
 					if (obj->isPew == false)
@@ -34,7 +34,7 @@ namespace coll{
 	template <class Object, class ObjectList>
 	void ProjectileToMonkey(Object &obj, std::vector<ObjectList> &objList, int &points, IngameSound &sound, HighscoreManager &highscore){
 		//collision detection for monkey (got a seperate to count monkey kills)
-		for (int i = 0; i < objList.size(); i++){
+		for (unsigned int i = 0; i < objList.size(); i++){
 			if (objList[i].active){
 				if (obj->sprite.getGlobalBounds().intersects(objList[i].sprite.getGlobalBounds())){
 					if (obj->isPew == false)
@@ -57,7 +57,7 @@ namespace coll{
 	template <class Object, class ObjectList>
 	void ProjectileToListNoHealth(Object &obj, std::vector<ObjectList> &objList, int &points, IngameSound &sound, HighscoreManager &highscore){
 		//Collision detection for things with no health
-		for (int i = 0; i < objList.size(); i++){
+		for (unsigned int i = 0; i < objList.size(); i++){
 			if (objList[i].active){
 				if (obj->sprite.getGlobalBounds().intersects(objList[i].sprite.getGlobalBounds())){
 					if (obj->isPew == false)
@@ -76,7 +76,7 @@ namespace coll{
 	template <class Object, class ObjectList>
 	void BossCollision(Object &obj, std::vector<ObjectList> &objList, int &points, IngameSound &sound, HighscoreManager&highscore, bool &boss1Dead){
 		//Boss 1 Collision detection
-		for (int i = 0; i < objList.size(); i++){
+		for (unsigned int i = 0; i < objList.size(); i++){
 			if (objList[i].active){
 				if (obj->sprite.getGlobalBounds().intersects(objList[i].sprite.getGlobalBounds())){
 					obj->active = false;
@@ -98,7 +98,7 @@ namespace coll{
 	template <class Object, class ObjectList>
 	void Boss2Collision(Object &obj, std::vector<ObjectList> &objList, int &points, IngameSound &sound, HighscoreManager&highscore){
 		//Boss 2 Collision detection
-		for (int i = 0; i < objList.size(); i++){
+		for (unsigned int i = 0; i < objList.size(); i++){
 			if (objList[i].active){
 				if (obj->sprite.getGlobalBounds().intersects(objList[i].sprite.getGlobalBounds())){
 					obj->active = false;
@@ -190,7 +190,7 @@ namespace coll{
 	template <class Object>
 	void Boss3Collision(std::vector<Boss3> &boss3v, Object &obj, IngameSound &sound, HighscoreManager &highscore, int &points, bool &boss3dead){
 		//boss3 collision weapon to boss3
-		for (int i = 0; i < boss3v.size(); i++){
+		for (unsigned int i = 0; i < boss3v.size(); i++){
 			//collision for first state
 			if (boss3v[i].getCurrentState() == 1.5){
 				//collision for left Spawner

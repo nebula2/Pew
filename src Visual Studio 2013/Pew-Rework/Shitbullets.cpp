@@ -9,7 +9,7 @@ ShitBullets::ShitBullets(){
 	IOsmooth smooth;
 	active = true;
 	hasTargetTexture = false;
-	shitTex.loadFromFile("graphics//enemies//shit.png");
+	shitTex.loadFromFile("graphics/enemies/shit.png");
 	shitTex.setSmooth(smooth.ReadSmoothSettings());
 	sprite.setTexture(shitTex);
 	sprite.setOrigin(17.5, 17.5);
@@ -36,14 +36,14 @@ void ShitBullets::Render(sf::RenderWindow &window){
 		//check for mouseOver
 	if (sprite.getGlobalBounds().intersects(sf::Rect<float>(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y + 1.0f, 1.0f, 1.0f))){
 		if (!hasTargetTexture){
-			shitTex.loadFromFile("graphics//enemies//shit_target.png");
+			shitTex.loadFromFile("graphics/enemies/shit_target.png");
 			sprite.setTexture(shitTex);
 			hasTargetTexture = true;
 		}
 	}
 	else{
 		if (hasTargetTexture){
-			shitTex.loadFromFile("graphics//enemies//shit.png");
+			shitTex.loadFromFile("graphics/enemies/shit.png");
 			sprite.setTexture(shitTex);
 			hasTargetTexture = false;
 		}

@@ -13,8 +13,8 @@ PlayState::PlayState(){
 	sound.setBuffer(volume);
 
 	//background and HUD
-	bg.setStuff("graphics//core//background.jpg", sf::Vector2f(800, 600));
-	hud.setFilePath("graphics//core//hud.png");
+	bg.setStuff("graphics/core//background.jpg", sf::Vector2f(800, 600));
+	hud.setFilePath("graphics/core//hud.png");
 	bgSpeed = 0.3f;
 	health.setPosition(0, 12.5);
 
@@ -74,7 +74,7 @@ void PlayState::Update(Game &game){
 void PlayState::Render(Game &game){
 	bg.Render(game.window);
 
-	if (player1.active /*|| player2.active*/)
+	if (player1.active)
 		if (!paused)
 			HandleDraws(game);
 

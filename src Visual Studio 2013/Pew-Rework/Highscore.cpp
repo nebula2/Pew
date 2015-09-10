@@ -2,11 +2,12 @@
 
 #include "Highscore.h"
 
-Highscore::Highscore(){
-	bg.setFilePath("graphics//core//lose.jpg");
 
-	ioHighscore.WriteHighscore(mng);
-	
+Highscore::Highscore(){
+	highscoreWritten = false;
+
+	bg.setFilePath("graphics/core/lose.jpg");
+
 	pointText.setSize(20);
 	pointText.setPosition(300, 195);
 
@@ -46,6 +47,12 @@ void Highscore::HandleEvents(Game &game){
 void Highscore::Update(Game &game){
 	mng = game.highscore;
 
+	if (!highscoreWritten)
+	{
+		ioHighscore.WriteHighscore(mng);
+		highscoreWritten = true;
+	}
+	
 	//Update stuff (there is the convertion from int to stringstream)
 	pointText.Update(pointsStream, mng.getPoints());
 	eMissedText.Update(eMissedStream, mng.getEnemyMissed());

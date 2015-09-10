@@ -13,7 +13,7 @@ SpaceMonkey::SpaceMonkey(){
 	active = true;
 	moveLeft = true;
 
-	enemyTex.loadFromFile("graphics//enemies//spacemonkey.png");
+	enemyTex.loadFromFile("graphics/enemies/spacemonkey.png");
 	enemyTex.setSmooth(smooth.ReadSmoothSettings());
 	sprite.setTexture(enemyTex);
 	sprite.setOrigin(36, 20);
@@ -51,14 +51,14 @@ void SpaceMonkey::Render(sf::RenderWindow &window){
 		//check for mouseOver
 	if (sprite.getGlobalBounds().intersects(sf::Rect<float>(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y + 1.0f, 1.0f, 1.0f))){
 		if (!hasTargetTexture){
-			enemyTex.loadFromFile("graphics//enemies//spacemonkey_target.png");
+			enemyTex.loadFromFile("graphics/enemies/spacemonkey_target.png");
 			sprite.setTexture(enemyTex);
 			hasTargetTexture = true;
 		}
 	}
 	else{
 		if (hasTargetTexture){
-			enemyTex.loadFromFile("graphics//enemies//spacemonkey.png");
+			enemyTex.loadFromFile("graphics/enemies/spacemonkey.png");
 			sprite.setTexture(enemyTex);
 			hasTargetTexture = false;
 		}

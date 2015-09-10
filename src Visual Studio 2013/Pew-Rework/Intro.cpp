@@ -5,11 +5,11 @@
 Intro::Intro(){
 	elapsedTime = 0;
 
-	intro.loadFromFile("graphics//core//intro.jpg");
+	intro.loadFromFile("graphics/core/intro.jpg");
 	intro.setSmooth(false);
 	introSprite.setTexture(intro);
 	introSprite.setPosition(0, 600);
-	bgSpeed = 0.03;
+	bgSpeed = 0.03f;
 	y = introSprite.getPosition().y;
 }
 
@@ -32,9 +32,12 @@ void Intro::HandleEvents(Game &game){
 				game.ChangeState(Game::gameStates::PLAY);
 		}
 	}
+	if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left)){
+		game.ChangeState(Game::gameStates::PLAY);
+	}
 }
 void Intro::Update(Game &game){
-	elapsedTime = pClock.restart().asMilliseconds();
+	elapsedTime = (float)pClock.restart().asMilliseconds();
 	y -= bgSpeed * elapsedTime;
 	introSprite.setPosition(0, y);
 

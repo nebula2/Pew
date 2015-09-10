@@ -7,7 +7,7 @@
 int IOdiff::ReadDiffSettings(){
 	int m_diff;
 	std::ifstream readInFile;
-	readInFile.open("stuff//diffSettings.txt", std::ios::in);
+	readInFile.open("stuff/diffSettings.txt", std::ios::in);
 	readInFile >> m_diff;
 
 	//make sure diff is between the states in header
@@ -23,7 +23,7 @@ int IOdiff::ReadDiffSettings(){
 
 void IOdiff::WriteDiffSettings(int &diff){
 	std::ofstream writeInFile;
-	writeInFile.open("stuff//diffSettings.txt", std::ios::out);
+	writeInFile.open("stuff/diffSettings.txt", std::ios::out);
 	writeInFile << diff;
 	writeInFile.close();
 }
@@ -48,8 +48,7 @@ void IOHighscore::WriteHighscore(HighscoreManager &highscore){
 	int msGotS = highscore.getShotsGot();
 
 	IOHighscore::openWrite();
-	IOHighscore::writeInFile << "Points " << mPoints << "," << "Enemy Missed " << meMissed << "," << "Enemy Killed " << meKilled << ","
-		<< "Monkey Killed " << mmKilled << "," << "Shots Fired " << msFired << "," << "Shots Got " << msGotS << "\n";
+	IOHighscore::writeInFile << mPoints << " "  << meMissed << " " << meKilled << " " << mmKilled << " " << msFired << " " << msGotS << " \n";
 	IOHighscore::closeWrite();
 }
 
@@ -57,7 +56,7 @@ void IOHighscore::WriteHighscore(HighscoreManager &highscore){
 
 bool IOscreen::getScreenSettings(){
 	std::ifstream readInFile;
-	readInFile.open("stuff//screenSettings.txt", std::ios::in);
+	readInFile.open("stuff/screenSettings.txt", std::ios::in);
 	bool temp;
 	readInFile >> temp;
 	readInFile.close();
@@ -66,7 +65,7 @@ bool IOscreen::getScreenSettings(){
 
 void IOscreen::setScreenSettings(bool &screen){
 	std::ofstream writeInFile;
-	writeInFile.open("stuff//screenSettings.txt", std::ios::out);
+	writeInFile.open("stuff/screenSettings.txt", std::ios::out);
 	writeInFile << screen;
 	writeInFile.close();
 }
@@ -76,7 +75,7 @@ void IOscreen::setScreenSettings(bool &screen){
 bool IOsmooth::ReadSmoothSettings(){
 	bool smooth;
 	std::ifstream readInFile;
-	readInFile.open("stuff//smoothSettings.txt", std::ios::in);
+	readInFile.open("stuff/smoothSettings.txt", std::ios::in);
 	readInFile >> smooth;
 	readInFile.close();
 	return smooth;
@@ -84,7 +83,7 @@ bool IOsmooth::ReadSmoothSettings(){
 
 void IOsmooth::WriteSmoothSettings(bool &smooth){
 	std::ofstream writeInFile;
-	writeInFile.open("stuff//smoothSettings.txt", std::ios::out);
+	writeInFile.open("stuff/smoothSettings.txt", std::ios::out);
 	writeInFile << smooth;
 	writeInFile.close();
 }
@@ -93,7 +92,7 @@ void IOsmooth::WriteSmoothSettings(bool &smooth){
 
 void IOsound::ReadSoundSettings(int &volume){
 	std::ifstream readInFile;
-	readInFile.open("stuff//soundSettings.txt", std::ios::in);
+	readInFile.open("stuff/soundSettings.txt", std::ios::in);
 	if (!readInFile)
 		std::cerr << "Could not open sound settings";
 
@@ -103,7 +102,7 @@ void IOsound::ReadSoundSettings(int &volume){
 
 void IOsound::WriteSoundSettings(int &volume){
 	std::ofstream writeInFile;
-	writeInFile.open("stuff//soundSettings.txt", std::ios::out);
+	writeInFile.open("stuff/soundSettings.txt", std::ios::out);
 	if (!writeInFile)
 		std::cerr << "Could not open sound settings";
 
@@ -116,7 +115,7 @@ void IOsound::WriteSoundSettings(int &volume){
 bool IOtwoPlayer::ReadSettings(){
 	bool twoPlayer;
 	std::ifstream readInFile;
-	readInFile.open("stuff//twoplayer.txt", std::ios::in);
+	readInFile.open("stuff/twoplayer.txt", std::ios::in);
 	readInFile >> twoPlayer;
 	readInFile.close();
 	return twoPlayer;
@@ -124,7 +123,7 @@ bool IOtwoPlayer::ReadSettings(){
 
 void IOtwoPlayer::WriteSettings(bool &twoPlayer){
 	std::ofstream writeInFile;
-	writeInFile.open("stuff//twoplayer.txt", std::ios::out);
+	writeInFile.open("stuff/twoplayer.txt", std::ios::out);
 	writeInFile << twoPlayer;
 	writeInFile.close();
 }

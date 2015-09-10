@@ -18,7 +18,7 @@ Boss2::Boss2(){
 	sinValue = 0;
 	debauch = 30;
 
-	enemyTex.loadFromFile("graphics//enemies//boss2.png");
+	enemyTex.loadFromFile("graphics/enemies/boss2.png");
 	enemyTex.setSmooth(smooth.ReadSmoothSettings());
 	sprite.setTexture(enemyTex);
 	sprite.setOrigin(75, 105.5);
@@ -55,7 +55,7 @@ void Boss2::Update(sf::RenderWindow &window, float elapsedTime){
 
 		//handle y movement (just a thought atm)
 		if (fadeIn){
-			y = 175 + std::sin(sinValue * PI / 180) * debauch;
+			y = 175 + (float)std::sin(sinValue * PI / 180) * debauch;
 			
 			if (sinValue > 360) //is the value that gets higher to get the curve effect
 				sinValue = 0;
@@ -70,14 +70,14 @@ void Boss2::Render(sf::RenderWindow &window){
 	//check for mouseOver
 	if (sprite.getGlobalBounds().intersects(sf::Rect<float>(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y + 1.0f, 1.0f, 1.0f))){
 		if (!hasTargetTexture){
-			enemyTex.loadFromFile("graphics//enemies//boss2_target.png");
+			enemyTex.loadFromFile("graphics/enemies/boss2_target.png");
 			sprite.setTexture(enemyTex);
 			hasTargetTexture = true;
 		}
 	}
 	else{
 		if (hasTargetTexture){
-			enemyTex.loadFromFile("graphics//enemies//boss2.png");
+			enemyTex.loadFromFile("graphics/enemies/boss2.png");
 			sprite.setTexture(enemyTex);
 			hasTargetTexture = false;
 		}

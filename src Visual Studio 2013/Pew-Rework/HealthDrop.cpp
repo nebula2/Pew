@@ -8,7 +8,7 @@ HealthDrop::HealthDrop(){
 	speed = 0.2;
 	active = true;
 
-	healthDropTex.loadFromFile("graphics//health_drop.png");
+	healthDropTex.loadFromFile("graphics/health_drop.png");
 	healthDropTex.setSmooth(false);
 	healthDropSprite.setTexture(healthDropTex);
 	healthDropSprite.setOrigin(12.5, 11.5);
