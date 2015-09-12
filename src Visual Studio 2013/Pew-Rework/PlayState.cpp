@@ -18,7 +18,6 @@ PlayState::PlayState(){
 	bgSpeed = 0.3f;
 	health.setPosition(0, 12.5);
 
-	player2.active = false;
 	playerHealth = player1.getHealth();
 
 	//unlock pew
@@ -44,7 +43,7 @@ void PlayState::HandleEvents(Game &game){
 					game.ChangeState(Game::gameStates::MAINMENU);
 			}
 	
-			if (pEvent.key.code == sf::Keyboard::Return && !paused)
+			if (pEvent.key.code == sf::Keyboard::Return && paused)
 				EndPause();
 		}
 	}
@@ -78,9 +77,6 @@ void PlayState::Render(Game &game){
 		if (!paused)
 			HandleDraws(game);
 
-		if (gotPew)
-			pewCD.Render(game.window);
-
 		if (paused){
 			messageHandler.Render(game.window, "pauseText");
 			messageHandler.Render(game.window, "pausedInfo");
@@ -96,6 +92,11 @@ void PlayState::Render(Game &game){
 
 	//new Weapon draw
 	messageHandler.UpdatelvUp(points, showLvUp, game.window, elapsedTime);
+
+	//draw Pew cooldown
+	if (gotPew && player1.active){
+		pewCD.Render(game.window);
+	}
 
 	//Game over 
 	if (!player1.active){
@@ -147,19 +148,19 @@ void PlayState::EndPause(){
 	paused = false;
 }
 void PlayState::IncrementCounters(){
-	elapsedTime = pClock.restart().asMilliseconds();
-	enemyTimeCount += elapsedTime;
-	bulletTimeCount += elapsedTime;
-	shitCount += elapsedTime;
-	boss1WeaponCount += elapsedTime;
-	boss2WeaponCount += elapsedTime;
-	healthDropCount += elapsedTime;
-	cowTimeCount += elapsedTime;
-	damageChill += elapsedTime;
-	enemyFormationCount += elapsedTime;
-	boss3FirstWeaponCount1 += elapsedTime;
-	boss3FirstWeaponCount2 += elapsedTime;
-	boss3SecWeaponCount += elapsedTime;
+	elapsedTime = (float)pClock.restart().asMilliseconds();
+	enemyTimeCount += (int)elapsedTime;
+	bulletTimeCount += (int)elapsedTime;
+	shitCount += (int)elapsedTime;
+	boss1WeaponCount += (int)elapsedTime;
+	boss2WeaponCount += (int)elapsedTime;
+	healthDropCount += (int)elapsedTime;
+	cowTimeCount += (int)elapsedTime;
+	damageChill += (int)elapsedTime;
+	enemyFormationCount += (int)elapsedTime;
+	boss3FirstWeaponCount1 += (int)elapsedTime;
+	boss3FirstWeaponCount2 += (int)elapsedTime;
+	boss3SecWeaponCount += (int)elapsedTime;
 }
 void PlayState::HandleSpawns(Game &game){
 	//initialize counts & background movement
@@ -207,7 +208,7 @@ void PlayState::HandleUpdates(Game &game){
 	UpdateManager::StdUpdate(unlockPewv, game.window, elapsedTime);								//unlockpew
 	UpdateManager::StdUpdate(b1Weaponv, game.window, elapsedTime);								//b1Weapon
 	UpdateManager::StdUpdate(boss2v, game.window, elapsedTime);									//boss2
-	UpdateManager::Boss2WeaponUpdate(boss2Weaponv, game.window, elapsedTime, player1, player2); // b2Weapon
+	UpdateManager::Boss2WeaponUpdate(boss2Weaponv, game.window, elapsedTime, player1);			// b2Weapon
 	UpdateManager::StdUpdate(boss3v, game.window, elapsedTime);									//boss3
 	UpdateManager::StdUpdate(cowv, game.window, elapsedTime);									//cow
 	UpdateManager::StdUpdate(healthv, game.window, elapsedTime);								//health
@@ -222,9 +223,6 @@ void PlayState::HandleUpdates(Game &game){
 
 	if (player1.active)
 	player1.Update(game.window, elapsedTime);
-
-	if (player2.active)
-	player2.Update(game.window, elapsedTime);
 }
 
 void PlayState::HandleDraws(Game &game){

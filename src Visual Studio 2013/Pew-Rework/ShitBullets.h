@@ -9,19 +9,40 @@
 
 class ShitBullets{
 public:
+	ShitBullets();
+
 	void Update(sf::RenderWindow &window, float elapsedTime);
 	void Render(sf::RenderWindow &window);
 	void SetPosition(float x, float y);
-	ShitBullets();
-	bool active;
-	sf::Sprite sprite;
-	int getDamage();
+
+	//setter
 	void reduceHealth(int pDamage);
-	int  getHealth();
+
+	//getter
+	int getDamage() const{ return 3 * m_diff; };
+	int getHealth() const { return m_health; };
+
+	//variables
+	sf::Sprite sprite;
+	bool active;
 private:
+	void initHealthBar();
+	void UpdateHealthBar();
+
+	float m_speed;			///< the speed
+	float m_xPos;			///< X-Position
+	float m_yPos;			///< Y-Position
+
+	int m_health;			///< actual health
+	int m_maxHealth;		///< max amount of health;
+	int m_diff;				///< Difficulty
+	bool m_hasTargetTexture;///< true = is target | false = is not target
+
 	sf::Vector2f pPosition;
-	float speed;
-	static sf::Texture shitTex;
-	bool hasTargetTexture;
+
+	static sf::Texture m_shitTex;
+	static sf::Texture m_healthTex;
+	sf::RectangleShape m_healthbar;
+
 };
 #endif

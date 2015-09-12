@@ -10,7 +10,7 @@ namespace Rm{
 
 	template <class C>
 	void StdDraw(std::vector<C> &vector, sf::RenderWindow &window){
-		for (int i = 0; i < vector.size(); i++){
+		for (unsigned int i = 0; i < vector.size(); i++){
 			if (vector[i].active)
 				vector[i].Render(window);
 			else

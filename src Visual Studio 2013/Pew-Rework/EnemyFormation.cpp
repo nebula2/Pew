@@ -7,10 +7,10 @@ sf::Texture EnemyFormation::texture;
 EnemyFormation::EnemyFormation(){
 	IOdiff diff;
 	IOsmooth smooth;
-	speed = 0.6;
+	speed = 0.6f;
 	damage = 15;
 	active = true;
-	health = 4 * diff.ReadDiffSettings();
+	health = 3 * diff.ReadDiffSettings();
 	hasTargetTexture = false;
 	texture.loadFromFile("graphics/enemies/enemyFormation.png");
 	texture.setSmooth(smooth.ReadSmoothSettings());
@@ -34,7 +34,7 @@ void EnemyFormation::Update(sf::RenderWindow &window, float elapsedTime){
 }
 void EnemyFormation::Render(sf::RenderWindow &window){
 	//check for mouseOver
-	if (sprite.getGlobalBounds().intersects(sf::Rect<float>(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y + 1.0f, 1.0f, 1.0f))){
+	if (sprite.getGlobalBounds().intersects(sf::Rect<float>((float)sf::Mouse::getPosition(window).x, (float)sf::Mouse::getPosition(window).y + 1.0f, 1.0f, 1.0f))){
 		if (!hasTargetTexture){
 			texture.loadFromFile("graphics/enemies/enemyFormation_target.png");
 			sprite.setTexture(texture);

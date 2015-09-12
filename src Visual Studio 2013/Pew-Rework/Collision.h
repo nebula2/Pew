@@ -120,7 +120,7 @@ namespace coll{
 	void PlayerEnemyInactive(std::vector<ObjectList> &objList, Object &pPlayer, IngameSound &sound)	{
 		//player collision with Enemies <- Enemies are set inactive if collision appeares
 		sf::Sprite pSprite = pPlayer.playerSprite;
-		for (int i = 0; i < objList.size(); i++)		{
+		for (unsigned int i = 0; i < objList.size(); i++)		{
 			if (objList[i].active)
 			{
 				if (objList[i].sprite.getGlobalBounds().intersects(pSprite.getGlobalBounds())){
@@ -140,7 +140,7 @@ namespace coll{
 	void PlayerEnemyActive(std::vector<ObjectList> &objList, Object &pPlayer, IngameSound &sound){
 		//player collision with Enemies which shall not be set inactive after collision
 		sf::Sprite pSprite = pPlayer.playerSprite;
-		for (int i = 0; i < objList.size(); i++){
+		for (unsigned int i = 0; i < objList.size(); i++){
 			if (objList[i].active){
 				if (objList[i].sprite.getGlobalBounds().intersects(pSprite.getGlobalBounds())){
 					pPlayer.reduceHealth(objList[i].getDamage());
@@ -158,7 +158,7 @@ namespace coll{
 	void PlayerHealthGet(std::vector<ObjectList> &objList, Object &pPlayer, IngameSound &sound){
 		//HealthDrop Collision
 		sf::Sprite pSprite = pPlayer.playerSprite;
-		for (int i = 0; i < objList.size(); i++){
+		for (unsigned int i = 0; i < objList.size(); i++){
 			if (objList[i].active){
 				if (objList[i].healthDropSprite.getGlobalBounds().intersects(pSprite.getGlobalBounds())){
 					objList[i].active = false;
@@ -173,7 +173,7 @@ namespace coll{
 	void PlayerUnlockPew(std::vector<ObjectList> &objectList, Object &pPlayer, IngameSound &sound, bool &gotPew, bool &pewOnCooldown){
 		//Player Collision to unlock the third weapon
 		sf::Sprite pSprite = pPlayer.playerSprite;
-		for (int i = 0; i < objectList.size(); i++)	{
+		for (unsigned int i = 0; i < objectList.size(); i++)	{
 			if (objectList[i].active){
 				if (objectList[i].pewDropSprite.getGlobalBounds().intersects(pSprite.getGlobalBounds())){
 					objectList[i].active = false;

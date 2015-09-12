@@ -40,7 +40,6 @@ private:
 
 	//
 	Player				player1;
-	Player2				player2;
 	SpawnManager		spawnManager;
 	WeaponManager		weapon;
 	MessageHandler		messageHandler;

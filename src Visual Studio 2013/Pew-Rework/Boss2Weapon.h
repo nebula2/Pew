@@ -11,16 +11,36 @@
 class Boss2Weapon{
 public:
 	Boss2Weapon();
-	void Update(sf::RenderWindow &window, float &elapsedTime, Player &pPlayer, Player2 &player2);
+	void Update(sf::RenderWindow &window, float &elapsedTime, Player &pPlayer);
 	void Render(sf::RenderWindow &window);
+	
+	//setter
 	void setPosition(float x, float y);
+
+	//getter
+	int getDamage() const { return 8 * m_diff; };
+
 	bool active;
 	sf::Sprite sprite;
-	int getDamage();
+
 private:
-	float speed;
-	static sf::Texture weaponTex;
-	bool hasTargetTexture;
+	void initHealthBar();
+	void UpdateHealthBar();
+
+	float m_speed;				///< the speed
+	float m_xPos;				///< X-Position
+	float m_yPos;				///< Y-Position
+
+	int m_diff;					///< Difficulty
+	int m_health;				///< actual health
+	int m_maxHealth;			///< max amount of health;
+
+	bool m_hasTargetTexture;	///< true = is target | false = is not target
+	
+
+	static sf::Texture m_weaponTex;
+	static sf::Texture m_healthTex;
+	sf::RectangleShape m_healthbar;
 };
 
 #endif

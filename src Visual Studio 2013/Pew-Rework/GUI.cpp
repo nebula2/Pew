@@ -30,7 +30,7 @@ MovableBackground::MovableBackground(){
 void MovableBackground::setStuff(std::string filepath, sf::Vector2f windowSize){
 	mbgTex.loadFromFile(filepath);
 	mbgSprite.setTexture(mbgTex);
-	mbgSprite.setTextureRect(sf::IntRect(0, bgY, windowSize.x, windowSize.y));
+	mbgSprite.setTextureRect(sf::IntRect(0, (int)bgY, (int)windowSize.x, (int)windowSize.y));
 }
 void MovableBackground::Update(sf::RenderWindow &window, float &elapsedTime, float &speed){
 	if (bgY < window.getSize().y)
@@ -39,7 +39,7 @@ void MovableBackground::Update(sf::RenderWindow &window, float &elapsedTime, flo
 	{
 		bgY = 0;
 	}
-	mbgSprite.setTextureRect(sf::IntRect(0, bgY, window.getSize().x, window.getSize().y));
+	mbgSprite.setTextureRect(sf::IntRect(0, (int)bgY, (int)window.getSize().x, (int)window.getSize().y));
 }
 
 void MovableBackground::Render(sf::RenderWindow &window){
@@ -116,15 +116,15 @@ Healthbar::Healthbar(){
 	hbTex.loadFromFile("graphics/core/healthbar.jpg");
 	hbTex.setSmooth(false);
 	hbSprite.setTexture(hbTex);
-	hbSprite.setPosition(71.55, 13);
-	hbSprite.setTextureRect(sf::IntRect(71.55, 13, 155, 25));
+	hbSprite.setPosition(71.55f, 13.0f);
+	hbSprite.setTextureRect(sf::IntRect(71, 13, 155, 25));
 }
 
 void Healthbar::Update(sf::RenderWindow &window, int health){
 	if (health <= 100)
 	{
 		health = 100 - health;
-		hbSprite.setTextureRect(sf::IntRect(71.55, 13, 155 - health * 1.55, 25));
+		hbSprite.setTextureRect(sf::IntRect(72, 13, (int)(155 - health * 1.55), 25));
 	}
 }
 
@@ -134,17 +134,17 @@ void Healthbar::Render(sf::RenderWindow &window){
 
 //CircleShape
 GUIcircleShape::GUIcircleShape(){
-	speed = 0.02;
+	speed = 0.02f;
+	texY = 0.0f;
+
 	if (!texture.loadFromFile("graphics/pewcd.png"))
-		std::cout << "cd nicht geladen also dat bild ne";
+		std::cout << "could not load cooldown-Texture \"pewcd.png\" \n";
 	texture.setSmooth(false);
+	
 	shape.setRadius(25);
 	shape.setPosition(450, 0);
-	texY = 0;
 	shape.setTexture(&texture);
-	shape.setTextureRect(sf::IntRect(450, texY, 53, 50));
-
-	//wo is die sprite du depp?
+	shape.setTextureRect(sf::IntRect(450, (int)texY, 53, 50));
 }
 
 void GUIcircleShape::Update(bool &pewOnCooldown, float &elapsedTime){
@@ -157,8 +157,7 @@ void GUIcircleShape::Update(bool &pewOnCooldown, float &elapsedTime){
 			pewOnCooldown = false;
 		}
 
-		shape.setTextureRect(sf::IntRect(450, texY, 53, 50));
-		
+		shape.setTextureRect(sf::IntRect(450, (int)texY, 53, 50));
 	}
 }
 

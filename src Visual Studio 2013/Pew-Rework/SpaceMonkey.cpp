@@ -2,46 +2,57 @@
 
 #include "SpaceMonkey.h"
 
-sf::Texture SpaceMonkey::enemyTex;
+sf::Texture SpaceMonkey::m_enemyTex;
+sf::Texture SpaceMonkey::m_healthTex;
 
 SpaceMonkey::SpaceMonkey(){
+
+	//get settings
 	IOdiff diff;
 	IOsmooth smooth;
-	hasTargetTexture = false;
-	speed = 0.3;
-	health = 10 * diff.ReadDiffSettings();
-	active = true;
-	moveLeft = true;
 
-	enemyTex.loadFromFile("graphics/enemies/spacemonkey.png");
-	enemyTex.setSmooth(smooth.ReadSmoothSettings());
-	sprite.setTexture(enemyTex);
-	sprite.setOrigin(36, 20);
-	sprite.setPosition(364, 25);
+	//init stuff
+	m_hasTargetTexture = false;
+	active = true;
+	m_moveLeft = true;
+
+	m_speed = 0.3f;
+	m_health = 10 * diff.ReadDiffSettings();
+	m_maxHealth = m_health;
+
+	m_enemyTex.loadFromFile("graphics/enemies/spacemonkey.png");
+	m_enemyTex.setSmooth(smooth.ReadSmoothSettings());
+	sprite.setTexture(m_enemyTex);
+	sprite.setOrigin(m_enemyTex.getSize().x / 2.0f, m_enemyTex.getSize().y / 2.0f);
+	sprite.setPosition(364.0f, 25.0f);
 
 }
 void SpaceMonkey::Update(sf::RenderWindow &window, float elapsedTime){
-	float x = sprite.getPosition().x;
-	float y = sprite.getPosition().y;
+	m_xPos = sprite.getPosition().x;
+	m_yPos = sprite.getPosition().y;
 
-	if (SpaceMonkey::active)	{
-		if (y <= 80)
-			y += speed*elapsedTime;
+	if (SpaceMonkey::active) {
+		//fade into screen
+		if (m_yPos <= 80.0f)
+			m_yPos += m_speed*elapsedTime;
 		
-		if (moveLeft && x > 36)
-			x -= speed*elapsedTime;
-		
+		//move left
+		if (m_moveLeft && m_xPos > 36.0f)
+			m_xPos -= m_speed*elapsedTime;
 		else
-			moveLeft = false;
+			m_moveLeft = false;
 		
-
-		if (!moveLeft && x < window.getSize().x - 36)
-			x += speed*elapsedTime;
-		
+		//move right
+		if (!m_moveLeft && m_xPos < window.getSize().x - 36.0f)
+			m_xPos += m_speed*elapsedTime;
 		else
-			moveLeft = true;
+			m_moveLeft = true;
+	
+		//Update Healthbar
+		UpdateHealthBar();
+		//set Position
+		sprite.setPosition(m_xPos, m_yPos);
 	}
-	sprite.setPosition(x, y);
 }
 
 
@@ -49,40 +60,67 @@ void SpaceMonkey::Render(sf::RenderWindow &window){
 	if (active)
 
 		//check for mouseOver
-	if (sprite.getGlobalBounds().intersects(sf::Rect<float>(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y + 1.0f, 1.0f, 1.0f))){
-		if (!hasTargetTexture){
-			enemyTex.loadFromFile("graphics/enemies/spacemonkey_target.png");
-			sprite.setTexture(enemyTex);
-			hasTargetTexture = true;
+	if (sprite.getGlobalBounds().intersects(sf::Rect<float>((float)sf::Mouse::getPosition(window).x, (float)sf::Mouse::getPosition(window).y + 1.0f, 1.0f, 1.0f))){
+		if (!m_hasTargetTexture){
+			m_enemyTex.loadFromFile("graphics/enemies/spacemonkey_target.png");
+			sprite.setTexture(m_enemyTex);
+			m_hasTargetTexture = true;
 		}
 	}
 	else{
-		if (hasTargetTexture){
-			enemyTex.loadFromFile("graphics/enemies/spacemonkey.png");
-			sprite.setTexture(enemyTex);
-			hasTargetTexture = false;
+		if (m_hasTargetTexture){
+			m_enemyTex.loadFromFile("graphics/enemies/spacemonkey.png");
+			sprite.setTexture(m_enemyTex);
+			m_hasTargetTexture = false;
 		}
 	}
 
 		window.draw(sprite);
+		window.draw(m_healthbar);
 }
 
 void SpaceMonkey::SetPosition(float x, float y){
 	sprite.setPosition(x, y);
+
+	//initialize Healthbar here to make sure that the position is known
+	initHealthBar();
 }
 
 void SpaceMonkey::reduceHealth(int pDamage){
-	int newhealth = health - pDamage;
-	health = newhealth;
+	m_health -= pDamage;
 }
 
-int SpaceMonkey::getHealth(){
-	return health;
+
+//Healthbar init
+void SpaceMonkey::initHealthBar(){
+
+	//load Texture
+	if (!m_healthTex.loadFromFile("graphics/enemies/health.png")){
+		perror("could not load enemy healthbar");
+	}
+
+	//set texture
+	m_healthbar.setTexture(&m_healthTex);
+
+	//set size of shape to the size of the texture
+	m_healthbar.setSize(sf::Vector2f((float)m_healthTex.getSize().x, (float)m_healthTex.getSize().y));
+
+	//pseudo rect
+	m_healthbar.setTextureRect(sf::IntRect(0, 0, 0, 0));
 }
 
-sf::Vector2f SpaceMonkey::getPosition(){
-	return sprite.getPosition();
-}
-int SpaceMonkey::getDamage(){
-	return 20;
+//Healthbar Update
+void SpaceMonkey::UpdateHealthBar(){
+
+	//first set the Position of the Shape
+	m_healthbar.setPosition(m_xPos, (m_yPos - 10.0f - sprite.getLocalBounds().height / 2)); ///< see how it behaves with origin
+
+	//get the percentage of health to find out how much should be shown in shape
+	float percentage = m_health * 100.0f / m_maxHealth;
+
+	//get the length of pixels to be shown
+	float showAmount = m_healthTex.getSize().x - (m_healthTex.getSize().x * percentage / 100.0f);
+
+	//set the Texture Rect that has to be shown
+	m_healthbar.setTextureRect(sf::IntRect((int)showAmount, 0, m_healthTex.getSize().x, m_healthTex.getSize().y));
 }
