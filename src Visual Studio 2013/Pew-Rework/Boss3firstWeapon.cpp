@@ -31,11 +31,11 @@ Boss3firstWeapon::Boss3firstWeapon(){
 
 void Boss3firstWeapon::Update(sf::RenderWindow &window, float &elapsedTime){
 	if (active)	{
-		float x = sprite.getPosition().x;
-		float y = sprite.getPosition().y;
+		m_xPos = sprite.getPosition().x;
+		m_yPos = sprite.getPosition().y;
 
-		if (y <= window.getSize().y){
-			y += m_speed*elapsedTime;
+		if (m_yPos <= window.getSize().y){
+			m_yPos += m_speed*elapsedTime;
 		}		
 		else{
 			active = false;
@@ -45,7 +45,7 @@ void Boss3firstWeapon::Update(sf::RenderWindow &window, float &elapsedTime){
 		UpdateHealthBar();
 
 		//do the rest
-		sprite.setPosition(x, y);
+		sprite.setPosition(m_xPos, m_yPos);
 		sprite.rotate(5);
 	}
 }

@@ -4,7 +4,7 @@
 #include <math.h>
 
 Player::Player(){
-	speed = 0.7;
+	speed = 0.7f;
 	health = 100;
 	active = true;
 
@@ -14,7 +14,7 @@ Player::Player(){
 	playerTexMoving.loadFromFile("graphics/player_move.png");
 
 	playerSprite.setTexture(playerTex);
-	playerSprite.setOrigin(playerTex.getSize().x / 2, playerTex.getSize().y / 2);
+	playerSprite.setOrigin(playerTex.getSize().x / 2.0f, playerTex.getSize().y / 2.0f);
 	playerSprite.setPosition(400, 300);
 }
 
@@ -24,8 +24,8 @@ void Player::Update(sf::RenderWindow &window, float elapsedTime){
 
 	//Handle input
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)){
-		if (x <= -7)
-			x = window.getSize().x;
+		if (x <= 15.0f)
+			x = 15.0f;
 		
 		else{
 			x -= speed*elapsedTime;
@@ -34,8 +34,8 @@ void Player::Update(sf::RenderWindow &window, float elapsedTime){
 	}
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)){
-		if (x >= window.getSize().x + 7)
-			x = 0;
+		if (x >= window.getSize().x - 15.0f)
+			x = window.getSize().x - 15.0f;
 		
 		else{
 			x += speed*elapsedTime;
@@ -54,8 +54,8 @@ void Player::Update(sf::RenderWindow &window, float elapsedTime){
 	}
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)){
-		if (y >= window.getSize().y - 17)
-			y = window.getSize().y - 17;
+		if (y >= window.getSize().y - 17.0f)
+			y = window.getSize().y - 17.0f;
 		
 		else{
 			y += speed*elapsedTime;
@@ -70,7 +70,7 @@ void Player::Update(sf::RenderWindow &window, float elapsedTime){
 		
 	
 
-	playerSprite.setRotation((-atan2(sf::Mouse::getPosition(window).x - x, sf::Mouse::getPosition(window).y - y) * 180 / 3.14159));
+	playerSprite.setRotation((-atan2((float)sf::Mouse::getPosition(window).x - x, (float)sf::Mouse::getPosition(window).y - y) * 180 / 3.14159));
 	playerSprite.setPosition(x, y);
 }
 
