@@ -69,9 +69,7 @@ HighscoreList::HighscoreList(){
 	//erase all entries that are not in the top ten
 	//but only if there are more than ten!
 	if (m_numInput.size() > 10){
-		for (auto it = m_numInput.begin() + 10; it != m_numInput.end(); it++){
-			it = m_numInput.erase(it);
-		}
+		m_numInput.resize(10);
 	}
 
 	//now we have a vector of integer, sorted by score which holds the TOP 10 plays

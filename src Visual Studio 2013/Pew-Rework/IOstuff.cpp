@@ -48,7 +48,7 @@ void IOHighscore::WriteHighscore(HighscoreManager &highscore){
 	int msGotS = highscore.getShotsGot();
 
 	IOHighscore::openWrite();
-	IOHighscore::writeInFile << mPoints << " "  << meMissed << " " << meKilled << " " << mmKilled << " " << msFired << " " << msGotS << " \n";
+	IOHighscore::writeInFile << mPoints << " "  << meMissed << " " << meKilled << " " << mmKilled << " " << msFired << " " << msGotS << " " << std::endl;
 	IOHighscore::closeWrite();
 }
 
