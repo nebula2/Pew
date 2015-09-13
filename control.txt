@@ -1,17 +1,11 @@
-this is temp:
-
 menu:
-arrow keys to select
-enter to apply
+arrow keys or mouse to select
+enter or left mouse button to apply
 
 ingame:
 esc for pause
 
-- first player -
+- player -
 q and e to switch the current weapon
-arrow keys for movement
-space for shoot
-
-- second player -
-mouse movement for movement
-left mouse button for shoot
+WASD for movement
+left mouse button
