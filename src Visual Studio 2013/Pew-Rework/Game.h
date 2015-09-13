@@ -20,13 +20,14 @@
 #include "DiffSet.h"
 #include "GraphicSet.h"
 #include "SoundSet.h"
+#include "SplashState.h"
 
 class Game{
 public:
 	 Game();
 	~Game();
 
-	enum class gameStates{ MAINMENU, INTRO, PLAY, SETTINGS, GRAPHICSET, SOUNDSET, DIFFSET, HIGHSCORE, HIGHSCORELIST};
+	enum class gameStates{ MAINMENU, INTRO, PLAY, SETTINGS, GRAPHICSET, SOUNDSET, DIFFSET, HIGHSCORE, HIGHSCORELIST, SPLASHSTATE};
 
 	void Run();
 	void ChangeState(gameStates newState);

@@ -97,6 +97,8 @@ void Game::ChangeState(gameStates newState){
 	case gameStates::HIGHSCORELIST:
 		CurrentState = std::move(std::unique_ptr<HighscoreList>(new HighscoreList));
 		break;
+	case gameStates::SPLASHSTATE:
+		CurrentState = std::move(std::unique_ptr<SplashState>(new SplashState));
 	}
 }
 

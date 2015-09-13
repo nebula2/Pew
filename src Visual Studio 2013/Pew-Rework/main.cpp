@@ -4,7 +4,7 @@
 
 int main(){
 	Game pew;
-	pew.ChangeState(Game::gameStates::MAINMENU); 
+	pew.ChangeState(Game::gameStates::SPLASHSTATE); 
 
 	pew.Run();
 
