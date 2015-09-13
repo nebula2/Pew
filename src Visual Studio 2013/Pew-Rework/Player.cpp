@@ -4,100 +4,145 @@
 #include <math.h>
 
 Player::Player(){
-	speed = 0.7f;
-	health = 100;
+	m_speed = 0.7f;
+	m_health = 100;
 	active = true;
+	
+	//get textures
+	if (!m_playerTex.loadFromFile("graphics/player.png")){
+		perror("could not load player texture \"graphics/player.png\" \n");
+	}
+	m_playerTex.setSmooth(false);
 
-	playerTex.loadFromFile("graphics/player.png");
-	playerTex.setSmooth(false);
+	if (!m_playerTexMoving.loadFromFile("graphics/player_move.png")){
+		perror("could not load player texture \"graphics/player_move.png\" \n");
+	}
+	m_playerTexMoving.setSmooth(false);
 
-	playerTexMoving.loadFromFile("graphics/player_move.png");
-
-	playerSprite.setTexture(playerTex);
-	playerSprite.setOrigin(playerTex.getSize().x / 2.0f, playerTex.getSize().y / 2.0f);
-	playerSprite.setPosition(400, 300);
+	//set up the sprite with the standing texture
+	playerSprite.setTexture(m_playerTex);
+	m_hasMovingTexture = false;
+	playerSprite.setOrigin(m_playerTex.getSize().x / 2.0f, m_playerTex.getSize().y / 2.0f);
+	playerSprite.setPosition(400.0f, 300.0f);
 }
 
 void Player::Update(sf::RenderWindow &window, float elapsedTime){
-	float x = playerSprite.getPosition().x;
-	float y = playerSprite.getPosition().y;
+	
+	//update variables
+	m_xPos = playerSprite.getPosition().x;
+	m_yPos = playerSprite.getPosition().y;
+	m_elapsedTime = elapsedTime;
 
 	//Handle input
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)){
-		if (x <= 15.0f)
-			x = 15.0f;
-		
-		else{
-			x -= speed*elapsedTime;
-			playerSprite.setTexture(playerTexMoving);
-		}
-	}
+	handleInput(window);
 
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)){
-		if (x >= window.getSize().x - 15.0f)
-			x = window.getSize().x - 15.0f;
-		
-		else{
-			x += speed*elapsedTime;
-			playerSprite.setTexture(playerTexMoving);
-		}
-	}
+	//Handle Player Appearance
+	handleRotation(window);
 
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)){
-		if (y <= 67)
-			y = 67;
-		
-		else{
-			y -= speed*elapsedTime;
-			playerSprite.setTexture(playerTexMoving);
-		}
-	}
-
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)){
-		if (y >= window.getSize().y - 17.0f)
-			y = window.getSize().y - 17.0f;
-		
-		else{
-			y += speed*elapsedTime;
-			playerSprite.setTexture(playerTexMoving);
-		}
-	}
-
-	//rotate the player so that he points to the mouse cursor
-	if (!sf::Keyboard::isKeyPressed(sf::Keyboard::A) && !sf::Keyboard::isKeyPressed(sf::Keyboard::D) && !sf::Keyboard::isKeyPressed(sf::Keyboard::S) && !sf::Keyboard::isKeyPressed(sf::Keyboard::W)){
-		playerSprite.setTexture(playerTex);
-	}
-		
-	
-
-	playerSprite.setRotation((-atan2((float)sf::Mouse::getPosition(window).x - x, (float)sf::Mouse::getPosition(window).y - y) * 180 / 3.14159));
-	playerSprite.setPosition(x, y);
+	//set the new Position
+	playerSprite.setPosition(m_xPos, m_yPos);
 }
 
 void Player::Render(sf::RenderWindow &window){
-	if (active)
+	if (active){
 		window.draw(playerSprite);
-}
-
-sf::Vector2f Player::getPosition(){
-	return playerSprite.getPosition();
-}
-
-const int Player::getHealth(){
-	return health;
+	}
 }
 
 void Player::reduceHealth(int pDamage){
-	health -= pDamage;
+	m_health -= pDamage;
 }
 
 void Player::increaseHealth(int heal){
-	int newHealth = health + heal;
-	health = newHealth;
-	if (health >= 100)
-		health = 100;
+	//add heal
+	m_health += heal;
+	//make sure player does not have more than 100 health
+	if (m_health >= 100){
+		m_health = 100;
+	}
 }
 
 void Player::setHealth(int mhealth){
-	health = mhealth;
+	m_health = mhealth;
+}
+
+//Handles the Input for Player-Movement
+void Player::handleInput(sf::RenderWindow& window){
+
+	//LEFT
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)){
+		if (m_xPos <= 15.0f){
+			m_xPos = 15.0f;
+		}
+		else{
+			m_xPos -= m_speed * m_elapsedTime;
+		}
+		setMovingTexture();
+	}
+
+	//RIGHT
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)){
+		if (m_xPos >= window.getSize().x - 15.0f){
+			m_xPos = window.getSize().x - 15.0f;
+		}
+			
+		else{
+			m_xPos += m_speed * m_elapsedTime;
+		}
+		setMovingTexture();
+	}
+
+	//UP
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)){
+		if (m_yPos <= 67.0f){
+			m_yPos = 67.0f;
+		}
+		else{
+			m_yPos -= m_speed * m_elapsedTime;
+		}
+		setMovingTexture();
+	}
+
+	//DOWN
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)){
+		if (m_yPos >= window.getSize().y - 17.0f){
+			m_yPos = window.getSize().y - 17.0f;
+		}
+		else{
+			m_yPos += m_speed * m_elapsedTime;
+		}
+		setMovingTexture();
+	}
+
+	//NO MOVEMENT
+	if (!sf::Keyboard::isKeyPressed(sf::Keyboard::W) &&
+		!sf::Keyboard::isKeyPressed(sf::Keyboard::A) &&
+		!sf::Keyboard::isKeyPressed(sf::Keyboard::S) &&
+		!sf::Keyboard::isKeyPressed(sf::Keyboard::D)){
+		setStandingTexture();
+	}
+}
+
+//Handles the rotation so that the Player follows the mouse
+void Player::handleRotation(sf::RenderWindow& window){
+
+	//set the rotation so that the player directs to the mouse position
+	playerSprite.setRotation((-atan2((float)sf::Mouse::getPosition(window).x - m_xPos, 
+									 (float)sf::Mouse::getPosition(window).y - m_yPos) * 180.0f / 3.14159f));
+}
+
+//sets the Move-Texture if not set
+void Player::setMovingTexture(){
+	if (!m_hasMovingTexture){
+		playerSprite.setTexture(m_playerTexMoving);
+		m_hasMovingTexture = true;
+	}
+}
+
+//sets the Standing-Texture if not set
+void Player::setStandingTexture(){
+	if (m_hasMovingTexture){
+		playerSprite.setTexture(m_playerTex);
+		m_hasMovingTexture = false;
+	}
 }

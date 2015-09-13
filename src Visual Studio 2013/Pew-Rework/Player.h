@@ -3,10 +3,8 @@
 #ifndef _PLAYER_H
 #define _PLAYER_H
 
-#include <iostream>
 #include <string>
 #include <SFML/Graphics.hpp>
-#include "Player2.h"
 
 class Player{
 public:
@@ -14,20 +12,39 @@ public:
 
 	void Update(sf::RenderWindow &window, float elapsedTime);
 	void Render(sf::RenderWindow &window);
-	const int getHealth();
+
+	//setter
 	void reduceHealth(int pDamage);
 	void increaseHealth(int heal);
-	void setHealth(int mhealth); //to sync with player2
-	sf::Sprite playerSprite;
-	sf::Vector2f getPosition();
+	void setHealth(int mhealth);
 
+	//getter
+	int getHealth() const { return m_health; };
+	sf::Vector2f getPosition() const { return playerSprite.getPosition(); };
+	
+
+	sf::Sprite playerSprite;
 	bool active;
 
 private:
-	float speed;
-	sf::Texture playerTex;
-	sf::Texture playerTexMoving;
-	int health;
+	//Handle the Input
+	void handleInput(sf::RenderWindow& window);
 
+	//Handle Appearance
+	void setMovingTexture();
+	void setStandingTexture();
+	void handleRotation(sf::RenderWindow& window);
+
+	float m_speed;			///< the speed
+	float m_xPos;			///< X-Position
+	float m_yPos;			///< Y-Position
+	float m_elapsedTime;	///< time that passes in one frame
+
+	int m_health;			///< actual health
+
+	bool m_hasMovingTexture;///< True = Texture for moving is set | False = Texture for standing is set
+
+	sf::Texture m_playerTex;
+	sf::Texture m_playerTexMoving;
 };
 #endif
