@@ -16,6 +16,7 @@ Boss3SecWeapon::Boss3SecWeapon(){
 	//init stuff
 	m_speed = 0.5f;
 	active = true;
+	m_die = false;
 	m_health = 3;
 	m_maxHealth = m_health;
 	m_hasTargetTexture = false;
@@ -45,6 +46,10 @@ void Boss3SecWeapon::Update(sf::RenderWindow &window, float &elapsedTime){
 
 		//do the rest
 		sprite.setPosition(m_xPos, m_yPos);
+
+		//see if death should be initialized
+		m_scale = sprite.getScale();
+		initDeath();
 	}
 }
 
@@ -112,4 +117,17 @@ void Boss3SecWeapon::UpdateHealthBar(){
 
 	//set the Texture Rect that has to be shown
 	m_healthbar.setTextureRect(sf::IntRect((int)showAmount, 0, m_healthTex.getSize().x, m_healthTex.getSize().y));
+}
+
+void Boss3SecWeapon::initDeath(){
+	if (m_die){
+		sprite.rotate(5);
+		m_scale.x -= 0.01f;
+		m_scale.y -= 0.01f;
+		sprite.setScale(sf::Vector2f(m_scale.x, m_scale.y));
+
+		if (m_scale.x <= 0.05f || m_scale.y <= 0.05f){
+			active = false;
+		}
+	}
 }

@@ -86,7 +86,7 @@ void SplashState::fadeOut() {
 
 	//increase as long as value is not 255
 	if (m_fadingAlpha <= 255) {
-		m_fadingAlpha += m_elapsedTime / 2;
+		m_fadingAlpha += (int)m_elapsedTime / 2;
 		//set alpha
 		m_fadingSprite.setColor(sf::Color(255, 255, 255, m_fadingAlpha));
 	}
@@ -149,7 +149,7 @@ void SplashState::updateCredits(){
 
 	//Start with SFML
 	if (m_alphaSFML <= 255 && !m_sfmlShown){
-		m_alphaSFML += m_elapsedTime / 5;
+		m_alphaSFML += (int)m_elapsedTime / 5;
 		m_sfmlSprite.setColor(sf::Color(255, 255, 255, m_alphaSFML));
 	}
 	if (m_alphaSFML >= 255 && !m_sfmlShown){
@@ -158,7 +158,7 @@ void SplashState::updateCredits(){
 
 	//Then ShitSoft
 	if (m_alphaShitSoft <= 255 && !m_shitSoftShown && m_sfmlShown){
-		m_alphaShitSoft += m_elapsedTime / 5;
+		m_alphaShitSoft += (int)m_elapsedTime / 5;
 		m_shitSoftSprite.setColor(sf::Color(255, 255, 255, m_alphaShitSoft));
 	}
 	if (m_alphaShitSoft >= 255 && !m_shitSoftShown){
@@ -167,7 +167,7 @@ void SplashState::updateCredits(){
 
 	//Then Credits
 	if (m_alphaCredits <= 255 && !m_CreditsShown && m_shitSoftShown && m_sfmlShown){
-		m_alphaCredits += m_elapsedTime / 9;
+		m_alphaCredits += (int)m_elapsedTime / 7;
 		m_credits.setColor(sf::Color(255, 255, 255, m_alphaCredits));
 	}
 	if (m_alphaCredits >= 255 && !m_CreditsShown){

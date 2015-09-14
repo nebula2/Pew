@@ -15,6 +15,7 @@ EnemyFormation::EnemyFormation(){
 	m_speed = 0.6f;
 	m_damage = 15;
 	active = true;
+	m_die = false;
 	m_hasTargetTexture = false;
 	m_health = 3 * diff.ReadDiffSettings();
 	m_maxHealth = m_health;
@@ -26,6 +27,7 @@ EnemyFormation::EnemyFormation(){
 	//initialize Healthbar
 	initHealthBar();
 }
+
 void EnemyFormation::Update(sf::RenderWindow &window, float elapsedTime){
 	m_xPos = sprite.getPosition().x;
 	m_yPos = sprite.getPosition().y;
@@ -47,6 +49,10 @@ void EnemyFormation::Update(sf::RenderWindow &window, float elapsedTime){
 
 	//do the rest
 	sprite.setPosition(m_xPos, m_yPos);
+
+	//see if death should be initialized
+	m_scale = sprite.getScale();
+	initDeath();
 }
 void EnemyFormation::Render(sf::RenderWindow &window){
 	//check for mouseOver
@@ -109,4 +115,17 @@ void EnemyFormation::UpdateHealthBar(){
 
 	//set the Texture Rect that has to be shown
 	m_healthbar.setTextureRect(sf::IntRect((int)showAmount, 0, m_healthTex.getSize().x, m_healthTex.getSize().y));
+}
+
+void EnemyFormation::initDeath(){
+	if (m_die){
+		sprite.rotate(5);
+		m_scale.x -= 0.1f;
+		m_scale.y -= 0.1f;
+		sprite.setScale(sf::Vector2f(m_scale.x, m_scale.y));
+
+		if (m_scale.x <= 0.05f || m_scale.y <= 0.05f){
+			active = false;
+		}
+	}
 }

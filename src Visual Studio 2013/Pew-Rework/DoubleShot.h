@@ -11,17 +11,17 @@ public:
 	void Update(float elapsedTime);
 	void Render(sf::RenderWindow &window);
 	void SetPosition(float x, float y);
-	int getDamage();
+	int getDamage() const { return 1; };
 	bool isPew;
 	bool active;
 	sf::Sprite sprite;
 private:
-	float speed;
-	static sf::Texture doubleTex;
+	sf::Vector2f normalize(sf::Vector2f& source);
+
+	static sf::Texture m_doubleTex;
 	float dirX;
 	float dirY;
 	float dir;
-	sf::Vector2f _direction;
-	sf::Vector2f normalize(sf::Vector2f& source);
+	sf::Vector2f m_direction;
 };
 #endif

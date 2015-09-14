@@ -13,6 +13,7 @@ Enemy::Enemy(){
 
 	//init stuff
 	m_hasTargetTexture = false;
+	m_die = false;
 	active = true;
 
 	m_speed = 0.6f;
@@ -57,6 +58,10 @@ void Enemy::Update(sf::RenderWindow &window, float elapsedTime, HighscoreManager
 		//do the rest
 		sprite.setPosition(m_xPos, m_yPos);
 		m_elapsedTime = elapsedTime;
+
+		//see if death should be initialized
+		m_scale = sprite.getScale();
+		initDeath();
 	}
 }
 
@@ -90,6 +95,19 @@ void Enemy::Render(sf::RenderWindow &window){
 
 		window.draw(sprite);
 		window.draw(m_healthbar);
+	}
+}
+
+void Enemy::initDeath(){
+	if (m_die){
+		sprite.rotate(5);
+		m_scale.x -= 0.1f;
+		m_scale.y -= 0.1f;
+		sprite.setScale(sf::Vector2f(m_scale.x, m_scale.y));
+
+		if (m_scale.x <= 0.05f || m_scale.y <= 0.05f){
+			active = false;
+		}
 	}
 }
 

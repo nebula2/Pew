@@ -15,6 +15,7 @@ SpaceMonkey::SpaceMonkey(){
 	m_hasTargetTexture = false;
 	active = true;
 	m_moveLeft = true;
+	m_die = false;
 
 	m_speed = 0.3f;
 	m_health = 10 * diff.ReadDiffSettings();
@@ -22,10 +23,13 @@ SpaceMonkey::SpaceMonkey(){
 
 	m_enemyTex.loadFromFile("graphics/enemies/spacemonkey.png");
 	m_enemyTex.setSmooth(smooth.ReadSmoothSettings());
+
 	sprite.setTexture(m_enemyTex);
 	sprite.setOrigin(m_enemyTex.getSize().x / 2.0f, m_enemyTex.getSize().y / 2.0f);
 	sprite.setPosition(364.0f, 25.0f);
 
+	m_color = sprite.getColor();
+	m_alpha = 255;
 }
 void SpaceMonkey::Update(sf::RenderWindow &window, float elapsedTime){
 	m_xPos = sprite.getPosition().x;
@@ -52,6 +56,10 @@ void SpaceMonkey::Update(sf::RenderWindow &window, float elapsedTime){
 		UpdateHealthBar();
 		//set Position
 		sprite.setPosition(m_xPos, m_yPos);
+
+		//see if death should be initialized
+		m_scale = sprite.getScale();
+		initDeath();
 	}
 }
 
@@ -77,6 +85,22 @@ void SpaceMonkey::Render(sf::RenderWindow &window){
 
 		window.draw(sprite);
 		window.draw(m_healthbar);
+}
+
+void SpaceMonkey::initDeath(){
+	if (m_die){
+		sprite.rotate(7);
+		m_scale.x += 0.08f;
+		m_scale.y += 0.08f;
+		sprite.setScale(sf::Vector2f(m_scale.x, m_scale.y));
+
+		m_alpha -= 10;
+		sprite.setColor(sf::Color(sprite.getColor().r, sprite.getColor().g, sprite.getColor().b, m_alpha));
+
+		if (m_scale.x >= 1.5f || m_scale.y >= 1.5f || m_alpha <=5){
+			active = false;
+		}
+	}
 }
 
 void SpaceMonkey::SetPosition(float x, float y){

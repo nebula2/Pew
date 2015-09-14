@@ -24,7 +24,7 @@ namespace coll{
 					sound.PlaySound("enemyCollision");
 					objList[i].reduceHealth(obj->getDamage());
 					if (objList[i].getHealth() <= 0){
-						objList[i].active = false;
+						objList[i].setDie(true);
 						highscore.setEnemyKilled(1);
 					}
 				}
@@ -45,7 +45,7 @@ namespace coll{
 					objList[i].reduceHealth(obj->getDamage());
 					if (objList[i].getHealth() <= 0){
 						sound.PlaySound("bossDeath");
-						objList[i].active = false;
+						objList[i].setDie(true);
 						points += 20;
 						highscore.setMonkeyKilled(1);
 					}
@@ -244,21 +244,6 @@ namespace coll{
 			}
 		}
 	}
-
-	//Test if Mouse pos intersects with enemy sprite to set it as target
-	template <class ObjectList>
-	void TargetTest(std::vector<ObjectList> &objList, sf::Vector2i pMouse){
-		for (int i = 0; i < objList.size(); i++){
-			if (objList[i].active){
-				if (objList[i].sprite.getGlobalBounds().intersects(pMouse->getPosition()))
-					objList[i]setTarget(true);
-				
-				else 
-					objList[i].setTarget(false);
-			}
-		}
-	}
-
 }
 
 #endif

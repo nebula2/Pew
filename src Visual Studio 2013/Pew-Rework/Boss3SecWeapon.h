@@ -14,15 +14,18 @@ public:
 
 	//setter
 	void reduceHealth(int pDamage);
-	
+	void setDie(bool die){ m_die = die; }
+
 	//getter
 	int getHealth() const { return m_health; };
 	int getDamage() const { return 5 * m_diff; };
+	bool getDie() const { return m_die; }
 
 	bool active;
 	sf::Sprite sprite;
 
 private:
+	void initDeath();
 	void initHealthBar();
 	void UpdateHealthBar();
 
@@ -34,6 +37,8 @@ private:
 	int m_health;			///< actual health
 	int m_maxHealth;		///< max amount of health;
 	bool m_hasTargetTexture;///< true = is target | false = is not target
+	bool m_die;				///< if this is true-> init death animation
+	sf::Vector2f m_scale;	///< Scale to set smaller if death inits
 
 	static sf::Texture m_weaponTex;
 	static sf::Texture m_healthTex;

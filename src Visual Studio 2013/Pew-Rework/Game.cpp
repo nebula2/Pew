@@ -8,12 +8,7 @@ Game::Game(){
 	playedIntro = false;
 
 	//check settings for fullscreen
-	if (ioscreen.getScreenSettings()){
-		window.create(sf::VideoMode(800, 600, 32), "Pew", sf::Style::Fullscreen);
-		window.setMouseCursorVisible(true);
-	}
-	else
-		window.create(sf::VideoMode(800, 600, 32), "Pew", sf::Style::Titlebar);
+	checkScreenSet();
 
 	//window stuff
 	window.setFramerateLimit(60);
@@ -26,7 +21,7 @@ Game::Game(){
 	iosound.ReadSoundSettings(volume);
 	ingMusic.LoadMusic(volume);
 	menMusic.LoadMusic(volume);
-	menMusic.PlayMusic("menu");
+	//menMusic.PlayMusic("menu");
 }
 
 Game::~Game(){
@@ -84,6 +79,7 @@ void Game::ChangeState(gameStates newState){
 		break;
 	case gameStates::SETTINGS:
 		CurrentState = std::move(std::unique_ptr<Settings>(new Settings));
+		checkScreenSet();
 		break;
 	case gameStates::DIFFSET:
 		CurrentState = std::move(std::unique_ptr<DiffSet>(new DiffSet));
@@ -127,4 +123,15 @@ void Game::setVolume(int &iVolume){
 	menMusic.MenuVolume(iVolume);
 	menMusic.IntroVolume(iVolume);
 	ingMusic.GameVolume(iVolume);
+}
+
+void Game::checkScreenSet(){
+	//check settings for fullscreen
+	
+	if (ioscreen.getScreenSettings()){
+		window.create(sf::VideoMode(800, 600, 32), "Pew", sf::Style::Fullscreen);
+		window.setMouseCursorVisible(true);
+	}
+	else
+		window.create(sf::VideoMode(800, 600, 32), "Pew", sf::Style::Titlebar);
 }

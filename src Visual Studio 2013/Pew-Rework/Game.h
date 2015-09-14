@@ -49,6 +49,7 @@ private:
 	void HandleEvents();
 	void Render();
 
+	void checkScreenSet();
 
 	std::unique_ptr<GameState> CurrentState;
 	IOscreen	ioscreen;

@@ -215,7 +215,7 @@ void HighscoreList::fadeOut() {
 
 	//increase as long as value is not 255
 	if (m_fadingAlpha <= 255) {
-		m_fadingAlpha += m_elapsedTime / 4;
+		m_fadingAlpha += (int)m_elapsedTime / 4;
 		//set alpha
 		m_fadingSprite.setColor(sf::Color(255, 255, 255, m_fadingAlpha));
 	}
