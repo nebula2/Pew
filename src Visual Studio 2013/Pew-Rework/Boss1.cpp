@@ -12,7 +12,7 @@ Boss1::Boss1(){
 
 	//init stuff
 	m_hasTargetTexture = false;
-	active = true;
+	m_active = true;
 	m_moveLeft = true;
 
 	m_speed = 0.4f;
@@ -30,7 +30,7 @@ Boss1::Boss1(){
 }
 void Boss1::Update(sf::RenderWindow &window, float elapsedTime){
 
-	if (Boss1::active){
+	if (m_active){
 
 		m_xPos = sprite.getPosition().x;
 		m_yPos = sprite.getPosition().y;
@@ -69,7 +69,7 @@ void Boss1::Update(sf::RenderWindow &window, float elapsedTime){
 
 
 void Boss1::Render(sf::RenderWindow &window){
-	if (active){
+	if (m_active){
 		window.draw(sprite);
 		window.draw(m_healthbar);
 	}
@@ -115,4 +115,9 @@ void Boss1::UpdateHealthBar(){
 
 	//set the Texture Rect that has to be shown
 	m_healthbar.setTextureRect(sf::IntRect((int)showAmount, 0, m_healthTex.getSize().x, m_healthTex.getSize().y));
+}
+
+//sets the entity active or inactive
+void Boss1::setActiveBool(bool active){
+	m_active = active;
 }

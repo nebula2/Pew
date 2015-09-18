@@ -77,7 +77,7 @@ void SpawnManager::SpaceMonkeySpawn(int &points, std::vector<SpaceMonkey> &vecto
 //spawns Shit (belongs to monkey)
 void SpawnManager::ShitSpawn(int &counter, std::vector<SpaceMonkey> &smVector, std::vector<ShitBullets> &sVector, IngameSound &sound){
 	for (unsigned int i = 0; i < smVector.size(); i++)	{
-		if (smVector[i].active && counter >= 1500)		{
+		if (smVector[i].getActiveBool() && counter >= 1500)		{
 			ShitBullets shitx;
 			shitx.SetPosition(smVector[i].getPosition().x, smVector[i].getPosition().y);
 			sound.PlaySound("fart");
@@ -109,7 +109,7 @@ void SpawnManager::UnlockPewSpawn(bool &boss1Dead, std::vector<UnlockPew> &vecto
 //spawns boss1 weapon
 void SpawnManager::Boss1WeaponSpawn(int &counter, std::vector<Boss1Weapon> &bwVector, std::vector<Boss1> &bVector, IngameSound &sound){
 	for (unsigned int i = 0; i < bVector.size(); i++)	{
-		if (bVector[i].active && counter >= 1000)		{
+		if (bVector[i].getActiveBool() && counter >= 1000)		{
 			Boss1Weapon b1Weaponx;
 			b1Weaponx.setPosition(bVector[i].getPosition().x, bVector[i].getPosition().y);
 			sound.PlaySound("pew");
@@ -225,7 +225,7 @@ void SpawnManager::Boss2Spawn(std::vector<Boss2> &vector, int &points){
 
 void SpawnManager::Boss2WeaponSpawn(int &counter, std::vector<Boss2Weapon> &bwvector, std::vector<Boss2> &bvector){
 	for (unsigned int i = 0; i < bvector.size(); i++)	{
-		if (bvector[i].active && bvector[i].getfadeIn() && counter >= 2000){
+		if (bvector[i].getActiveBool() && bvector[i].getfadeIn() && counter >= 2000){
 			Boss2Weapon b2Wx;
 			b2Wx.setPosition(bvector[i].getPosition().x, bvector[i].getPosition().y);
 			bwvector.push_back(b2Wx);
@@ -245,14 +245,14 @@ void SpawnManager::Boss3Spawn(std::vector<Boss3> &vector, int &points, IngameSou
 
 void SpawnManager::Boss3FirstWeaponSpawn(int &counter1, int &counter2, std::vector<Boss3firstWeapon> &vector, std::vector<Boss3> &bVector, IngameSound &sound){
 	for (unsigned int i = 0; i < bVector.size(); i++)	{
-		if (bVector[i].active && bVector[i].getCurrentState() == 1.5 && bVector[i].getHead1Active() && counter1 >= 1500){ //left Spawner
+		if (bVector[i].getActiveBool() && bVector[i].getCurrentState() == 1.5 && bVector[i].getHead1Active() && counter1 >= 1500){ //left Spawner
 			Boss3firstWeapon b3Wx1;
 			b3Wx1.setPosition(bVector[i].getHead1XPosition() + 50, bVector[i].getHead1YPosition() + 50);
 			vector.push_back(b3Wx1);
 			counter1 = 0;
 		}
 
-		if (bVector[i].active && bVector[i].getCurrentState() == 1.5 && bVector[i].getHead2Active() && counter2 >= 1500){ //right Spawner
+		if (bVector[i].getActiveBool() && bVector[i].getCurrentState() == 1.5 && bVector[i].getHead2Active() && counter2 >= 1500){ //right Spawner
 			Boss3firstWeapon b3Wx2;
 			b3Wx2.setPosition(bVector[i].getHead2XPosition() + 50, bVector[i].getHead2YPosition() + 50);
 			vector.push_back(b3Wx2);
@@ -263,7 +263,7 @@ void SpawnManager::Boss3FirstWeaponSpawn(int &counter1, int &counter2, std::vect
 
 void SpawnManager::Boss3SecWeaponSpawn(int &counter, std::vector<Boss3SecWeapon> &vector, std::vector<Boss3> &bVector, IngameSound &sound){
 	for (unsigned int i = 0; i < bVector.size(); i++)	{
-		if (bVector[i].active && bVector[i].getCurrentState() == 2.5 && bVector[i].getCowMActive() && counter >= 1500){
+		if (bVector[i].getActiveBool() && bVector[i].getCurrentState() == 2.5 && bVector[i].getCowMActive() && counter >= 1500){
 			Boss3SecWeapon b3Wx;
 			b3Wx.setPosition(bVector[i].getCowMXPosition() + 50, bVector[i].getCowMYPosition() + 50);
 			vector.push_back(b3Wx);

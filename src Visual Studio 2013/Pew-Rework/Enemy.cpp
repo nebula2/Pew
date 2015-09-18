@@ -14,7 +14,7 @@ Enemy::Enemy(){
 	//init stuff
 	m_hasTargetTexture = false;
 	m_die = false;
-	active = true;
+	m_active = true;
 
 	m_speed = 0.6f;
 	m_xPos = 0.0f;
@@ -33,7 +33,7 @@ Enemy::Enemy(){
 }
 
 void Enemy::Update(sf::RenderWindow &window, float elapsedTime, HighscoreManager &highscore){
-	if (Enemy::active)	{
+	if (m_active)	{
 		m_xPos = sprite.getPosition().x;
 		m_yPos = sprite.getPosition().y;
 
@@ -48,7 +48,7 @@ void Enemy::Update(sf::RenderWindow &window, float elapsedTime, HighscoreManager
 		}
 		else{
 			//if enemy got through player, do this
-			active = false;
+			m_active = false;
 			highscore.setEnemyMissed(1);
 		}
 
@@ -66,7 +66,7 @@ void Enemy::Update(sf::RenderWindow &window, float elapsedTime, HighscoreManager
 }
 
 void Enemy::Render(sf::RenderWindow &window){
-	if (active){
+	if (m_active){
 
 		//spawn it with pseudo random rotation
 		if (m_rotation < 360){
@@ -106,7 +106,7 @@ void Enemy::initDeath(){
 		sprite.setScale(sf::Vector2f(m_scale.x, m_scale.y));
 
 		if (m_scale.x <= 0.05f || m_scale.y <= 0.05f){
-			active = false;
+			m_active = false;
 		}
 	}
 }
@@ -151,4 +151,9 @@ void Enemy::UpdateHealthBar(){
 
 	//set the Texture Rect that has to be shown
 	m_healthbar.setTextureRect(sf::IntRect((int)showAmount, 0, m_healthTex.getSize().x, m_healthTex.getSize().y));
+}
+
+//sets the entity active or inactive
+void Enemy::setActiveBool(bool active){
+	m_active = active;
 }

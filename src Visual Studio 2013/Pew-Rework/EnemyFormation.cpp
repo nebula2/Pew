@@ -14,7 +14,7 @@ EnemyFormation::EnemyFormation(){
 	//init stuff
 	m_speed = 0.6f;
 	m_damage = 15;
-	active = true;
+	m_active = true;
 	m_die = false;
 	m_hasTargetTexture = false;
 	m_health = 3 * diff.ReadDiffSettings();
@@ -41,7 +41,7 @@ void EnemyFormation::Update(sf::RenderWindow &window, float elapsedTime){
 		}
 	}
 	else{
-		active = false;
+		m_active = false;
 	}
 	
 	//Update Healthbar
@@ -125,7 +125,12 @@ void EnemyFormation::initDeath(){
 		sprite.setScale(sf::Vector2f(m_scale.x, m_scale.y));
 
 		if (m_scale.x <= 0.05f || m_scale.y <= 0.05f){
-			active = false;
+			m_active = false;
 		}
 	}
+}
+
+//sets the entity active or inactive
+void EnemyFormation::setActiveBool(bool active){
+	m_active = active;
 }

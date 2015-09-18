@@ -13,7 +13,7 @@ ShitBullets::ShitBullets(){
 	m_health = 1;
 	m_maxHealth = m_health;
 
-	active = true;
+	m_active = true;
 	m_hasTargetTexture = false;
 
 	m_speed = 0.2f;
@@ -25,7 +25,7 @@ ShitBullets::ShitBullets(){
 }
 
 void ShitBullets::Update(sf::RenderWindow &window, float elapsedTime){
-	if (active)	{
+	if (m_active)	{
 		m_xPos = sprite.getPosition().x;
 		m_yPos = sprite.getPosition().y;
 
@@ -33,7 +33,7 @@ void ShitBullets::Update(sf::RenderWindow &window, float elapsedTime){
 		if (m_yPos <= window.getSize().y)
 			m_yPos += m_speed*elapsedTime;
 		else
-			active = false;
+			m_active = false;
 
 		//Update Healthbar
 		UpdateHealthBar();
@@ -43,7 +43,7 @@ void ShitBullets::Update(sf::RenderWindow &window, float elapsedTime){
 }
 
 void ShitBullets::Render(sf::RenderWindow &window){
-	if (active){
+	if (m_active){
 
 		//check for mouseOver
 		if (sprite.getGlobalBounds().intersects(sf::Rect<float>((float)sf::Mouse::getPosition(window).x, (float)sf::Mouse::getPosition(window).y + 1.0f, 1.0f, 1.0f))){
@@ -105,4 +105,9 @@ void ShitBullets::UpdateHealthBar(){
 
 	//set the Texture Rect that has to be shown
 	m_healthbar.setTextureRect(sf::IntRect((int)showAmount, 0, m_healthTex.getSize().x, m_healthTex.getSize().y));
+}
+
+//sets the entity active or inactive
+void ShitBullets::setActiveBool(bool active){
+	m_active = active;
 }

@@ -6,8 +6,8 @@
 sf::Texture DoubleShot::m_doubleTex;
 
 DoubleShot::DoubleShot(float playerPosX, float playerPosY, sf::RenderWindow& window){
-	active = true;
-	isPew = false;
+	m_active = true;
+	m_isPew = false;
 
 	//set direction up
 	dirX = sf::Mouse::getPosition(window).x - playerPosX;
@@ -27,20 +27,20 @@ DoubleShot::DoubleShot(float playerPosX, float playerPosY, sf::RenderWindow& win
 }
 
 void DoubleShot::Update(float elapsedTime){
-	if (active){
+	if (m_active){
 		float x = sprite.getPosition().x;
 		float y = sprite.getPosition().y;
 
 		sprite.move(m_direction * elapsedTime);
 		if (y < 0.0f || y > 900.0f || x < 0.0f || x > 900.0f){
-			active = false;
+			m_active = false;
 		}
 	}
 
 }
 
 void DoubleShot::Render(sf::RenderWindow &window){
-	if (active)
+	if (m_active)
 		window.draw(sprite);
 }
 
@@ -56,4 +56,9 @@ sf::Vector2f DoubleShot::normalize(sf::Vector2f& source){
 	}
 	else
 		return source;
+}
+
+//sets the entity active or inactive
+void DoubleShot::setActiveBool(bool active){
+	m_active = active;
 }

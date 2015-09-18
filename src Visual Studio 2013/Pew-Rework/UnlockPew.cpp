@@ -5,8 +5,8 @@
 sf::Texture UnlockPew::pewDropTex;
 
 UnlockPew::UnlockPew(){
-	speed = 0.1;
-	active = true;
+	speed = 0.1f;
+	m_active = true;
 
 	pewDropTex.loadFromFile("graphics/pewDrop.png");
 
@@ -17,27 +17,32 @@ UnlockPew::UnlockPew(){
 }
 
 void UnlockPew::Update(sf::RenderWindow &window, float elapsedTime){
-	if (UnlockPew::active){
+	if (m_active){
 		float x = pewDropSprite.getPosition().x;
 		float y = pewDropSprite.getPosition().y;
 
-		if (y <= window.getSize().y / 2)
+		if (y <= window.getSize().y / 2.0f)
 			y += speed*elapsedTime;
 		
-		else if (y >= window.getSize().y / 2)
-			y = window.getSize().y / 2;
+		else if (y >= window.getSize().y / 2.0f)
+			y = window.getSize().y / 2.0f;
 
-		x = window.getSize().x / 2;
+		x = window.getSize().x / 2.0f;
 
 		pewDropSprite.setPosition(x, y);
 	}
 }
 
 void UnlockPew::Render(sf::RenderWindow &window){
-	if (active)
+	if (m_active)
 		window.draw(pewDropSprite);
 }
 
 void UnlockPew::SetPosition(float x, float y){
 	pewDropSprite.setPosition(x, y);
+}
+
+//sets the entity active or inactive
+void UnlockPew::setActiveBool(bool active){
+	m_active = active;
 }

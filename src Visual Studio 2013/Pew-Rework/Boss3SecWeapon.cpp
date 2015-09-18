@@ -15,7 +15,7 @@ Boss3SecWeapon::Boss3SecWeapon(){
 
 	//init stuff
 	m_speed = 0.5f;
-	active = true;
+	m_active = true;
 	m_die = false;
 	m_health = 3;
 	m_maxHealth = m_health;
@@ -31,7 +31,7 @@ Boss3SecWeapon::Boss3SecWeapon(){
 }
 
 void Boss3SecWeapon::Update(sf::RenderWindow &window, float &elapsedTime){
-	if (active){
+	if (m_active){
 		m_xPos = sprite.getPosition().x;
 		m_yPos = sprite.getPosition().y;
 
@@ -39,7 +39,7 @@ void Boss3SecWeapon::Update(sf::RenderWindow &window, float &elapsedTime){
 			m_yPos += m_speed*elapsedTime;
 		
 		else
-			active = false;
+			m_active = false;
 		
 		//Update Healthbar
 		UpdateHealthBar();
@@ -54,7 +54,7 @@ void Boss3SecWeapon::Update(sf::RenderWindow &window, float &elapsedTime){
 }
 
 void Boss3SecWeapon::Render(sf::RenderWindow &window){
-	if (active){
+	if (m_active){
 
 		//check for mouseOver
 		if (sprite.getGlobalBounds().intersects(sf::Rect<float>((float)sf::Mouse::getPosition(window).x, (float)sf::Mouse::getPosition(window).y + 1.0f, 1.0f, 1.0f))){
@@ -127,7 +127,12 @@ void Boss3SecWeapon::initDeath(){
 		sprite.setScale(sf::Vector2f(m_scale.x, m_scale.y));
 
 		if (m_scale.x <= 0.05f || m_scale.y <= 0.05f){
-			active = false;
+			m_active = false;
 		}
 	}
+}
+
+//sets the entity active or inactive
+void Boss3SecWeapon::setActiveBool(bool active){
+	m_active = active;
 }

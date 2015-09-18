@@ -14,10 +14,10 @@ namespace coll{
 	void ProjectileToList(Object &obj, std::vector<ObjectList> &objList, int &points, IngameSound &sound, HighscoreManager &highscore)	{
 		//collision detection for normal enemies
 		for (unsigned int i = 0; i < objList.size(); i++)		{
-			if (objList[i].active)			{
+			if (objList[i].getActiveBool())			{
 				if (obj->sprite.getGlobalBounds().intersects(objList[i].sprite.getGlobalBounds()))				{
-					if (obj->isPew == false)
-						obj->active = false;
+					if (!obj->getIsPew())
+						obj->setActiveBool(false);
 
 					highscore.setShotsGot(1);
 					points += 5;
@@ -35,10 +35,10 @@ namespace coll{
 	void ProjectileToMonkey(Object &obj, std::vector<ObjectList> &objList, int &points, IngameSound &sound, HighscoreManager &highscore){
 		//collision detection for monkey (got a seperate to count monkey kills)
 		for (unsigned int i = 0; i < objList.size(); i++){
-			if (objList[i].active){
+			if (objList[i].getActiveBool()){
 				if (obj->sprite.getGlobalBounds().intersects(objList[i].sprite.getGlobalBounds())){
-					if (obj->isPew == false)
-						obj->active = false;
+					if (!obj->getIsPew())
+						obj->setActiveBool(false);
 					
 					sound.PlaySound("enemyCollision");
 					highscore.setShotsGot(1);
@@ -58,12 +58,12 @@ namespace coll{
 	void ProjectileToListNoHealth(Object &obj, std::vector<ObjectList> &objList, int &points, IngameSound &sound, HighscoreManager &highscore){
 		//Collision detection for things with no health
 		for (unsigned int i = 0; i < objList.size(); i++){
-			if (objList[i].active){
+			if (objList[i].getActiveBool()){
 				if (obj->sprite.getGlobalBounds().intersects(objList[i].sprite.getGlobalBounds())){
-					if (obj->isPew == false)
-						obj->active = false;
+					if (!obj->getIsPew())
+						obj->setActiveBool(false);
 					
-					objList[i].active = false;
+					objList[i].setActiveBool(false);
 					points += 5;
 					sound.PlaySound("enemyCollision");
 					highscore.setEnemyKilled(1);
@@ -77,15 +77,15 @@ namespace coll{
 	void BossCollision(Object &obj, std::vector<ObjectList> &objList, int &points, IngameSound &sound, HighscoreManager&highscore, bool &boss1Dead){
 		//Boss 1 Collision detection
 		for (unsigned int i = 0; i < objList.size(); i++){
-			if (objList[i].active){
+			if (objList[i].getActiveBool()){
 				if (obj->sprite.getGlobalBounds().intersects(objList[i].sprite.getGlobalBounds())){
-					obj->active = false;
+					obj->setActiveBool(false);
 					sound.PlaySound("boss1Hit");
 					highscore.setShotsGot(1);
 					objList[i].reduceHealth(obj->getDamage());
 					if (objList[i].getHealth() <= 0){
 						sound.PlaySound("bossDeath");
-						objList[i].active = false;
+						objList[i].setActiveBool(false);
 						points += 20;
 						highscore.setEnemyKilled(1);
 						boss1Dead = true;
@@ -99,15 +99,15 @@ namespace coll{
 	void Boss2Collision(Object &obj, std::vector<ObjectList> &objList, int &points, IngameSound &sound, HighscoreManager&highscore){
 		//Boss 2 Collision detection
 		for (unsigned int i = 0; i < objList.size(); i++){
-			if (objList[i].active){
+			if (objList[i].getActiveBool()){
 				if (obj->sprite.getGlobalBounds().intersects(objList[i].sprite.getGlobalBounds())){
-					obj->active = false;
+					obj->setActiveBool(false);
 					sound.PlaySound("boss1Hit");
 					highscore.setShotsGot(1);
 					objList[i].reduceHealth(obj->getDamage());
 					if (objList[i].getHealth() <= 0){
 						sound.PlaySound("bossDeath");
-						objList[i].active = false;
+						objList[i].setActiveBool(false);
 						points += 20;
 						highscore.setEnemyKilled(1);
 					}
@@ -121,14 +121,14 @@ namespace coll{
 		//player collision with Enemies <- Enemies are set inactive if collision appeares
 		sf::Sprite pSprite = pPlayer.playerSprite;
 		for (unsigned int i = 0; i < objList.size(); i++)		{
-			if (objList[i].active)
+			if (objList[i].getActiveBool())
 			{
 				if (objList[i].sprite.getGlobalBounds().intersects(pSprite.getGlobalBounds())){
-					objList[i].active = false;
+					objList[i].setActiveBool(false);
 					pPlayer.reduceHealth(objList[i].getDamage());
 					sound.PlaySound("playerCollision");
 					if (pPlayer.getHealth() <= 0){
-						pPlayer.active = false;
+						pPlayer.setActiveBool(false);
 						sound.PlaySound("playerDeath");
 					}
 				}
@@ -141,12 +141,12 @@ namespace coll{
 		//player collision with Enemies which shall not be set inactive after collision
 		sf::Sprite pSprite = pPlayer.playerSprite;
 		for (unsigned int i = 0; i < objList.size(); i++){
-			if (objList[i].active){
+			if (objList[i].getActiveBool()){
 				if (objList[i].sprite.getGlobalBounds().intersects(pSprite.getGlobalBounds())){
 					pPlayer.reduceHealth(objList[i].getDamage());
 					sound.PlaySound("playerCollision");
 					if (pPlayer.getHealth() <= 0){
-						pPlayer.active = false;
+						pPlayer.setActiveBool(false);
 						sound.PlaySound("playerDeath");
 					}
 				}
@@ -159,9 +159,9 @@ namespace coll{
 		//HealthDrop Collision
 		sf::Sprite pSprite = pPlayer.playerSprite;
 		for (unsigned int i = 0; i < objList.size(); i++){
-			if (objList[i].active){
+			if (objList[i].getActiveBool()){
 				if (objList[i].healthDropSprite.getGlobalBounds().intersects(pSprite.getGlobalBounds())){
-					objList[i].active = false;
+					objList[i].setActiveBool(false);
 					sound.PlaySound("healthDrop");
 					pPlayer.increaseHealth(20);
 				}
@@ -174,9 +174,9 @@ namespace coll{
 		//Player Collision to unlock the third weapon
 		sf::Sprite pSprite = pPlayer.playerSprite;
 		for (unsigned int i = 0; i < objectList.size(); i++)	{
-			if (objectList[i].active){
+			if (objectList[i].getActiveBool()){
 				if (objectList[i].pewDropSprite.getGlobalBounds().intersects(pSprite.getGlobalBounds())){
-					objectList[i].active = false;
+					objectList[i].setActiveBool(false);
 					sound.PlaySound("healthDrop");
 					gotPew = true;
 					pewOnCooldown = true;
@@ -196,7 +196,7 @@ namespace coll{
 				//collision for left Spawner
 				if (boss3v[i].getHead1Active()){
 					if (obj->sprite.getGlobalBounds().intersects(boss3v[i].headSprite1.getGlobalBounds())){
-						obj->active = false;
+						obj->setActiveBool(false);
 						sound.PlaySound("enemyCollision");
 						highscore.setShotsGot(1);
 						boss3v[i].setHead1Position(boss3v[i].getHead1XPosition(), boss3v[i].getHead1YPosition() - 2);
@@ -207,7 +207,7 @@ namespace coll{
 				if (boss3v[i].getHead2Active()){
 					if (obj->sprite.getGlobalBounds().intersects(boss3v[i].headSprite2.getGlobalBounds()))
 					{
-						obj->active = false;
+						obj->setActiveBool(false);
 						sound.PlaySound("enemyCollision");
 						highscore.setShotsGot(1);
 						boss3v[i].setHead2Position(boss3v[i].getHead2XPosition(), boss3v[i].getHead2YPosition() -2);
@@ -219,7 +219,7 @@ namespace coll{
 				//collision for cow spawner
 				if (boss3v[i].getCowMActive()){
 					if (obj->sprite.getGlobalBounds().intersects(boss3v[i].cowSprite.getGlobalBounds())){
-						obj->active = false;
+						obj->setActiveBool(false);
 						sound.PlaySound("enemyCollision");
 						highscore.setShotsGot(1);
 						boss3v[i].setCowMPosition(boss3v[i].getCowMXPosition(), boss3v[i].getCowMYPosition() -2);
@@ -228,9 +228,9 @@ namespace coll{
 			}
 //_____________________________________________________________________________________________________________________________________
 			if (boss3v[i].getCurrentState() >= 3 && boss3v[i].getCurrentState() <= 4){
-				if (boss3v[i].active){
+				if (boss3v[i].getActiveBool()){
 					if (obj->sprite.getGlobalBounds().intersects(boss3v[i].sprite.getGlobalBounds())){
-						obj->active = false;
+						obj->setActiveBool(false);
 						sound.PlaySound("enemyCollision");
 						highscore.setShotsGot(1);
 						boss3v[i].reduceHealth(obj->getDamage());

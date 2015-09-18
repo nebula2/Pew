@@ -9,7 +9,7 @@ Cow::Cow(){
 	IOsmooth smooth;
 	hasTargetTexture = false;
 	speed = 0.5 *diff.ReadDiffSettings();
-	active = true;
+	m_active = true;
 	damage = 25;
 
 	cowTex.loadFromFile("graphics/enemies/cow.png");
@@ -19,7 +19,7 @@ Cow::Cow(){
 }
 
 void Cow::Update(sf::RenderWindow &window, float elapsedTime){
-	if (active){
+	if (m_active){
 		float x = sprite.getPosition().x;
 		float y = sprite.getPosition().y;
 
@@ -31,14 +31,14 @@ void Cow::Update(sf::RenderWindow &window, float elapsedTime){
 				y += speed * elapsedTime;
 		}
 		else if (y >= window.getSize().y * 1.5)
-			active = false;
+			m_active = false;
 		
 		sprite.setPosition(x, y);
 	}
 }
 
 void Cow::Render(sf::RenderWindow &window){
-	if (active)
+	if (m_active)
 		window.draw(sprite);
 }
 
@@ -48,4 +48,9 @@ void Cow::setPosition(float x, float y){
 
 int Cow::getDamage(){
 	return damage;
+}
+
+//sets the entity active or inactive
+void Cow::setActiveBool(bool active){
+	m_active = active;
 }

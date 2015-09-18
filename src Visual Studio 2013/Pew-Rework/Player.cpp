@@ -6,7 +6,7 @@
 Player::Player(){
 	m_speed = 0.7f;
 	m_health = 100;
-	active = true;
+	m_active = true;
 	
 	//get textures
 	if (!m_playerTex.loadFromFile("graphics/player.png")){
@@ -44,7 +44,7 @@ void Player::Update(sf::RenderWindow &window, float elapsedTime){
 }
 
 void Player::Render(sf::RenderWindow &window){
-	if (active){
+	if (m_active){
 		window.draw(playerSprite);
 	}
 }
@@ -145,4 +145,9 @@ void Player::setStandingTexture(){
 		playerSprite.setTexture(m_playerTex);
 		m_hasMovingTexture = false;
 	}
+}
+
+//sets the entity active or inactive
+void Player::setActiveBool(bool active){
+	m_active = active;
 }

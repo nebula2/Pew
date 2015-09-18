@@ -16,16 +16,16 @@ public:
 	//setter
 	void setPosition(float x, float y);
 	void reduceHealth(int pDamage);
+	void setActiveBool(bool active);
 
 	//getter
 	int getHealth() const { return m_health; };
 	int getDamage() const { return 30; };
 	bool getfadeIn() const { return m_fadeIn; };
 	sf::Vector2f getPosition() const { return sprite.getPosition(); };
+	bool getActiveBool() const { return m_active; }
 
 	sf::Sprite sprite;
-	bool active;
-
 private:
 	void initHealthBar();
 	void UpdateHealthBar();
@@ -39,6 +39,7 @@ private:
 	int m_maxHealth;		///< max amount of health;
 	int m_debauch;			///< value for curvy motion
 
+	bool m_active;			///< if this is true-> it is active
 	bool m_fadeIn;			///< True = fading in | false = is there
 	bool m_moveLeft;		///< True = move left | false = move right
 	bool m_hasTargetTexture;///< true = is target | false = is not target

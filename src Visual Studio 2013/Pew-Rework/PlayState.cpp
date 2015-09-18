@@ -73,7 +73,7 @@ void PlayState::Update(Game &game){
 void PlayState::Render(Game &game){
 	bg.Render(game.window);
 
-	if (player1.active)
+	if (player1.getActiveBool())
 		if (!paused)
 			HandleDraws(game);
 
@@ -94,12 +94,12 @@ void PlayState::Render(Game &game){
 	messageHandler.UpdatelvUp(points, showLvUp, game.window, elapsedTime);
 
 	//draw Pew cooldown
-	if (gotPew && player1.active){
+	if (gotPew && player1.getActiveBool()){
 		pewCD.Render(game.window);
 	}
 
 	//Game over 
-	if (!player1.active){
+	if (!player1.getActiveBool()){
 		game.highscore.setPoints(points);
 		messageHandler.Render(game.window, "gameOver");
 
@@ -190,7 +190,7 @@ void PlayState::HandleSpawns(Game &game){
 	pewCD.Update(pewOnCooldown, elapsedTime);//pewCooldown
 
 	//player weapon spawn
-	if (player1.active){
+	if (player1.getActiveBool()){
 		if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left)){
 			spawnManager.BulletSpawn(bulletTimeCount, bulletv, game.highscore, weapon, player1, sound, game.window);//bullet
 			spawnManager.DoubleShotSpawn(bulletTimeCount, dShotv, game.highscore, weapon, player1, sound, game.window);//Doubleshot
@@ -221,12 +221,12 @@ void PlayState::HandleUpdates(Game &game){
 
 	UpdateHUD(game.window);
 
-	if (player1.active)
+	if (player1.getActiveBool())
 	player1.Update(game.window, elapsedTime);
 }
 
 void PlayState::HandleDraws(Game &game){
-	if (player1.active)
+	if (player1.getActiveBool())
 		player1.Render(game.window);
 
 	Rm::StdDraw(healthv, game.window);//health
@@ -257,7 +257,7 @@ void PlayState::HandleCollisions(Game &game){
 	CollisionManager::WeaponToEnemy(bulletv, points, sound, game.highscore, enemyv, monkeyv, shitv, boss1v, boss1Dead, boss2Weaponv, enemyFormationv, boss3v, boss3FWeaponv, boss3SWeaponv, boss3dead, game.window);//bullet
 	CollisionManager::WeaponToEnemy(dShotv, points, sound, game.highscore, enemyv, monkeyv, shitv, boss1v, boss1Dead, boss2Weaponv, enemyFormationv, boss3v, boss3FWeaponv, boss3SWeaponv, boss3dead, game.window);//doubleShot
 	CollisionManager::PewToEnemy(pewv, points, sound, game.highscore, enemyv, monkeyv, shitv, boss1v, boss2v, boss2Weaponv, enemyFormationv, boss3v, boss3FWeaponv, boss3SWeaponv, boss3dead, game.window);//Pew
-	if (player1.active)	{
+	if (player1.getActiveBool())	{
 		//player collision
 		coll::PlayerEnemyInactive(enemyv, player1, sound);//enemy
 		coll::PlayerEnemyInactive(shitv, player1, sound);//shit

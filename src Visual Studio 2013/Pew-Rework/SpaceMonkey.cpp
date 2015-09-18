@@ -13,7 +13,7 @@ SpaceMonkey::SpaceMonkey(){
 
 	//init stuff
 	m_hasTargetTexture = false;
-	active = true;
+	m_active = true;
 	m_moveLeft = true;
 	m_die = false;
 
@@ -35,7 +35,7 @@ void SpaceMonkey::Update(sf::RenderWindow &window, float elapsedTime){
 	m_xPos = sprite.getPosition().x;
 	m_yPos = sprite.getPosition().y;
 
-	if (SpaceMonkey::active) {
+	if (m_active) {
 		//fade into screen
 		if (m_yPos <= 80.0f)
 			m_yPos += m_speed*elapsedTime;
@@ -65,7 +65,7 @@ void SpaceMonkey::Update(sf::RenderWindow &window, float elapsedTime){
 
 
 void SpaceMonkey::Render(sf::RenderWindow &window){
-	if (active)
+	if (m_active)
 
 		//check for mouseOver
 	if (sprite.getGlobalBounds().intersects(sf::Rect<float>((float)sf::Mouse::getPosition(window).x, (float)sf::Mouse::getPosition(window).y + 1.0f, 1.0f, 1.0f))){
@@ -98,7 +98,7 @@ void SpaceMonkey::initDeath(){
 		sprite.setColor(sf::Color(sprite.getColor().r, sprite.getColor().g, sprite.getColor().b, m_alpha));
 
 		if (m_scale.x >= 1.5f || m_scale.y >= 1.5f || m_alpha <=5){
-			active = false;
+			m_active = false;
 		}
 	}
 }
@@ -147,4 +147,9 @@ void SpaceMonkey::UpdateHealthBar(){
 
 	//set the Texture Rect that has to be shown
 	m_healthbar.setTextureRect(sf::IntRect((int)showAmount, 0, m_healthTex.getSize().x, m_healthTex.getSize().y));
+}
+
+//sets the entity active or inactive
+void SpaceMonkey::setActiveBool(bool active){
+	m_active = active;
 }

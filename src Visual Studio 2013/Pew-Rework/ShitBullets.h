@@ -14,21 +14,24 @@ public:
 	void Update(sf::RenderWindow &window, float elapsedTime);
 	void Render(sf::RenderWindow &window);
 	void SetPosition(float x, float y);
+	
 
 	//setter
 	void reduceHealth(int pDamage);
+	void setActiveBool(bool active);
 
 	//getter
 	int getDamage() const{ return 3 * m_diff; };
 	int getHealth() const { return m_health; };
+	bool getActiveBool() const { return m_active; }
 
 	//variables
 	sf::Sprite sprite;
-	bool active;
 private:
 	void initHealthBar();
 	void UpdateHealthBar();
 
+	bool m_active;			///< if this is true-> it is active
 	float m_speed;			///< the speed
 	float m_xPos;			///< X-Position
 	float m_yPos;			///< Y-Position

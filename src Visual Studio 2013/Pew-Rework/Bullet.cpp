@@ -6,9 +6,9 @@
 sf::Texture Bullet::bulletTex;
 
 Bullet::Bullet(float playerPosX, float playerPosY, sf::RenderWindow& window){
-	speed = 0.9;
-	active = true;
-	isPew = false;
+	speed = 0.9f;
+	m_active = true;
+	m_isPew = false;
 
 	//set direction up
 	dirX = sf::Mouse::getPosition(window).x - playerPosX;
@@ -27,20 +27,20 @@ Bullet::Bullet(float playerPosX, float playerPosY, sf::RenderWindow& window){
 }
 
 void Bullet::Update(float elapsedTime){
-	if (active){
+	if (m_active){
 		float x = sprite.getPosition().x;
 		float y = sprite.getPosition().y;
 
 		sprite.move(_direction * elapsedTime);
 		if (y < 0 || y > 900 || x < 0 || x > 900){
-			active = false;
+			m_active = false;
 		}
 	}
 
 }
 
 void Bullet::Render(sf::RenderWindow &window){
-	if (active)
+	if (m_active)
 		window.draw(sprite);
 }
 
@@ -59,4 +59,9 @@ sf::Vector2f Bullet::normalize(sf::Vector2f& source){
 	}
 	else
 		return source;
+}
+
+//sets the entity active or inactive
+void Bullet::setActiveBool(bool active){
+	m_active = active;
 }

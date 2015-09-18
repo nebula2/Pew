@@ -16,13 +16,13 @@ public:
 	
 	//setter
 	void setPosition(float x, float y);
+	void setActiveBool(bool active);
 
 	//getter
 	int getDamage() const { return 8 * m_diff; };
+	bool getActiveBool() const { return m_active; }
 
-	bool active;
 	sf::Sprite sprite;
-
 private:
 	void initHealthBar();
 	void UpdateHealthBar();
@@ -35,6 +35,7 @@ private:
 	int m_health;				///< actual health
 	int m_maxHealth;			///< max amount of health;
 
+	bool m_active;			///< if this is true-> it is active
 	bool m_hasTargetTexture;	///< true = is target | false = is not target
 	
 

@@ -19,7 +19,7 @@ Boss3::Boss3(){
 	m_maxHealth = m_health;
 	m_damage = 10;
 	m_currentState = 0.0f;
-	active =        true;
+	m_active = true;
 	m_head1Active = false;
 	m_head2Active = false;
 	m_cowMActive = false;
@@ -63,7 +63,7 @@ Boss3::Boss3(){
 }
 
 void Boss3::Update(sf::RenderWindow &window, float elapsedTime){
-	if (Boss3::active) {
+	if (m_active) {
 
 		m_elapsedTime = elapsedTime;
 		m_xPos = sprite.getPosition().x;
@@ -89,7 +89,7 @@ void Boss3::Update(sf::RenderWindow &window, float elapsedTime){
 
 void Boss3::Render(sf::RenderWindow &window)
 {
-	if (active){
+	if (m_active){
 		if (m_cowMActive)
 			window.draw(cowSprite); //machine
 		
@@ -256,7 +256,7 @@ void Boss3::stateMovement4(sf::RenderWindow& window){
 			sprite.setPosition(m_xPos, m_yPos);
 		}
 		if (m_yPos >= 700)
-			active = false;
+			m_active = false;
 	}
 }
 
@@ -465,4 +465,9 @@ void Boss3::stateInitHandler(){
 		//get good position to rotate
 		stateInit3();
 	}
+}
+
+//sets the entity active or inactive
+void Boss3::setActiveBool(bool active){
+	m_active = active;
 }

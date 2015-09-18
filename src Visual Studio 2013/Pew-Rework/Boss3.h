@@ -13,13 +13,15 @@ public:
 	Boss3();
 	void Update(sf::RenderWindow &window, float elapsedTime);
 	void Render(sf::RenderWindow &window);
-	void setBossPosition(float x, float y);
+	
 
 	//setter
+	void setBossPosition(float x, float y);
 	void reduceHealth(int pDamage);
 	void setCowMPosition(float x, float y);
 	void setHead1Position(float x, float y);
 	void setHead2Position(float x, float y);
+	void setActiveBool(bool active);
 
 	//getter
 	float getCurrentState() const { return m_currentState; };
@@ -42,8 +44,8 @@ public:
 	bool getHead1Active() const { return m_head1Active; };
 	bool getHead2Active() const { return m_head2Active; };
 	bool getGoneDead() const { return m_goneDead; };
+	bool getActiveBool() const { return m_active; }
 
-	bool active;
 	sf::Sprite sprite;
 	sf::Sprite headSprite1;
 	sf::Sprite headSprite2;
@@ -103,6 +105,7 @@ private:
 	bool m_state3Pos;		///< if this is true -> boss reached position for third state
 	bool m_topAfterDeath;	///< if this is true -> top is reached after death (movement relevant)
 	bool m_fallToGround;	///< if this is true -> fall to ground (movement relevant)
+	bool m_active;			///< if this is true-> it is active
 
 	int	m_damage;			///< damage the boss makes
 	int	m_health;			///< the health
